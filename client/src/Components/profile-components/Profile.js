@@ -4,11 +4,15 @@ import AppHeader from '../../AppHeader';
 import AppFooter from '../../AppFooter';
 import Input from '../form-components/Input';
 import profileImage from '../../Images/profile_image.jpg';
+import styles from "./Modal.module.css";
+
 // REACT COFNRM ALERT 
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 import { useState,useEffect } from 'react'
+
+
 
 export default function Profile2(props) {
     const [user, setUser] = useState({
@@ -29,6 +33,7 @@ export default function Profile2(props) {
     const [editEmail, setEditEmail] = useState(false)
     const [editUsername, setEditUsername] = useState(false)
     const [photo, setPhoto ] = useState(profileImage);
+    const [isOpen, setIsOpen] = useState(false);
 
     useEffect(() => {
         let t = window.localStorage.getItem("jwt");
@@ -81,10 +86,6 @@ export default function Profile2(props) {
     const handleSubmit = (evt) => {
         evt.preventDefault();
 
-        // const data = new FormData(evt.target);
-        // const payload = Object.fromEntries(data.entries());
-        // console.log(payload);
-
         const requestOptions = {
             method: 'POST', 
             body: JSON.stringify(user),
@@ -102,6 +103,7 @@ export default function Profile2(props) {
                     console.log("DONE")
                 }
             })
+            .then()
     }
 
     const logout = () => {
@@ -178,26 +180,24 @@ export default function Profile2(props) {
             //     }
             // })
     }
+    const Modal = ({ setIsOpen }) => {
+        return (
+            <>
+                <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
+                <div className={styles.centered}>
+                    <div className={styles.modal}>
+                        <button style={{display:'flex', width:'100%', justifyContent:'flex-end', padding:'5px'}} className='none' onClick={() => setIsOpen(false)}>
+                            <i className='icon ms-1 icon-close'></i> 
+                        </button>
 
-    return(
-        <>
-            <AppHeader />
-            <div className='bg_profile'>
-                <div className='container relative'>
-                    <div className='row container-profile'>
-                        
-                        <div className='col-12 col-lg-6 box-sec1'>
+                        <div>
+                        <div className={styles.modalHeader}>
+                            <h5 className={styles.heading}>Upload picture</h5>
+                        </div>
+                        <div style={{display:'flex', justifyContent: 'center'}}>
                             <input 
-                                type="hidden"
-                                name="id"
-                                id="id"
-                                value={user.id}
-                                onChange={handleChange}
-                            />
-                            <div className='row'>
-                            <button  onClick={handleSubmit} className="link">Save Image</button>
-                            <input 
-                                // onChange={handleChange}
+                                id='file-input'
+                                className={styles.fileInput}
                                 type={"file"}
                                 name={"picture"}
                                 onChange={(event) => {
@@ -218,9 +218,61 @@ export default function Profile2(props) {
                                         }));
                                     };
                                 }}
-                                
-                                
                             />
+                            <label className={styles.fileInputLabel} for="file-input">
+                                <i className='icon ms-1 icon-upload'></i> 
+                                <span>SELECT A PICTURE</span>
+                            </label>
+                        </div>
+                            
+                        
+                        <div style={{display:'flex', justifyContent: 'space-around'}} >
+                            <button
+                                style={{width:'unset'}}
+                                className='snow'
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            <button  
+                                style={{width:'unset'}}
+                                onClick={handleSubmit} 
+                                className="ochre"
+                            >
+                                UPLOAD
+                            </button>
+                        </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+    return(
+        <>
+            <AppHeader />
+            <div className='bg_profile'>
+            {isOpen && <Modal setIsOpen={setIsOpen} />}
+                <div className='container relative'>
+                    <div className='row container-profile'>
+                        
+                        <div className='col-12 col-lg-6 box-sec1'>
+                            <input 
+                                type="hidden"
+                                name="id"
+                                id="id"
+                                value={user.id}
+                                onChange={handleChange}
+                            />
+                            <div className='row'>
+                            <button style={{backgroundColor:'#B66A00', width:'35px', borderRadius:'50%',position: 'relative', top:'0', right:'-145px'}} className='none' onClick={() => setIsOpen(true)}>
+                                <i style={{ color: 'white'}} className='icon icon-edit'></i>
+                            </button>
+                            
+                            
                             
 
                                 <div className='col-12 col-lg-4'>
