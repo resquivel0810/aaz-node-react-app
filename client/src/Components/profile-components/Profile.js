@@ -84,6 +84,9 @@ export default function Profile2(props) {
         let value = evt.target.value;
         let name = evt.target.name;
 
+        console.log(evt.target.name)
+        setLastEdited(evt.target.name)
+
         setUser((prevState) => ({
             ...prevState,
             [name]: value,
@@ -113,7 +116,7 @@ export default function Profile2(props) {
                     console.log(data)
                     
                     setToastProperties({
-                        description: `YOUR ${lastEdited}`,
+                        description: `YOUR ${lastEdited.toUpperCase()}`,
                         borderColor: '#8DD037',
                         icon: 'icon-success'
                     })
@@ -333,12 +336,19 @@ export default function Profile2(props) {
                                                         value = {user.name}
                                                         handleChange={handleChange}
                                                     />
-                                                    <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
+                                                    {
+                                                        lastEdited === 'name' 
+                                                            ? 
+                                                            <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
+                                                            :
+                                                            <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={handleSubmit} className="link">Save</button>
+                                                    }
+                                                    
                                                 </> 
                                                 :
                                                 <>
                                                     <h3>{user.name}</h3>
-                                                    <button onClick={() => {setEditName(true); setEditLastName(false) ; setEditEmail(false); setEditUsername(false); setLastEdited('NAME')}} className='none'>
+                                                    <button onClick={() => {setEditName(true); setEditLastName(false) ; setEditEmail(false); setEditUsername(false)}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -363,7 +373,7 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <div className='subtitle primary_dark'>{user.lastname}</div>
-                                                    <button onClick={() => {setEditLastName(true); setEditName(false); setEditEmail(false); setEditUsername(false); setLastEdited('LAST NAME')}} className='none'>
+                                                    <button onClick={() => {setEditLastName(true); setEditName(false); setEditEmail(false); setEditUsername(false)}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -388,7 +398,7 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <div className='subtitle primary_dark'>{user.email}</div>
-                                                    <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false); setLastEdited('EMAIL')}} className='none'>
+                                                    <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false)}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -418,7 +428,7 @@ export default function Profile2(props) {
                                         </>
                                         :
                                         <>
-                                        <button style={{position:'relative', right:'45px', top:'5px'}} onClick={() => {setEditUsername(true); setEditName(false); setEditLastName(false); setEditEmail(false); setLastEdited('USERNAME')}} className='none'>
+                                        <button style={{position:'relative', right:'45px', top:'5px'}} onClick={() => {setEditUsername(true); setEditName(false); setEditLastName(false); setEditEmail(false)}} className='none'>
                                             <i className='icon ms-1 icon-edit'></i>
                                         </button>
                                         </>
