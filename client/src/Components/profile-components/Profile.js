@@ -6,11 +6,14 @@ import Input from '../form-components/Input';
 import profileImage from '../../Images/profile_image.jpg';
 import styles from "./Modal.module.css";
 
+import Toast from "../toast/Toast"
+
 // REACT COFNRM ALERT 
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
 import { useState,useEffect } from 'react'
+
 
 
 
@@ -32,8 +35,12 @@ export default function Profile2(props) {
     const [editLastName, setEditLastName] = useState(false)
     const [editEmail, setEditEmail] = useState(false)
     const [editUsername, setEditUsername] = useState(false)
+    const [lastEdited ,setLastEdited] =useState('none')
+    const [toastVisible, setToastVisible] = useState(false)
     const [photo, setPhoto ] = useState(profileImage);
     const [isOpen, setIsOpen] = useState(false);
+    const [toastProperties, setToastProperties] = useState([])
+    
 
     useEffect(() => {
         let t = window.localStorage.getItem("jwt");
@@ -84,7 +91,10 @@ export default function Profile2(props) {
     };
 
     const handleSubmit = (evt) => {
+        
         evt.preventDefault();
+        
+        
 
         const requestOptions = {
             method: 'POST', 
@@ -92,18 +102,28 @@ export default function Profile2(props) {
         }
 
         fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
-            .then(response => response.json())
             .then(data => {
-                if (data.error){
-                    setAlert({
-                        type: "alert-danger", 
-                        message: data.error.message,
+                setToastVisible(true)
+           
+                setInterval(() => {
+                    setToastVisible(false)
+                }, 5000)
+                 
+                if (data.status === 200){
+                    console.log(data)
+                    
+                    setToastProperties({
+                        description: `YOUR ${lastEdited}`,
+                        borderColor: '#8DD037',
+                        icon: 'icon-success'
                     })
+                           
+                    
                 }else{
-                    console.log("DONE")
+                    console.log(data.status)
                 }
             })
-            .then()
+           
     }
 
     const logout = () => {
@@ -254,7 +274,13 @@ export default function Profile2(props) {
     return(
         <>
             <AppHeader />
+            <Toast
+                toastList={toastProperties}
+                position="top-right" 
+                visible={toastVisible}
+            />
             <div className='bg_profile'>
+            
             {isOpen && <Modal setIsOpen={setIsOpen} />}
                 <div className='container relative'>
                     <div className='row container-profile'>
@@ -312,7 +338,7 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <h3>{user.name}</h3>
-                                                    <button onClick={() => {setEditName(true); setEditLastName(false) ; setEditEmail(false); setEditUsername(false)}} className='none'>
+                                                    <button onClick={() => {setEditName(true); setEditLastName(false) ; setEditEmail(false); setEditUsername(false); setLastEdited('NAME')}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -337,7 +363,7 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <div className='subtitle primary_dark'>{user.lastname}</div>
-                                                    <button onClick={() => {setEditLastName(true); setEditName(false); setEditEmail(false); setEditUsername(false)}} className='none'>
+                                                    <button onClick={() => {setEditLastName(true); setEditName(false); setEditEmail(false); setEditUsername(false); setLastEdited('LAST NAME')}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -362,7 +388,7 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <div className='subtitle primary_dark'>{user.email}</div>
-                                                    <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false)}} className='none'>
+                                                    <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false); setLastEdited('EMAIL')}} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -392,7 +418,7 @@ export default function Profile2(props) {
                                         </>
                                         :
                                         <>
-                                        <button style={{position:'relative', right:'45px', top:'5px'}} onClick={() => {setEditUsername(true); setEditName(false); setEditLastName(false); setEditEmail(false)}} className='none'>
+                                        <button style={{position:'relative', right:'45px', top:'5px'}} onClick={() => {setEditUsername(true); setEditName(false); setEditLastName(false); setEditEmail(false); setLastEdited('USERNAME')}} className='none'>
                                             <i className='icon ms-1 icon-edit'></i>
                                         </button>
                                         </>
