@@ -12,7 +12,7 @@ import Toast from "../toast/Toast"
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
 
-import { useState,useEffect } from 'react'
+import { useState,useEffect, useRef } from 'react'
 
 
 
@@ -80,6 +80,31 @@ export default function Profile2(props) {
 
     }, []);
 
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+         
+           // Alert if clicked on outside of element
+         
+          function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target) ) {
+                setEditName(false); setEditLastName(false) ; setEditEmail(false); setEditUsername(false)
+            }
+          
+          }
+          // Bind the event listener
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+      }
+
+    const wrapperRef= useRef(null);
+    useOutsideAlerter(wrapperRef);
+ 
+    
+
     const handleChange = (evt) => {
         let value = evt.target.value;
         let name = evt.target.name;
@@ -95,7 +120,7 @@ export default function Profile2(props) {
 
     const handleSubmit = (evt) => {
         
-        evt.preventDefault();
+        // evt.preventDefault();
         
         
 
@@ -107,6 +132,7 @@ export default function Profile2(props) {
         fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
             .then(data => {
                 setToastVisible(true)
+                console.log()
            
                 setInterval(() => {
                     setToastVisible(false)
@@ -274,21 +300,26 @@ export default function Profile2(props) {
         );
     };
 
+    
+
     return(
         <>
+            {/* <div onClick={() => {setEditName(false); setEditLastName(false) ; setEditEmail(false); setEditUsername(false)}} style={{width:'100vw', height:'100vh', position: 'absolute', top:'0'}} id='experiment' /> */}
             <AppHeader />
             <Toast
                 toastList={toastProperties}
                 position="top-right" 
                 visible={toastVisible}
             />
-            <div className='bg_profile'>
+            
+            <div  className='bg_profile'>
             
             {isOpen && <Modal setIsOpen={setIsOpen} />}
                 <div className='container relative'>
                     <div className='row container-profile'>
                         
                         <div className='col-12 col-lg-6 box-sec1'>
+                        
                             <input 
                                 type="hidden"
                                 name="id"
@@ -321,13 +352,19 @@ export default function Profile2(props) {
                                         />
                                     </div>
                                 </div>
-                                <div className='col-12 col-lg-8'>
-                                    {/* <h3 className='primary_dark'>{user.name} {user.lastname}</h3> */}
+                              
+                                <div ref={wrapperRef} className='col-12 col-lg-8'>
+                                   
                                     <div className='pb-2'>
+                                        <div className='body_text_small'>
+                                            Name
+                                        </div>
                                         <div className='input-content'>
+                                            
                                             {editName 
                                                 ? 
                                                 <>
+                                                    
                                                     <Input 
                                                         title = {"name"}
                                                         type = {"text"}
@@ -339,9 +376,9 @@ export default function Profile2(props) {
                                                     {
                                                         lastEdited === 'name' 
                                                             ? 
-                                                            <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
+                                                            <button style={{position:'relative', right:'45px'}} onClick={()=>{handleSubmit(); setEditName(false)}} className="link">Save</button>
                                                             :
-                                                            <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={handleSubmit} className="link">Save</button>
+                                                            <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={()=>{handleSubmit() && setEditName(false)}} className="link">Save</button>
                                                     }
                                                     
                                                 </> 
@@ -356,7 +393,10 @@ export default function Profile2(props) {
                                         </div>
                                     </div>
                                     <div className='pb-2'>
-                                        <div className='input-content'>
+                                        <div className='body_text_small'>
+                                            Last name
+                                        </div>
+                                        <div  className='input-content'>
                                             {editLastName 
                                                 ? 
                                                 <>
@@ -368,7 +408,14 @@ export default function Profile2(props) {
                                                         value = {user.lastname}
                                                         handleChange={handleChange}
                                                     />
-                                                    <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
+                                                    {
+                                                        lastEdited === 'lastname' 
+                                                            ? 
+                                                            <button style={{position:'relative', right:'45px'}} onClick={()=>{handleSubmit(); setEditLastName(false)}} className="link">Save</button>
+                                                            :
+                                                            <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={()=>{handleSubmit() && setEditLastName(false)}} className="link">Save</button>
+                                                    }
+                                                    {/* <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button> */}
                                                 </> 
                                                 :
                                                 <>
@@ -381,7 +428,10 @@ export default function Profile2(props) {
                                         </div>   
                                     </div>
                                     <div className='pb-2'>
-                                        <div className='input-content'>
+                                        <div className='body_text_small'>
+                                            Email
+                                        </div>
+                                        <div  className='input-content'>
                                             {editEmail 
                                                 ? 
                                                 <>
@@ -393,7 +443,13 @@ export default function Profile2(props) {
                                                         value = {user.email}
                                                         handleChange={handleChange}
                                                     />
-                                                    <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
+                                                    {
+                                                        lastEdited === 'email' 
+                                                            ? 
+                                                            <button style={{position:'relative', right:'45px'}} onClick={()=>{handleSubmit(); setEditEmail(false)}} className="link">Save</button>
+                                                            :
+                                                            <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={()=>{handleSubmit() && setEditEmail(false)}} className="link">Save</button>
+                                                    }
                                                 </> 
                                                 :
                                                 <>
@@ -405,37 +461,46 @@ export default function Profile2(props) {
                                             }
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div className='mt-4'>
-                                <div className='pt-4'>
+                                    <div className='pb-2'>
                                     <div className='body_text_small'>
                                         Username
                                     </div>
-                                    <div className='input-content'>
-                                    <Input 
-                                        title = {"username"}
-                                        type = {"text"}
-                                        name = {"username"}
-                                        placeholder = {user.username}
-                                        value = {user.username}
-                                        handleChange={handleChange}
-                                    />
+                                    <div  className='input-content'>
                                     {editUsername
-                                        ?
+                                        ? 
                                         <>
-                                        <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button>
-                                        </>
+                                            <Input 
+                                                title = {"username"}
+                                                type = {"text"}
+                                                name = {"username"}
+                                                placeholder = {user.username}
+                                                value = {user.username}
+                                                handleChange={handleChange}
+                                            />
+                                            {/* <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button> */}
+                                            {
+                                                lastEdited === 'username' 
+                                                    ? 
+                                                    <button style={{position:'relative', right:'45px'}} onClick={()=>{handleSubmit(); setEditUsername(false)}} className="link">Save</button>
+                                                    :
+                                                    <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={()=>{handleSubmit() && setEditUsername(false)}} className="link">Save</button>
+                                            }
+                                        </> 
                                         :
                                         <>
-                                        <button style={{position:'relative', right:'45px', top:'5px'}} onClick={() => {setEditUsername(true); setEditName(false); setEditLastName(false); setEditEmail(false)}} className='none'>
-                                            <i className='icon ms-1 icon-edit'></i>
-                                        </button>
+                                            <div className='subtitle primary_dark'>{user.username}</div>
+                                            <button onClick={() => {setEditEmail(false); setEditName(false); setEditLastName(false); setEditUsername(true)}} className='none'>
+                                                <i className='icon ms-1 icon-edit'></i>
+                                            </button>
                                         </>
                                     }
                                     </div>
                                     
                                 </div>
+                                </div>
+                            </div>
+                          
+                               
                                 
                                 <div className='pt-4'>
                                     <Link
@@ -446,12 +511,6 @@ export default function Profile2(props) {
                                     </Link>
                                 </div>
 
-                                {/* <p onClick={this.makeInput} >a certain value</p> */}
-                            </div>
-
-                            {/* <div className='pt-3'>
-                                <button className="btn ochre">Save changes</button>
-                            </div> */}
                             
 
                         </div>

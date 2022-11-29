@@ -14,6 +14,7 @@ const Input = (props) => {
                 value={props.value}
                 onChange={props.handleChange}
                 placeholder={props.placeholder}
+                disabled={props.disabled}
                 required
             />
             <div className={props.errorDiv}>
