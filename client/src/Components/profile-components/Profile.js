@@ -8,9 +8,12 @@ import styles from "./Modal.module.css";
 
 import Toast from "../toast/Toast"
 
+
 // REACT COFNRM ALERT 
 import { confirmAlert } from 'react-confirm-alert'; 
 import 'react-confirm-alert/src/react-confirm-alert.css'; 
+
+import Compressor from 'compressorjs';
 
 import { useState,useEffect, useRef } from 'react'
 
@@ -38,7 +41,13 @@ export default function Profile2(props) {
     const [lastEdited ,setLastEdited] =useState('none')
     const [toastVisible, setToastVisible] = useState(false)
     const [photo, setPhoto ] = useState(profileImage);
-    const [isOpen, setIsOpen] = useState(false);
+    const [credentials, setCredentials] = useState({
+        pwd: '',
+        txt: ''
+    })
+    const [isOpenPhotoModal, setIsOpenPhotoModal] = useState(false);
+    const [isOpenModalChangePass, setIsOpenModalChangePass] = useState(false);
+    const [isOpenModalChangeEmail, setIsOpenModalChangeEmail] = useState(false);
     const [toastProperties, setToastProperties] = useState([])
     
 
@@ -69,6 +78,10 @@ export default function Profile2(props) {
                                 lastname: json.user.lastname,
                                 email: json.user.email,
                                 picture: json.user.picture,
+                            })
+                            setCredentials({
+                                pwd: '',
+                                txt: json.user.email,
                             })
                         })
                 }
@@ -118,11 +131,23 @@ export default function Profile2(props) {
         }));
     };
 
+    const handlePassChange = (evt) => {
+        let value = evt.target.value;
+        let name = evt.target.name;
+
+        // console.log(evt.target.name)
+
+        setCredentials((prevState) => ({
+            ...prevState,
+            [name]: value,
+        }));
+        
+    };
+
+
     const handleSubmit = (evt) => {
         
         // evt.preventDefault();
-        
-        
 
         const requestOptions = {
             method: 'POST', 
@@ -229,7 +254,11 @@ export default function Profile2(props) {
             //     }
             // })
     }
-    const Modal = ({ setIsOpen }) => {
+
+   
+
+
+    const ModalPhoto = ({ setIsOpen }) => {
         return (
             <>
                 <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
@@ -259,7 +288,15 @@ export default function Profile2(props) {
                                     reader.readAsDataURL(event.target.files[0]);
                                     reader.onload = function () {
                                         console.log(reader.result);
-                                        // let value =event.target.value;
+
+                                        // console.log(window.atob(reader.result))
+                                        
+                                        // let compressed = new Compressor(window.atob(reader.result), {
+                                        //     quality: 0.6,})
+                                        // console.log(compressed)
+
+
+                                        
                                         let name = event.target.name;
                                         setUser((prevState) => ({
                                             ...prevState,
@@ -300,11 +337,145 @@ export default function Profile2(props) {
         );
     };
 
+    const ModalChangePass = ({ setIsOpen }) => {
+        return (
+            <>
+            <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
+                <div className={styles.centered}>
+                    <div className={styles.modal}>
+                        <button style={{display:'flex', width:'100%', justifyContent:'flex-end', padding:'5px'}} className='none' onClick={() => setIsOpen(false)}>
+                            <i className='icon ms-1 icon-close'></i> 
+                        </button>
+
+                        <div>
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} className={styles.modalHeader}>
+                            <i style={{color:'#4FB8A8', fontSize:'3rem'}} className='icon ms-1 icon-alert'></i> 
+                        </div>
+                        <div style={{display:'flex', justifyContent: 'center', marginBottom: '25px', marginTop: '10px'}}>
+                            <h5 className={styles.heading}>
+                                Are you sure you want to change your password?
+                            </h5>
+                        </div>
+                            
+                        
+                        <div style={{display:'flex', justifyContent: 'space-around'}} >
+                        <button  
+                                style={{width:'unset'}}
+                                
+                                className="snow"
+                            >
+                                <Link
+                                    to={'/changePassword'}
+                                    className='link'
+                                    style={{textDecoration: 'none'}}
+                                >
+                                    I´M SURE
+                                </Link>
+                                
+                            </button>
+                            <button
+                                style={{width:'unset'}}
+                                className='ochre'
+                                onClick={() => setIsOpen(false)}
+                            >
+                                Cancel
+                            </button>
+                            
+                        </div>
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </>
+        );
+    };
+
+    const handleGetCredentials = () => {
+        
+        // evt.preventDefault();
+
+        const requestOptions = {
+            method: 'POST', 
+            body: JSON.stringify(credentials),
+        }
+
+        fetch("https://accounting.linarys.com/v1/login/", requestOptions)
+            .then((response) => response.json())
+            .then(data => {
+                if (data.user.id === 0 && data.user.confirmed === 0){
+                    console.log("No")  
+                    console.log(data.user)
+
+                    
+                }else{
+                    console.log('Yes')
+                    console.log(data.user)
+                    setEditEmail(true) 
+                    setEditName(false)
+                    setEditLastName(false)
+                    setEditUsername(false)
+                    setIsOpenModalChangeEmail(false)
+                }
+            })
+           
+    }
+
+    const ModalChangeEmail = ({ setIsOpen}) => {
+        return (
+            <>
+            <div className={styles.darkBG} onClick={() => setIsOpen(false)} />
+                <div className={styles.centered}>
+                    <div className={styles.modal}>
+                        <button style={{display:'flex', width:'100%', justifyContent:'flex-end', padding:'5px'}} className='none' onClick={() => setIsOpen(false)}>
+                            <i className='icon ms-1 icon-close'></i> 
+                        </button>
+                        <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} className={styles.modalHeader}>
+                            <i style={{color:'#4FB8A8', fontSize:'3rem'}} className='icon ms-1 icon-alert'></i> 
+                        </div>
+                        <div style={{display:'flex', justifyContent: 'center', marginBottom: '5px', marginTop: '10px'}}>
+                            <h6 style={{fontSize:'12px', paddingTop:'0', paddingBottom:'0'}} className={styles.heading}>
+                                In order to change your email address, for security reasons we need you to enter your current password
+                            </h6>
+                        </div>
+                      
+                        <Input 
+                            title = {"pwd"}
+                            type = {"password"}
+                            name = {"pwd"}
+                            autoFocus="autoFocus"
+                            placeholder = {'Enter password'}
+                            value = {credentials.pwd}
+                            handleChange={handlePassChange}
+                            style={{width:'200px'}}
+                        />
+                        <button
+                            style={{width:'unset'}}
+                            className='ochre'
+                            onClick={() => setIsOpen(false)}
+                        >
+                            Cancel
+                        </button>
+                        <button
+                            style={{width:'unset'}}
+                            className='snow'
+                            onClick={handleGetCredentials}
+                        >
+                            confirm
+                        </button>
+
+                        
+                        
+                    </div>
+                </div>
+            </>
+        );
+    };
+
     
 
     return(
         <>
-            {/* <div onClick={() => {setEditName(false); setEditLastName(false) ; setEditEmail(false); setEditUsername(false)}} style={{width:'100vw', height:'100vh', position: 'absolute', top:'0'}} id='experiment' /> */}
             <AppHeader />
             <Toast
                 toastList={toastProperties}
@@ -314,7 +485,9 @@ export default function Profile2(props) {
             
             <div  className='bg_profile'>
             
-            {isOpen && <Modal setIsOpen={setIsOpen} />}
+            {isOpenPhotoModal && <ModalPhoto setIsOpen={setIsOpenPhotoModal} />}
+            {isOpenModalChangePass && <ModalChangePass setIsOpen={setIsOpenModalChangePass} />}
+            {isOpenModalChangeEmail && <ModalChangeEmail setIsOpen={setIsOpenModalChangeEmail} />}
                 <div className='container relative'>
                     <div className='row container-profile'>
                         
@@ -328,7 +501,7 @@ export default function Profile2(props) {
                                 onChange={handleChange}
                             />
                             <div className='row'>
-                            <button style={{backgroundColor:'#B66A00', width:'35px', borderRadius:'50%',position: 'relative', top:'0', right:'-145px'}} className='none' onClick={() => setIsOpen(true)}>
+                            <button style={{backgroundColor:'#B66A00', width:'35px', borderRadius:'50%',position: 'relative', top:'0', right:'-145px'}} className='none' onClick={() => setIsOpenPhotoModal(true)}>
                                 <i style={{ color: 'white'}} className='icon icon-edit'></i>
                             </button>
                             
@@ -415,7 +588,6 @@ export default function Profile2(props) {
                                                             :
                                                             <button disabled style={{position:'relative', right:'45px', color:'#A5A5A5'}} onClick={()=>{handleSubmit() && setEditLastName(false)}} className="link">Save</button>
                                                     }
-                                                    {/* <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button> */}
                                                 </> 
                                                 :
                                                 <>
@@ -454,7 +626,8 @@ export default function Profile2(props) {
                                                 :
                                                 <>
                                                     <div className='subtitle primary_dark'>{user.email}</div>
-                                                    <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false)}} className='none'>
+                                                    {/* <button onClick={() => {setEditEmail(true); setEditName(false); setEditLastName(false); setEditUsername(false)}} className='none'> */}
+                                                    <button onClick={() => setIsOpenModalChangeEmail(true)} className='none'>
                                                         <i className='icon ms-1 icon-edit'></i>
                                                     </button>
                                                 </>
@@ -477,7 +650,7 @@ export default function Profile2(props) {
                                                 value = {user.username}
                                                 handleChange={handleChange}
                                             />
-                                            {/* <button style={{position:'relative', right:'45px'}} onClick={handleSubmit} className="link">Save</button> */}
+
                                             {
                                                 lastEdited === 'username' 
                                                     ? 
@@ -503,12 +676,14 @@ export default function Profile2(props) {
                                
                                 
                                 <div className='pt-4'>
-                                    <Link
-                                        to={'/changePassword'}
-                                        className='link'
+                                    
+                                    <a
+                                        href="#!" 
+                                        className="link"
+                                        onClick={() => setIsOpenModalChangePass(true)}
                                     >
                                         Change password
-                                    </Link>
+                                    </a>
                                 </div>
 
                             

@@ -73,7 +73,7 @@ export default class Login extends Component{
         fetch("https://accounting.linarys.com/v1/login/", requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                if (data.user.id === 0 & data.user.confirmed === 0) {
+                if (data.user.id === 0 && data.user.confirmed === 0) {
                     console.log("NO ACCESS")
                     this.setState({
                         alert: {

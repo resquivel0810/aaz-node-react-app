@@ -13,8 +13,11 @@ const Input = (props) => {
                 name={props.name}
                 value={props.value}
                 onChange={props.handleChange}
+                onKeyDown={props.handleKeyDown}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
+                autoFocus={props.autoFocus}
+                style={props.style}
                 required
             />
             <div className={props.errorDiv}>
