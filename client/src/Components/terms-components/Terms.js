@@ -53,7 +53,7 @@ export default function Terms() {
                                             className={'link'}
                                             onClick={() => setTimeout(() => {
                                                 window.location.reload()
-                                            }, 10)}
+                                            }, 20)}
                                         >
                                             {t.attributes.title}
                                         </Link>
