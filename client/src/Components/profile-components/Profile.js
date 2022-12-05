@@ -78,6 +78,7 @@ export default function Profile2(props) {
                                 lastname: json.user.lastname,
                                 email: json.user.email,
                                 picture: json.user.picture,
+                                account: json.user.account
                             })
                             setCredentials({
                                 pwd: '',
@@ -668,6 +669,29 @@ export default function Profile2(props) {
                                         </>
                                     }
                                     </div>
+                                    <div className='pb-2'>
+                                        <div className='body_text_small'>
+                                            Account
+                                        </div>
+                                        <div className='subtitle primary_dark'>
+                                        {(() => {
+                                            if (user.account === 1) {
+                                            return (
+                                                <div>Basic account</div>
+                                            )
+                                            } else if (user.account === 2) {
+                                            return (
+                                                <div>otherCase</div>
+                                            )
+                                            } else {
+                                            return (
+                                                <div>catch all</div>
+                                            )
+                                            }
+                                        })()}
+                                        </div>
+                                    </div>
+                                    
                                     
                                 </div>
                                 </div>

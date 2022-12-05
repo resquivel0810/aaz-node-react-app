@@ -1,7 +1,7 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import Meaning from './Meaning';
+
 
 const parseJSON = (resp) => (resp.json ? resp.json() : resp);
 const checkStatus = (resp) => {
@@ -19,7 +19,7 @@ const headers = { 'Content-Type': 'application/json' };
 export default function Terms() {
     const [error, setError] = useState(null);
     const [terms, setTerms] = useState([]);
-    let data;
+    // let data;
 
     useEffect(() => {
         fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
@@ -32,10 +32,10 @@ export default function Terms() {
         
         
     }, [])
-    console.log("*",terms, error, data)
+    // console.log("*",terms, error, data)
 
     return(
-        <Fragment>
+        <>
             <div className=''>
                 <h3>All terms</h3>
                 <div className=''>
@@ -51,6 +51,9 @@ export default function Terms() {
                                             key={t.id} 
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
+                                            onClick={() => setTimeout(() => {
+                                                window.location.reload()
+                                            }, 10)}
                                         >
                                             {t.attributes.title}
                                         </Link>
@@ -72,7 +75,7 @@ export default function Terms() {
                                     <div className='col-4 text-end'>
                                         <i className='icon ms-1 icon-copy'></i>
                                         <i className='icon ms-1 icon-share'></i>
-                                        {/* <i className='icon ms-1'>W</i> */}
+                                        <i className='icon ms-1 icon-addwatchlist'></i>
                                     </div>
                                 </div>
                                 
@@ -84,6 +87,6 @@ export default function Terms() {
 
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 }

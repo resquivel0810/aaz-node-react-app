@@ -20,11 +20,11 @@ export default function Meaning(props) {
     
     const [error, setError] = useState(null);
     const [terms, setTerms] = useState([]);
-    let data;
+    
 
     let { id } = useParams();
 
-    console.log('id:'+id);
+
 
     useEffect(() => {
         
@@ -33,10 +33,12 @@ export default function Meaning(props) {
         })
             .then(checkStatus)
             .then(parseJSON)
-            .then(({ data }) => setTerms(data))
+            .then(data  => setTerms({...data.data.attributes}))
             .catch((error) => setError(error))
     }, [])
-    console.log("Meaning",terms, error, data)
+   
+    console.log({...terms.localizations})
+
 
     return(
         <Fragment>
@@ -52,12 +54,11 @@ export default function Meaning(props) {
                     {id > 0 &&
                         <div>
                             <div className='subtitle_bold'>
-                                {/* {terms.id} */}
-                                {/* {terms.attributes.title} */}
-                                Meaning
+                                {terms.title}
+                                
                             </div>
                             <div>
-                                {/* {terms.attributes.terms.data.attributes.definition} */}
+                                {{...{...{...{...terms.terms}.data}[0]}.attributes}.definition}
                             </div>
                         </div>
                     }
