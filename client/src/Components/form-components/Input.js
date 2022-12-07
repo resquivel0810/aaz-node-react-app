@@ -19,6 +19,9 @@ const Input = (props) => {
                 autoFocus={props.autoFocus}
                 style={props.style}
                 required
+                checked={props.checked}
+                data-checked={props.checked}
+                
             />
             <div className={props.errorDiv}>
                 {props.errorMsg}

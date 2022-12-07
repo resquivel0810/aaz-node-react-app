@@ -1,4 +1,4 @@
-import React, {Fragment} from 'react';
+import React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -37,11 +37,11 @@ export default function Meaning(props) {
             .catch((error) => setError(error))
     }, [])
    
-    console.log({...terms.localizations})
+    // console.log({...terms.localizations})
 
 
     return(
-        <Fragment>
+        <>
             <div className=''>
                 <div className='box_meaningTerm'>
             
@@ -65,6 +65,6 @@ export default function Meaning(props) {
         
                 </div>
             </div>
-        </Fragment>
+        </>
     );
 }

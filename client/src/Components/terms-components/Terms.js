@@ -3,36 +3,9 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 
-const parseJSON = (resp) => (resp.json ? resp.json() : resp);
-const checkStatus = (resp) => {
-    if (resp.status >= 200 && resp.status < 300) {
-      return resp;
-    }
-  
-    return parseJSON(resp).then(resp => {
-      throw resp;
-    });
-};
 
-const headers = { 'Content-Type': 'application/json' };
+export default function Terms(terms) {
 
-export default function Terms() {
-    const [error, setError] = useState(null);
-    const [terms, setTerms] = useState([]);
-    // let data;
-
-    useEffect(() => {
-        fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
-            headers, method: 'GET' 
-        })
-          .then(checkStatus)
-          .then(parseJSON)
-          .then(({ data }) => setTerms(data))
-          .catch((error) => setError(error))
-        
-        
-    }, [])
-    // console.log("*",terms, error, data)
 
     return(
         <>
@@ -43,7 +16,7 @@ export default function Terms() {
                         {/* <FilterAlphabet /> */}
                     </div>
                     <div className='container_term'>
-                        {terms.map((t) => (                             
+                        {terms.terms.map((t) => (                             
                             <div className='box_term' key={t.id}>
                                 <div className='row'>
                                     <div className='col-8'>
@@ -81,6 +54,7 @@ export default function Terms() {
                                 
                             </div>
                         ))}
+            
                     </div>
                     
                     
