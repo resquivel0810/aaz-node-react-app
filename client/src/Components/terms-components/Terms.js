@@ -4,9 +4,9 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function Terms(terms) {
+export default function Terms({terms, onClick2 = f => f }) {
 
-
+    
     return(
         <>
             <div className=''>
@@ -16,17 +16,16 @@ export default function Terms(terms) {
                         {/* <FilterAlphabet /> */}
                     </div>
                     <div className='container_term'>
-                        {terms.terms.map((t) => (                             
-                            <div className='box_term' key={t.id}>
+                        {terms.map((t) => (                             
+                            <div className='box_term' id={t.id} key={t.id}>
                                 <div className='row'>
                                     <div className='col-8'>
                                         <Link
                                             key={t.id} 
+                                            onClick={() =>onClick2(t.id)}
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
-                                            onClick={() => setTimeout(() => {
-                                                window.location.reload()
-                                            }, 20)}
+                                            
                                         >
                                             {t.attributes.title}
                                         </Link>

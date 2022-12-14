@@ -7,33 +7,33 @@ export default class AppHeader extends Component{
 
     constructor(props){
         super(props);
-        this.state = {
-            jwt: "",
-            id: "",
-            user:{
-                id: 0,
-            },
-        }
+        // this.state = {
+        //     jwt: "",
+        //     id: "",
+        //     user:{
+        //         id: 0,
+        //     },
+        // }
         
-        this.handleJWTChange(this.handleJWTChange.bind(this));
+        // this.handleJWTChange(this.handleJWTChange.bind(this));
     }
     
-    componentDidMount(){
-        let t = window.localStorage.getItem("jwt");
-        let id = window.localStorage.getItem("id");
+    // componentDidMount(){
+    //     let t = window.localStorage.getItem("jwt");
+    //     let id = window.localStorage.getItem("id");
        
-        if(t){
-          if(this.state.jwt === ""){
-            this.setState({jwt: JSON.parse(t)});
-            this.setState({jwt: JSON.parse(id)});
-            console.log("JWT: " + t)
-            console.log("ID USER:"+id)
-          }
+    //     if(t){
+    //       if(this.state.jwt === ""){
+    //         this.setState({jwt: JSON.parse(t)});
+    //         this.setState({jwt: JSON.parse(id)});
+    //         console.log("JWT: " + t)
+    //         console.log("ID USER:"+id)
+    //       }
 
-        }
+    //     }
         
         
-    }
+    // }
     
     handleJWTChange = (jwt) => {
         this.setState({ jwt: jwt });

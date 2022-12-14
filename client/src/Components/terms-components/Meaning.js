@@ -16,35 +16,62 @@ const checkStatus = (resp) => {
 const headers = { 'Content-Type': 'application/json' };
 
 
-export default function Meaning(props) {
+let listOfTradcutions = []
+let listOfCurrentTraductions = []
+
+export default function Meaning({meaning, id}) {
+
+    const [meaningTranslation, setMeaningTranslation] = useState(false)
+
     
-    const [error, setError] = useState(null);
-    const [terms, setTerms] = useState([]);
-    
+    const getMeaningTraducion = (meaningTraductionId) => {
+        const requestOptions = {
+            method: 'GET', 
+      
+        }
 
-    let { id } = useParams();
 
 
-
-    useEffect(() => {
-        
-        fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, { 
-            headers, method: 'GET' 
+        fetch(`https://sandbox.linarys.com/api/folios/${meaningTraductionId}?populate=*`, requestOptions)
+        .then((response) => {
+            if(response.status !== "200"){
+                let err = Error;
+                err.Message = "Invalid response code: " + response.status;
+            }
+            return response.json();
         })
-            .then(checkStatus)
-            .then(parseJSON)
-            .then(data  => setTerms({...data.data.attributes}))
-            .catch((error) => setError(error))
-    }, [])
-   
-    // console.log({...terms.localizations})
+        .then((json) => {
+            setMeaningTranslation(json.data.attributes)
+            console.log(json)
+        })
+    }
 
+    let traductions = {...meaning.localizations}.data
+    // console.log(listOfTradcutions)
+    // console.log(Object.values({...traductions}))
 
     return(
         <>
-            <div className=''>
-                <div className='box_meaningTerm'>
-            
+            <div  className=''>
+                <div style={{padding: '25px'}} className='box_meaningTerm'>
+                    {
+                       Object.values({...traductions}).map((l)=> {
+                         
+                            console.log(l.attributes.locale === 'fr')
+                            listOfTradcutions.push(
+                                l.id, l.attributes.locale
+                            );
+                            console.log(listOfCurrentTraductions)
+                            listOfCurrentTraductions = listOfTradcutions.slice(1).slice(-6)
+                            
+                            // return (
+                            //     <h1>{listOfTradcutions[0]}</h1>
+                            // )
+                            
+                        })
+                        
+                    }
+   
                     {id == 0 &&
                         <div className='subtitle_bold'>
                             Choose one
@@ -52,15 +79,81 @@ export default function Meaning(props) {
                     }
                     
                     {id > 0 &&
+                        <>
+                        <div style={{textAlign: 'center'}} >
+                            <h3>{meaning.title} </h3>  
+                        </div>
+                        <div style={{display:'flex', justifyContent: 'center'}}>
+                            <button className='none'>
+                                <i className='icon ms-1 icon-copy'></i>
+                            </button>
+                            <button className='none'>
+                                <i className='icon ms-1 icon-share'></i>
+                            </button>
+                            <button className='none'>
+                                <i className='icon ms-1 icon-addwatchlist'></i>
+                            </button>
+                        </div>
                         <div>
-                            <div className='subtitle_bold'>
-                                {terms.title}
-                                
+                            <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'60%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px'}}>
+                                <button onClick={() => getMeaningTraducion(id)} style={{color:'#BD8F16'}} className='none'>GERMAN</button>
+                                {(() => {
+                                    if (listOfCurrentTraductions[1] === 'fr') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[3] === 'fr') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[5] === 'fr'){
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                    )
+                                    }
+                                })()}
+                                    {(() => {
+                                    if (listOfCurrentTraductions[1] === 'it') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[3] === 'it') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[5] === 'it'){
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                    )
+                                    }
+                                })()}
+                                {(() => {
+                                    if (listOfCurrentTraductions[1] === 'en') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[3] === 'en') {
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                    )
+                                    } else if (listOfCurrentTraductions[5] === 'en'){
+                                    return (
+                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                    )
+                                    }
+                                })()}
+                          
+                            </div>
+                         
+                            <div style={{color:'#068B77'}} className='subtitle_bold'>
+
+                                {meaningTranslation.title}  
                             </div>
                             <div>
-                                {{...{...{...{...terms.terms}.data}[0]}.attributes}.definition}
+                                {{...{...{...{...meaning.terms}.data}[0]}.attributes}.definition}
                             </div>
                         </div>
+                        </>
                     }
         
                 </div>

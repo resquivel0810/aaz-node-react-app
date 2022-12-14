@@ -26,7 +26,9 @@ export default function Dictionary(props) {
     const [terms, setTerms] = useState([])
     const [error, setError] = useState(null);
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
+    // const [currentLetter, setCurrentLetter] = useState('a')
     const [displayedLetters, setDisplayedLetters] = useState(false)
+    const [meaning, setMeaning] = useState([])
 
     useEffect(() => {
         let t = window.localStorage.getItem("jwt");
@@ -42,10 +44,43 @@ export default function Dictionary(props) {
           .then(({ data }) => setTerms(data))
           .catch((error) => setError(error))
 
+        fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, { 
+            headers, method: 'GET' 
+        })
+            .then(checkStatus)
+            .then(parseJSON)
+            .then(data  => setMeaning({...data.data.attributes}))
+            .catch((error) => setError(error))
+
         
         
     }, [])
     let id = props.match.params.id;
+    // console.log(id)
+
+    const getMeaning = (id) => {
+
+        // id = props.match.params.id;
+        const requestOptions = {
+            method: 'GET', 
+      
+        }
+
+        fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, requestOptions)
+        .then((response) => {
+            if(response.status !== "200"){
+                let err = Error;
+                err.Message = "Invalid response code: " + response.status;
+            }
+            return response.json();
+        })
+        .then((json) => {
+            setMeaning(json.data.attributes)
+            // history.push("/home");
+            console.log(json, id)
+        })
+        
+    }
 
     const getTermsWithLetter = (letter) => {
         const requestOptions = {
@@ -65,6 +100,8 @@ export default function Dictionary(props) {
             setTerms(json.data)
         })
     }
+
+    // console.log(meaning)
 
     const handleChange = e => {
         const  value  = e.target.value;
@@ -277,10 +314,14 @@ export default function Dictionary(props) {
                     <div className='row py-4'>
                         <div className='col'>
                             <FilterByLetter currentLetters={currentLetters}/>
-                            <Terms terms={terms} />
+                            <Terms 
+                                terms={terms}
+                                onClick2={(id) => getMeaning(id)} 
+                            />
                         </div>
                         <div className='d-none d-lg-block col'>
                             <Meaning 
+                                meaning={meaning}
                                 id = {id}
                             />
                         </div>
