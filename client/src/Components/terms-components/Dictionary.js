@@ -76,7 +76,6 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setMeaning(json.data.attributes)
-            // history.push("/home");
             console.log(json, id)
         })
         
@@ -98,6 +97,8 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setTerms(json.data)
+            setMeaning([])
+            props.history.push('/dictionary/0')
         })
     }
 
@@ -320,7 +321,9 @@ export default function Dictionary(props) {
                             <Terms 
                                 terms={terms}
                                 onClick2={(id) => getMeaning(id)} 
+                                currentTerm = {meaning.title}
                             />
+                            {console.log(meaning.title)}
                         </div>
                         <div className='d-none d-lg-block col'>
                             <Meaning 

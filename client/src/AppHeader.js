@@ -25,7 +25,7 @@ export default function AppHeader2({onClick3 = f => f, search}) {
                             id='search'
                             placeholder='Search'
                         />  
-                        <button onClick={() => onClick3(document.getElementById('search').value)} style={{width:'unset'}} className='btn ochre'>SEARCH</button>   
+                        <button onClick={() => onClick3(document.getElementById('search').value)} style={{width:'unset', height: '30px', padding: '0 10px', position: 'relative', right: '70px'}} className='btn ochre'>SEARCH</button>   
                         </div>
                         :
                         null

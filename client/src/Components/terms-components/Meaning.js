@@ -63,98 +63,99 @@ export default function Meaning({meaning, id}) {
                             );
                             console.log(listOfCurrentTraductions)
                             listOfCurrentTraductions = listOfTradcutions.slice(1).slice(-6)
-                            
-                            // return (
-                            //     <h1>{listOfTradcutions[0]}</h1>
-                            // )
+                     
                             
                         })
                         
                     }
-   
-                    {id == 0 &&
-                        <div className='subtitle_bold'>
-                            Choose one
-                        </div>
-                    }
-                    
-                    {id > 0 &&
-                        <>
-                        <div style={{textAlign: 'center'}} >
-                            <h3>{meaning.title} </h3>  
-                        </div>
-                        <div style={{display:'flex', justifyContent: 'center'}}>
-                            <button className='none'>
-                                <i className='icon ms-1 icon-copy'></i>
-                            </button>
-                            <button className='none'>
-                                <i className='icon ms-1 icon-share'></i>
-                            </button>
-                            <button className='none'>
-                                <i className='icon ms-1 icon-addwatchlist'></i>
-                            </button>
-                        </div>
-                        <div>
-                            <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'60%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px'}}>
-                                <button onClick={() => getMeaningTraducion(id)} style={{color:'#BD8F16'}} className='none'>GERMAN</button>
-                                {(() => {
-                                    if (listOfCurrentTraductions[1] === 'fr') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[3] === 'fr') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[5] === 'fr'){
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
-                                    )
-                                    }
-                                })()}
-                                    {(() => {
-                                    if (listOfCurrentTraductions[1] === 'it') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[3] === 'it') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[5] === 'it'){
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
-                                    )
-                                    }
-                                })()}
-                                {(() => {
-                                    if (listOfCurrentTraductions[1] === 'en') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[3] === 'en') {
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
-                                    )
-                                    } else if (listOfCurrentTraductions[5] === 'en'){
-                                    return (
-                                        <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
-                                    )
-                                    }
-                                })()}
-                          
-                            </div>
-                         
-                            <div style={{color:'#068B77'}} className='subtitle_bold'>
 
-                                {meaningTranslation.title}  
+                    {(() => {
+                        if (id == 0) {
+                        return (
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100%', color:'#004F3D'}} className='subtitle_bold'>
+                                Choose one
+                            </div>
+                        )
+                        } else {
+                        return (
+                            <>
+                            <div style={{textAlign: 'center'}} >
+                                <h3>{meaning.title} </h3>  
+                            </div>
+                            <div style={{display:'flex', justifyContent: 'center'}}>
+                                <button className='none'>
+                                    <i className='icon ms-1 icon-copy'></i>
+                                </button>
+                                <button className='none'>
+                                    <i className='icon ms-1 icon-share'></i>
+                                </button>
+                                <button className='none'>
+                                    <i className='icon ms-1 icon-addwatchlist'></i>
+                                </button>
                             </div>
                             <div>
-                                {{...{...{...{...meaning.terms}.data}[0]}.attributes}.definition}
+                                <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'60%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px'}}>
+                                    <button onClick={() => getMeaningTraducion(id)} style={{color:'#BD8F16'}} className='none'>GERMAN</button>
+                                    {(() => {
+                                        if (listOfCurrentTraductions[1] === 'fr') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[3] === 'fr') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[5] === 'fr'){
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>FRENCH</button>
+                                        )
+                                        }
+                                    })()}
+                                        {(() => {
+                                        if (listOfCurrentTraductions[1] === 'it') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[3] === 'it') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[5] === 'it'){
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ITALIAN</button>
+                                        )
+                                        }
+                                    })()}
+                                    {(() => {
+                                        if (listOfCurrentTraductions[1] === 'en') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[0])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[3] === 'en') {
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[2])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                        )
+                                        } else if (listOfCurrentTraductions[5] === 'en'){
+                                        return (
+                                            <button onClick={() => getMeaningTraducion(listOfCurrentTraductions[4])} style={{color:'#BD8F16'}} className='none'>ENGLISH</button>
+                                        )
+                                        }
+                                    })()}
+                              
+                                </div>
+                             
+                                <div style={{color:'#068B77'}} className='subtitle_bold'>
+    
+                                    {meaningTranslation.title}  
+                                </div>
+                                <div>
+                                    {{...{...{...{...meaning.terms}.data}[0]}.attributes}.definition}
+                                </div>
                             </div>
-                        </div>
-                        </>
-                    }
+                            </>
+                        )
+                        }
+                    })()}
         
                 </div>
             </div>

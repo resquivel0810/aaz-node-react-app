@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 
 
-export default function Terms({terms, onClick2 = f => f }) {
+export default function Terms({terms, onClick2 = f => f, currentTerm }) {
 
     
     return(
@@ -19,12 +19,15 @@ export default function Terms({terms, onClick2 = f => f }) {
                         {terms.map((t) => (                             
                             <div className='box_term' id={t.id} key={t.id}>
                                 <div className='row'>
-                                    <div className='col-8'>
+                                    <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white'}} className='col-8'>
+                                    {/* 'rgba(225,226,225,0.6)' */}
+                                        {console.log(t.attributes.title)}
                                         <Link
                                             key={t.id} 
                                             onClick={() =>onClick2(t.id)}
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
+                                            
                                             
                                         >
                                             {t.attributes.title}
@@ -47,7 +50,7 @@ export default function Terms({terms, onClick2 = f => f }) {
                                     <div className='col-4 text-end'>
                                         <i className='icon ms-1 icon-copy'></i>
                                         <i className='icon ms-1 icon-share'></i>
-                                        <i className='icon ms-1 icon-addwatchlist'></i>
+                                        {/* <i className='icon ms-1 icon-addwatchlist'></i> */}
                                     </div>
                                 </div>
                                 
