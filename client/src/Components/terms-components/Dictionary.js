@@ -56,7 +56,7 @@ export default function Dictionary(props) {
         
     }, [])
     let id = props.match.params.id;
-    // console.log(id)
+    console.log(props.match.path)
 
     const getMeaning = (id) => {
 
@@ -308,7 +308,10 @@ export default function Dictionary(props) {
 
     return(
         <>
-            <AppHeader />
+            <AppHeader 
+                onClick3={(letters) => getTermsWithLetter(letters) }
+                search={props.match.path}
+            />
             <div className='bg_dictionary'>
                 <div className='container relative'>
                     <div className='row py-4'>
