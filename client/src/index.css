@@ -839,7 +839,7 @@ input:hover {
 .box_meaningTerm{
   background: #E0F2F0;
   height: 70vh;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .box_term{

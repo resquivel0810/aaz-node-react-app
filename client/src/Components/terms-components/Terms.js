@@ -10,7 +10,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm }) {
     return(
         <>
             <div className=''>
-                <h3>All terms</h3>
+                {/* <h3>All terms</h3> */}
                 <div className=''>
                     <div className='my-4'>
                         {/* <FilterAlphabet /> */}
@@ -21,7 +21,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm }) {
                                 <div className='row'>
                                     <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white'}} className='col-8'>
                                     {/* 'rgba(225,226,225,0.6)' */}
-                                        {console.log(t.attributes.title)}
+                                        {/* {console.log(t.attributes.title)} */}
                                         <Link
                                             key={t.id} 
                                             onClick={() =>onClick2(t.id)}

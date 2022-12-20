@@ -26,14 +26,16 @@ export default function Dictionary(props) {
     const [terms, setTerms] = useState([])
     const [error, setError] = useState(null);
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
-    // const [currentLetter, setCurrentLetter] = useState('a')
+    const [currentLetter, setCurrentLetter] = useState()
     const [displayedLetters, setDisplayedLetters] = useState(false)
     const [meaning, setMeaning] = useState([])
+    const [meaningTranslation, setMeaningTranslation] = useState(false)
+    const [searched, setSearched] = useState('')
 
     useEffect(() => {
         let t = window.localStorage.getItem("jwt");
         if(t === null){
-            console.log("No access");
+            // console.log("No access");
             window.location.href = '/'
         }
         fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
@@ -56,7 +58,7 @@ export default function Dictionary(props) {
         
     }, [])
     let id = props.match.params.id;
-    console.log(props.match.path)
+    // console.log(props.match.path)
 
     const getMeaning = (id) => {
 
@@ -76,7 +78,8 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setMeaning(json.data.attributes)
-            console.log(json, id)
+            setMeaningTranslation(false)
+            // console.log(json, id)
         })
         
     }
@@ -99,15 +102,58 @@ export default function Dictionary(props) {
             setTerms(json.data)
             setMeaning([])
             props.history.push('/dictionary/0')
+            if(json.data.length > 0) {
+                setCurrentLetter(json.data[0].attributes.title.charAt(0))
+                setSearched('')
+            } else if (json.data.length === 0) {
+                setCurrentLetter('')
+            }
+            
+            // setCurrentLetter(json.data[0].attributes.title.charAt(0))
+            // console.log(json.data[0].attributes.title.charAt(0))
+            console.log(json.data.length > 0 )
         })
     }
 
-    // console.log(meaning)
+    const getMeaningTraducion = (meaningTraductionId) => {
+        const requestOptions = {
+            method: 'GET', 
+      
+        }
+
+        fetch(`https://sandbox.linarys.com/api/folios/${meaningTraductionId}?populate=*`, requestOptions)
+        .then((response) => {
+            if(response.status !== "200"){
+                let err = Error;
+                err.Message = "Invalid response code: " + response.status;
+            }
+            return response.json();
+        })
+        .then((json) => {
+            setMeaningTranslation(json.data.attributes)
+            // console.log(json)
+        })
+    }
+    let traductions = {...meaning.localizations}.data
+    // console.log(Object.values({...traductions}))
+    let listOfTradcutions = []
+    let listOfCurrentTraductions = []
+    Object.values({...traductions}).map((l)=> {
+                         
+        // console.log(l.attributes.locale === 'fr')
+        listOfTradcutions.push(
+            l.id, l.attributes.locale
+        );
+        // console.log(listOfTradcutions)
+        listOfCurrentTraductions = listOfTradcutions.slice(0).slice(-6)
+ 
+        
+    })
 
     const handleChange = e => {
         const  value  = e.target.value;
         setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
-        console.log(typeof(value), value)
+        // setCurrentLetter(null)
     };
 
     const changeDisplayedLetters = () => {
@@ -143,7 +189,7 @@ export default function Dictionary(props) {
             <>
             <div>
                 <div>
-                    <div style={{display:'flex', backgroundColor: '#E1E2E1', width: '200px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center'}}>
+                    <div style={{display:'flex', backgroundColor: '#E1E2E1', width: '250px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center'}}>
                         <div style={{display: 'flex', alignItems: 'center', backgroundColor: '#FDFDFD', padding: '0 10px',borderRadius: '10px'}}>
                             <span>{currentLetters}</span>
                             <button onClick={() => changeDisplayedLetters()} className='none'><i className='icon ms-1 icon-more'></i></button>
@@ -151,7 +197,7 @@ export default function Dictionary(props) {
                         
                         <div style={{display: 'flex'}}>
                             <button 
-                                style={{margin: '5px', height: '15px', width: '15px'}} 
+                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['à', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
                                 className='none'
                                 id={Object.values(currentLetters)[0]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[0])}
@@ -159,7 +205,7 @@ export default function Dictionary(props) {
                                 {Object.values(currentLetters)[0]}
                             </button>
                             <button 
-                                style={{margin: '5px', height: '15px', width: '15px'}}  
+                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['B', 'E', 'H', 'K', 'N', 'Q', 'T', 'W', 'Z'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className='none'
                                 id={Object.values(currentLetters)[1]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[1])}
@@ -168,7 +214,7 @@ export default function Dictionary(props) {
                             </button>
                             {/* {Object.values(currentLetters)[2] } */}
                             <button 
-                                style={{margin: '5px', height: '15px', width: '15px'}}  
+                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['C', 'F', 'I', 'L', 'O', 'R', 'U', 'X'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className='none'
                                 id={Object.values(currentLetters)[2]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[2])}
@@ -311,24 +357,60 @@ export default function Dictionary(props) {
         <>
             <AppHeader 
                 onClick3={(letters) => getTermsWithLetter(letters) }
+                onClick5={(search) => setSearched(search)}
                 search={props.match.path}
             />
             <div className='bg_dictionary'>
                 <div className='container relative'>
                     <div className='row py-4'>
                         <div className='col'>
+                            {/* {
+                                currentLetter !== undefined 
+                                ?
+                                <h3>All terms with {currentLetter}</h3>
+                                :
+                                <h3>All terms</h3>
+                            } */}
+                            {(() => {
+                                if (currentLetter !== undefined && searched === '') {
+                                return (
+                                    <h3 style={{margin: '0'}}>All terms with {currentLetter}</h3>
+                                )
+                                } else if (searched !== '') {
+                                return (
+                                    <h3 style={{margin: '0'}}>Results</h3>
+                                )
+                                } else {
+                                return (
+                                    <h3 style={{margin: '0'}}>All terms</h3>
+                                )
+                                }
+                            })()}
+                            <div style={{color: '#A5A5A5', marginBottom:'20px'}}>Currently searching in german</div>
+                            
+                           
                             <FilterByLetter currentLetters={currentLetters}/>
-                            <Terms 
-                                terms={terms}
-                                onClick2={(id) => getMeaning(id)} 
-                                currentTerm = {meaning.title}
-                            />
-                            {console.log(meaning.title)}
+                            {
+                                terms.length > 0
+                                ?
+                                <Terms 
+                                    terms={terms}
+                                    onClick2={(id) => getMeaning(id)} 
+                                    currentTerm = {meaning.title}
+                                />
+                                :
+                                <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>Sorry we couldn’t find any matches for the term “{searched}”.  Double check your search for any typos or spelling error or search by letter. </div>
+                            }
+                            
+                            
                         </div>
                         <div className='d-none d-lg-block col'>
                             <Meaning 
                                 meaning={meaning}
                                 id = {id}
+                                listOfCurrentTraductions = {listOfCurrentTraductions}
+                                meaningTranslation = {meaningTranslation}
+                                onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
                             />
                         </div>
                     </div>
