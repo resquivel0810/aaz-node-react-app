@@ -102,10 +102,14 @@ export default function Dictionary(props) {
             setTerms(json.data)
             setMeaning([])
             props.history.push('/dictionary/0')
-            if(json.data.length > 0) {
+            if(json.data.length > 0 && searched !== '') {
                 setCurrentLetter(json.data[0].attributes.title.charAt(0))
                 setSearched('')
-            } else if (json.data.length === 0) {
+            } 
+            else if(json.data.length > 0 && searched === '') {
+                setCurrentLetter(json.data[0].attributes.title.charAt(0))
+            }
+            else if (json.data.length === 0) {
                 setCurrentLetter('')
             }
             
