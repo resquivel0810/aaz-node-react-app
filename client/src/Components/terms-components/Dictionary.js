@@ -6,6 +6,12 @@ import AppHeader from '../../AppHeader';
 import Terms from './../terms-components/Terms';
 import Meaning from './Meaning';
 import Input from '../form-components/Input';
+import Toast from '../toast/Toast2';
+
+
+
+import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
 
 const parseJSON = (resp) => (resp.json ? resp.json() : resp);
 const checkStatus = (resp) => {
@@ -28,11 +34,18 @@ export default function Dictionary(props) {
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
     const [currentLetter, setCurrentLetter] = useState()
     const [displayedLetters, setDisplayedLetters] = useState(false)
+    const [displayedSearchBarOptions, setDisplayedSearchBarOptions] = useState(false)
     const [meaning, setMeaning] = useState([])
     const [meaningTranslation, setMeaningTranslation] = useState(false)
     const [searched, setSearched] = useState('')
+    const [searchLanguage, setSearchLanguage] = useState('de')
+    
+    const [clipboard, setClipboard] = useState('jajaja')
+    const [toastVisible, setToastVisible] = useState(false)
+    const [toastProperties, setToastProperties] = useState([])
 
     useEffect(() => {
+        setIsLoading(true)
         let t = window.localStorage.getItem("jwt");
         if(t === null){
             // console.log("No access");
@@ -43,7 +56,8 @@ export default function Dictionary(props) {
         })
           .then(checkStatus)
           .then(parseJSON)
-          .then(({ data }) => setTerms(data))
+          .then(({ data }) => {setTerms(data); setIsLoading(false)})
+        //   .then(setIsLoading(false))
           .catch((error) => setError(error))
 
         fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, { 
@@ -57,6 +71,14 @@ export default function Dictionary(props) {
         
         
     }, [])
+
+    useEffect(() => {
+        setToastProperties({
+            description: `${clipboard.toUpperCase()}`,
+            borderColor: '#0A9DE4',
+            icon: 'icon-success'
+        })
+    }, [clipboard])
     let id = props.match.params.id;
     // console.log(props.match.path)
 
@@ -85,12 +107,13 @@ export default function Dictionary(props) {
     }
 
     const getTermsWithLetter = (letter) => {
+        setIsLoading(true)
         const requestOptions = {
             method: 'GET', 
       
         }
 
-        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=de&filters[title][$startsWith]=`+letter, requestOptions)
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=` + letter, requestOptions)
         .then((response) => {
             if(response.status !== "200"){
                 let err = Error;
@@ -100,11 +123,13 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setTerms(json.data)
+            setIsLoading(false)
             setMeaning([])
             props.history.push('/dictionary/0')
             if(json.data.length > 0 && searched !== '') {
                 setCurrentLetter(json.data[0].attributes.title.charAt(0))
                 setSearched('')
+
             } 
             else if(json.data.length > 0 && searched === '') {
                 setCurrentLetter(json.data[0].attributes.title.charAt(0))
@@ -164,6 +189,7 @@ export default function Dictionary(props) {
         setDisplayedLetters(!displayedLetters)
     }
 
+
     function useOutsideAlerter(ref) {
         useEffect(() => {
          
@@ -172,6 +198,8 @@ export default function Dictionary(props) {
           function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target) ) {
                 setDisplayedLetters(false)
+                setDisplayedSearchBarOptions(false)
+
             }
           
           }
@@ -185,7 +213,12 @@ export default function Dictionary(props) {
       }
 
     const wrapperRef= useRef(null);
+    
     useOutsideAlerter(wrapperRef);
+
+    const wrapperRef2= useRef(null);
+
+    useOutsideAlerter(wrapperRef2);
 
     const FilterByLetter = ({currentLetters}) => {
 
@@ -359,22 +392,26 @@ export default function Dictionary(props) {
 
     return(
         <>
+            <Toast
+                toastList={toastProperties}
+                position="top-right" 
+                visible={toastVisible}
+            />
             <AppHeader 
                 onClick3={(letters) => getTermsWithLetter(letters) }
                 onClick5={(search) => setSearched(search)}
+                onFocus1={() => setDisplayedSearchBarOptions(true)}
+                // onBlur1={() => setDisplayedSearchBarOptions(false)}
+                ref={wrapperRef2}
+                options={displayedSearchBarOptions}
                 search={props.match.path}
+                onChange1={(lan) => setSearchLanguage(lan)}
+
             />
             <div className='bg_dictionary'>
                 <div className='container relative'>
                     <div className='row py-4'>
                         <div className='col'>
-                            {/* {
-                                currentLetter !== undefined 
-                                ?
-                                <h3>All terms with {currentLetter}</h3>
-                                :
-                                <h3>All terms</h3>
-                            } */}
                             {(() => {
                                 if (currentLetter !== undefined && searched === '') {
                                 return (
@@ -390,21 +427,103 @@ export default function Dictionary(props) {
                                 )
                                 }
                             })()}
-                            <div style={{color: '#A5A5A5', marginBottom:'20px'}}>Currently searching in german</div>
-                            
+                            <div style={{color: '#A5A5A5', marginBottom:'20px'}}>
+                                Currently searching in 
+                                {
+                                    searchLanguage === 'de' ? <> german</> : null 
+                                }
+                                {
+                                    searchLanguage === 'fr' ? <> french</> : null 
+                                }
+                                {
+                                    searchLanguage === 'it' ? <> italian</> : null 
+                                }
+                                {
+                                    searchLanguage === 'en' ? <> english</> : null 
+                                }
+                            </div>
+                            {console.log(terms.length)}
                            
                             <FilterByLetter currentLetters={currentLetters}/>
-                            {
-                                terms.length > 0
-                                ?
-                                <Terms 
-                                    terms={terms}
-                                    onClick2={(id) => getMeaning(id)} 
-                                    currentTerm = {meaning.title}
-                                />
-                                :
-                                <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>Sorry we couldn’t find any matches for the term “{searched}”.  Double check your search for any typos or spelling error or search by letter. </div>
+                           {
+                                    isLoading
+                                    ?
+                                    // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
+                                    //     Sorry we couldn’t find any matches for the term “{searched}”.  
+                                    //     Double check your search for any typos or spelling error or 
+                                    //     search by letter. 
+                                    // </div>
+
+                                    <>
+                                    
+                                    <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '500px'}}>
+                                    <SkeletonTheme
+                                        baseColor="#E1E2E1"
+                                        highlightColor="#FDFDFD"
+                                        borderRadius="10"
+                                        duration={2}
+                                    >
+                                        {[1,2,3,4,5].map(() => (
+                                            <div className='box_term'>
+                                            <Skeleton width={100} />
+                                            <div className='d-flex flex-row'>
+                                                <div className='body_text_len me-2'>DE.</div>
+                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                            </div>
+                                            <div className='d-flex flex-row'>
+                                                <div className='body_text_len me-2'>EN.</div>
+                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                            </div>
+                                            <div className='d-flex flex-row'>
+                                                <div className='body_text_len me-2'>FR.</div>
+                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                            </div>
+                                            <div className='d-flex flex-row'>
+                                                <div className='body_text_len me-2'>IT.</div>
+                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                            </div>
+                                           
+                                            
+                                        </div>
+                                        ))}
+                                        
+                                        
+                                    </SkeletonTheme>
+                                    </div>
+                                    </>
+                                    :
+                                    <>
+                                    <Terms 
+                                        isLoading={isLoading}
+                                        terms={terms}
+                                        onClick2={(id) => getMeaning(id)} 
+                                        currentTerm = {meaning.title}
+                                        clipboard = {clipboard}
+                                        toastVisible = {toastVisible}
+                                        setClipboard = {(cli) => 
+                                            {   setClipboard(cli); 
+                                                setToastProperties({
+                                                    description: `${clipboard.toUpperCase()}`,
+                                                    borderColor: '#0A9DE4',
+                                                    icon: 'icon-success'
+                                                })
+                                            }
+                                        }
+                                        setToastVisible = {(val) => setToastVisible(val)}
+                                    />
+                                    </>
                             }
+                            {/* <Terms 
+                                isLoading={isLoading}
+                                terms={terms}
+                                onClick2={(id) => getMeaning(id)} 
+                                currentTerm = {meaning.title}
+                            /> */}
+                           
+                                
+
+                 
+                            
                             
                             
                         </div>

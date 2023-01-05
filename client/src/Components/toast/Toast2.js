@@ -29,7 +29,7 @@ const Toast = props => {
                         </div>
                         <div style={{margin: 'auto', marginLeft: '10px'}}>
                             <p style={{margin: '0', color:`${toastList.borderColor}`, fontWeight: '700'}}>
-                                {toastList.description} WAS <br/> SUCCESSFULLY CHANGED
+                                TERM {toastList.description} <br/> HAS BEEN COPIED
                             </p>
                         </div>
                     </div>  
