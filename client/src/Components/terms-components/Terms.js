@@ -8,7 +8,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
-export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f }) {
+export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f }) {
     // const [clipboard, setClipboard] = useState('jajaja')
 
     useEffect(() => {
@@ -31,7 +31,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                 <div className='row'>
                                     <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white'}} className='col-8'>
                                     {/* 'rgba(225,226,225,0.6)' */}
-                                        {/* {console.log(t.attributes.title)} */}
+                                    
                                         {
                                             isLoading
                                             ?
@@ -39,19 +39,21 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             :
                                             <Link
                                             key={t.id} 
-                                            onClick={() =>{onClick2(t.id); console.log('MORE THAN ONE!!!')}}
+                                            onClick={() =>{onClick2(t.id); setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText])}}
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
+                                            id={t.attributes.title}
+                                            
                                             
                                             
                                         >
                                             {t.attributes.title}
                                         </Link>
-
+                                            
                                         }
 
                                         <div id={t.attributes.terms.data[0].id} >
-                                        {/* {console.log(t.attributes.terms.data[0].id)} */}
+                                        
                                         
                                         {t.attributes.terms.data.map((g) => (
                                             <div className='d-flex flex-row' key={g.id}>
@@ -83,9 +85,8 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                                         setTimeout(() => {
                                                             setToastVisible(false)
                                                         }, 5000)
+                                                        setClipboardTitle(document.getElementById(t.attributes.title).innerText)
                                                         
-                                                        
-
                                                  
                                                     }
                                                 } 

@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
-// import SearchFilter from './Components/terms-components/SearchFilter';
 
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f}) {
+
+export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f}) {
     let id = window.localStorage.getItem("id")
     return (
         <>
@@ -55,6 +55,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                         {
                             options
                             ?  
+                            <>
                             <div style={{width:'300px', height:'200px', backgroundColor: '#F6F9E5', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
                                 <select onChange={() => onChange1(document.getElementById("language").value)} name="cars" id="language">
                                     <option value="de">GERMAN</option>
@@ -62,7 +63,28 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                                     <option value="it">ITALIAN</option>
                                     <option value="en">ENGLISH</option>
                                 </select>
+                                <div>
+                                    <div>
+                                        <Link onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} className={'link'} to={`${lastVisited.flat()[2]}`}>{lastVisited.flat()[3]}</Link>
+                                    </div>
+                                    <div>
+                                        <Link onClick={() => {getMeaning(lastVisited.flat()[4].slice(12));console.log(lastVisited.flat()[4].slice(12))}} className={'link'} to={`${lastVisited.flat()[4]}`}>{lastVisited.flat()[5]}</Link>
+                                    </div>
+                                    <div>
+                                        <Link onClick={() => {getMeaning(lastVisited.flat()[6].slice(12));console.log(lastVisited.flat()[6].slice(12))}} className={'link'} to={`${lastVisited.flat()[6]}`}>{lastVisited.flat()[7]}</Link>
+                                    </div>
+                                    <div>
+                                        <Link onClick={() => {getMeaning(lastVisited.flat()[8].slice(12));console.log(lastVisited.flat()[8].slice(12))}} className={'link'} to={`${lastVisited.flat()[8]}`}>{lastVisited.flat()[9]}</Link>
+                                    </div>
+                                    <div>
+                                        <Link onClick={() => {getMeaning(lastVisited.flat()[10].slice(12));console.log(lastVisited.flat()[10].slice(12))}} className={'link'} to={`${lastVisited.flat()[10]}`}>{lastVisited.flat()[11]}</Link>
+                                    </div>
+    
+                              
+                                </div>
                             </div>
+                           
+                            </>
                             :
                             null
 

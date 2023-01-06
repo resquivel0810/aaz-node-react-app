@@ -42,7 +42,9 @@ export default function Dictionary(props) {
     
     const [clipboard, setClipboard] = useState('jajaja')
     const [toastVisible, setToastVisible] = useState(false)
+    const [clipboardTitle, setClipboardTitle] = useState('')
     const [toastProperties, setToastProperties] = useState([])
+    const [link, setLink] = useState([])
 
     useEffect(() => {
         setIsLoading(true)
@@ -65,7 +67,7 @@ export default function Dictionary(props) {
         })
             .then(checkStatus)
             .then(parseJSON)
-            .then(data  => setMeaning({...data.data.attributes}))
+            .then(data  => {setMeaning({...data.data.attributes}); setSearchLanguage({...data.data.attributes}.locale)})
             .catch((error) => setError(error))
 
         
@@ -74,11 +76,11 @@ export default function Dictionary(props) {
 
     useEffect(() => {
         setToastProperties({
-            description: `${clipboard.toUpperCase()}`,
+            description: `${clipboardTitle.toUpperCase()}`,
             borderColor: '#0A9DE4',
             icon: 'icon-success'
         })
-    }, [clipboard])
+    }, [clipboardTitle])
     let id = props.match.params.id;
     // console.log(props.match.path)
 
@@ -405,7 +407,9 @@ export default function Dictionary(props) {
                 ref={wrapperRef2}
                 options={displayedSearchBarOptions}
                 search={props.match.path}
-                onChange1={(lan) => setSearchLanguage(lan)}
+                onChange1={(lan) => {setSearchLanguage(lan); }}
+                lastVisited = {link}
+                getMeaning={(id) => getMeaning(id)}
 
             />
             <div className='bg_dictionary'>
@@ -442,7 +446,7 @@ export default function Dictionary(props) {
                                     searchLanguage === 'en' ? <> english</> : null 
                                 }
                             </div>
-                            {console.log(terms.length)}
+                            {/* {console.log(terms.length)} */}
                            
                             <FilterByLetter currentLetters={currentLetters}/>
                            {
@@ -510,6 +514,8 @@ export default function Dictionary(props) {
                                             }
                                         }
                                         setToastVisible = {(val) => setToastVisible(val)}
+                                        setClipboardTitle = {(val) => setClipboardTitle(val)}
+                                        setLink = {(val) => setLink([...[val], ...link])}
                                     />
                                     </>
                             }
@@ -534,6 +540,7 @@ export default function Dictionary(props) {
                                 listOfCurrentTraductions = {listOfCurrentTraductions}
                                 meaningTranslation = {meaningTranslation}
                                 onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
+                                searchLanguage = {searchLanguage}
                             />
                         </div>
                     </div>

@@ -19,7 +19,7 @@ const headers = { 'Content-Type': 'application/json' };
 // let listOfTradcutions = []
 // let listOfCurrentTraductions = []
 
-export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation}) {
+export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage}) {
 
 
     return(
@@ -55,112 +55,470 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                             <div>
                                 {/* {console.log(meaningTranslation)} */}
                                 <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'60%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px', height: '35px', alignItems: 'center'}}>
-                                    <button 
-                                        onClick={() => onClick4(id)} 
-                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
-                                        className='none'
-                                    >
-                                        GERMAN
-                                    </button>
+                                 
                                     {(() => {
-                                        if (listOfCurrentTraductions[1] === 'fr') {
+                                        if (searchLanguage === 'de') {
                                         return (
+                                            <>
                                             <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[0])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                onClick={() => onClick4(id)} 
+                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                className='none'
+                                            >
+                                                GERMAN
+                                            </button>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'fr'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                                {(() => {
+                                                if (listOfCurrentTraductions[1] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'it'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'en'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                            </>
+                                        )
+                                        } else if (searchLanguage === 'fr') {
+                                        return (
+                                            <>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'de'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
+                                            <button 
+                                                onClick={() => onClick4(id)} 
+                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
                                                 FRENCH
                                             </button>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'it'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'en'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
+
+
+
+
+                                            </>
                                         )
-                                        } else if (listOfCurrentTraductions[3] === 'fr') {
+                                        } else if (searchLanguage === 'it'){
                                         return (
+                                            <>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'de'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'fr'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
                                             <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[2])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                FRENCH
-                                            </button>
-                                        )
-                                        } else if (listOfCurrentTraductions[5] === 'fr'){
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[4])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                FRENCH
-                                            </button>
-                                        )
-                                        }
-                                    })()}
-                                        {(() => {
-                                        if (listOfCurrentTraductions[1] === 'it') {
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[0])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                onClick={() => onClick4(id)} 
+                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
                                                 ITALIAN
                                             </button>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'en') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'en'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ENGLISH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
+
+
+                                            </>
                                         )
-                                        } else if (listOfCurrentTraductions[3] === 'it') {
+                                        } else if (searchLanguage === 'en'){
                                         return (
+                                            <>
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'de') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'de'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        GERMAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'fr') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'fr'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        FRENCH
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+                                            {(() => {
+                                                if (listOfCurrentTraductions[1] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[0])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[3] === 'it') {
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[2])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                } else if (listOfCurrentTraductions[5] === 'it'){
+                                                return (
+                                                    <button 
+                                                        onClick={() => onClick4(listOfCurrentTraductions[4])} 
+                                                        style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                        className='none'
+                                                    >
+                                                        ITALIAN
+                                                    </button>
+                                                )
+                                                }
+                                            })()}
+
+
+
+
                                             <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[2])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
+                                                onClick={() => onClick4(id)} 
+                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
-                                                ITALIAN
+                                                ENGLISH
                                             </button>
-                                        )
-                                        } else if (listOfCurrentTraductions[5] === 'it'){
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[4])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                ITALIAN
-                                            </button>
+                                            </>
                                         )
                                         }
                                     })()}
-                                    {(() => {
-                                        if (listOfCurrentTraductions[1] === 'en') {
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[0])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                ENGLISH
-                                            </button>
-                                        )
-                                        } else if (listOfCurrentTraductions[3] === 'en') {
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[2])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                ENGLISH
-                                            </button>
-                                        )
-                                        } else if (listOfCurrentTraductions[5] === 'en'){
-                                        return (
-                                            <button 
-                                                onClick={() => onClick4(listOfCurrentTraductions[4])} 
-                                                style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
-                                                className='none'
-                                            >
-                                                ENGLISH
-                                            </button>
-                                        )
-                                        }
-                                    })()}
+                                    
                               
                                 </div>
 
