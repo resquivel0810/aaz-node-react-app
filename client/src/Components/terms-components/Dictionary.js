@@ -8,6 +8,8 @@ import Meaning from './Meaning';
 import Input from '../form-components/Input';
 import Toast from '../toast/Toast2';
 
+import {useHistory} from 'react-router-dom'
+
 
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
@@ -28,7 +30,11 @@ const headers = { 'Content-Type': 'application/json' };
 
 
 export default function Dictionary(props) {
-    const [isLoading, setIsLoading ] = useState(false)
+    // const [isLoading, setIsLoading ] = useState(false)
+    const [isLoadingTerms, setIsLoadingTerms] = useState(false)
+    const [isLoadingMeaning, setIsLoadingMeaning] = useState(false)
+    const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
+
     const [terms, setTerms] = useState([])
     const [error, setError] = useState(null);
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
@@ -47,7 +53,9 @@ export default function Dictionary(props) {
     const [link, setLink] = useState([])
 
     useEffect(() => {
-        setIsLoading(true)
+        // setIsLoading(true)
+        setIsLoadingTerms(true)
+        setIsLoadingMeaning(true)
         let t = window.localStorage.getItem("jwt");
         if(t === null){
             // console.log("No access");
@@ -58,7 +66,7 @@ export default function Dictionary(props) {
         })
           .then(checkStatus)
           .then(parseJSON)
-          .then(({ data }) => {setTerms(data); setIsLoading(false)})
+          .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
         //   .then(setIsLoading(false))
           .catch((error) => setError(error))
 
@@ -85,6 +93,7 @@ export default function Dictionary(props) {
     // console.log(props.match.path)
 
     const getMeaning = (id) => {
+        setIsLoadingMeaning(true)
 
         // id = props.match.params.id;
         const requestOptions = {
@@ -102,14 +111,28 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setMeaning(json.data.attributes)
+            setIsLoadingMeaning(false)
             setMeaningTranslation(false)
             // console.log(json, id)
         })
         
     }
 
+    const getTermsWithLanguage = (lan) => {
+        setIsLoadingTerms(true)
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lan}`, { 
+            headers, method: 'GET' 
+        })
+          .then(checkStatus)
+          .then(parseJSON)
+          .then(({ data }) => {setTerms(data); setIsLoadingTerms(false)})
+        //   .then(setIsLoading(false))
+          .catch((error) => setError(error))
+        
+    }
+
     const getTermsWithLetter = (letter) => {
-        setIsLoading(true)
+        setIsLoadingTerms(true)
         const requestOptions = {
             method: 'GET', 
       
@@ -125,9 +148,9 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setTerms(json.data)
-            setIsLoading(false)
-            setMeaning([])
-            props.history.push('/dictionary/0')
+            setIsLoadingTerms(false)
+            // setMeaning([])
+            // props.history.push('/dictionary/0')
             if(json.data.length > 0 && searched !== '') {
                 setCurrentLetter(json.data[0].attributes.title.charAt(0))
                 setSearched('')
@@ -162,7 +185,7 @@ export default function Dictionary(props) {
         })
         .then((json) => {
             setMeaningTranslation(json.data.attributes)
-            // console.log(json)
+            setIsLoadingMeaningTranslation(false)
         })
     }
     let traductions = {...meaning.localizations}.data
@@ -391,7 +414,7 @@ export default function Dictionary(props) {
             </>
         )
     }
-
+    let history = useHistory()
     return(
         <>
             <Toast
@@ -407,7 +430,23 @@ export default function Dictionary(props) {
                 ref={wrapperRef2}
                 options={displayedSearchBarOptions}
                 search={props.match.path}
-                onChange1={(lan) => {setSearchLanguage(lan); }}
+                onChange1={(lan) => {
+                    setSearchLanguage(lan);
+                    console.log(listOfCurrentTraductions); 
+                    let translationId = listOfCurrentTraductions[listOfCurrentTraductions.indexOf(lan)-1];  
+                    if(translationId === undefined) {
+                        var currentId = props.match.params.id
+                    } else {
+                        currentId = translationId
+                    }; 
+                    console.log(currentId);
+                    getMeaning(currentId)
+                    
+                    history.push(`/dictionary/${currentId}`)
+                    getTermsWithLanguage(lan)
+                    
+                   
+                }}
                 lastVisited = {link}
                 getMeaning={(id) => getMeaning(id)}
 
@@ -450,74 +489,74 @@ export default function Dictionary(props) {
                            
                             <FilterByLetter currentLetters={currentLetters}/>
                            {
-                                    isLoading
-                                    ?
-                                    // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
-                                    //     Sorry we couldn’t find any matches for the term “{searched}”.  
-                                    //     Double check your search for any typos or spelling error or 
-                                    //     search by letter. 
-                                    // </div>
+                                isLoadingTerms
+                                ?
+                                // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
+                                //     Sorry we couldn’t find any matches for the term “{searched}”.  
+                                //     Double check your search for any typos or spelling error or 
+                                //     search by letter. 
+                                // </div>
 
-                                    <>
-                                    
-                                    <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '500px'}}>
-                                    <SkeletonTheme
-                                        baseColor="#E1E2E1"
-                                        highlightColor="#FDFDFD"
-                                        borderRadius="10"
-                                        duration={2}
-                                    >
-                                        {[1,2,3,4,5].map(() => (
-                                            <div className='box_term'>
-                                            <Skeleton width={100} />
-                                            <div className='d-flex flex-row'>
-                                                <div className='body_text_len me-2'>DE.</div>
-                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                            </div>
-                                            <div className='d-flex flex-row'>
-                                                <div className='body_text_len me-2'>EN.</div>
-                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                            </div>
-                                            <div className='d-flex flex-row'>
-                                                <div className='body_text_len me-2'>FR.</div>
-                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                            </div>
-                                            <div className='d-flex flex-row'>
-                                                <div className='body_text_len me-2'>IT.</div>
-                                                <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                            </div>
-                                           
-                                            
+                                <>
+                                
+                                <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '500px'}}>
+                                <SkeletonTheme
+                                    baseColor="#E1E2E1"
+                                    highlightColor="#FDFDFD"
+                                    borderRadius="10"
+                                    duration={2}
+                                >
+                                    {[1,2,3,4,5].map(() => (
+                                        <div className='box_term'>
+                                        <Skeleton width={100} />
+                                        <div className='d-flex flex-row'>
+                                            <div className='body_text_len me-2'>DE.</div>
+                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
                                         </div>
-                                        ))}
+                                        <div className='d-flex flex-row'>
+                                            <div className='body_text_len me-2'>EN.</div>
+                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                        </div>
+                                        <div className='d-flex flex-row'>
+                                            <div className='body_text_len me-2'>FR.</div>
+                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                        </div>
+                                        <div className='d-flex flex-row'>
+                                            <div className='body_text_len me-2'>IT.</div>
+                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                        </div>
                                         
                                         
-                                    </SkeletonTheme>
                                     </div>
-                                    </>
-                                    :
-                                    <>
-                                    <Terms 
-                                        isLoading={isLoading}
-                                        terms={terms}
-                                        onClick2={(id) => getMeaning(id)} 
-                                        currentTerm = {meaning.title}
-                                        clipboard = {clipboard}
-                                        toastVisible = {toastVisible}
-                                        setClipboard = {(cli) => 
-                                            {   setClipboard(cli); 
-                                                setToastProperties({
-                                                    description: `${clipboard.toUpperCase()}`,
-                                                    borderColor: '#0A9DE4',
-                                                    icon: 'icon-success'
-                                                })
-                                            }
+                                    ))}
+                                    
+                                    
+                                </SkeletonTheme>
+                                </div>
+                                </>
+                                :
+                                <>
+                                <Terms 
+                                    isLoading={isLoadingTerms}
+                                    terms={terms}
+                                    onClick2={(id) => getMeaning(id)} 
+                                    currentTerm = {meaning.title}
+                                    clipboard = {clipboard}
+                                    toastVisible = {toastVisible}
+                                    setClipboard = {(cli) => 
+                                        {   setClipboard(cli); 
+                                            setToastProperties({
+                                                description: `${clipboard.toUpperCase()}`,
+                                                borderColor: '#0A9DE4',
+                                                icon: 'icon-success'
+                                            })
                                         }
-                                        setToastVisible = {(val) => setToastVisible(val)}
-                                        setClipboardTitle = {(val) => setClipboardTitle(val)}
-                                        setLink = {(val) => setLink([...[val], ...link])}
-                                    />
-                                    </>
+                                    }
+                                    setToastVisible = {(val) => setToastVisible(val)}
+                                    setClipboardTitle = {(val) => setClipboardTitle(val)}
+                                    setLink = {(val) => setLink([...[val], ...link])}
+                                />
+                                </>
                             }
                             {/* <Terms 
                                 isLoading={isLoading}
@@ -534,14 +573,45 @@ export default function Dictionary(props) {
                             
                         </div>
                         <div className='d-none d-lg-block col'>
-                            <Meaning 
-                                meaning={meaning}
-                                id = {id}
-                                listOfCurrentTraductions = {listOfCurrentTraductions}
-                                meaningTranslation = {meaningTranslation}
-                                onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
-                                searchLanguage = {searchLanguage}
-                            />
+                            {
+                                isLoadingMeaning
+                                ?
+                                <>
+                                    <SkeletonTheme
+                                    baseColor="#E1E2E1"
+                                    highlightColor="#FDFDFD"
+                                    borderRadius="10"
+                                    duration={2}
+                                >
+                                    <div style={{padding: '25px'}} className='box_meaningTerm'>
+                                        <div style={{textAlign: 'center', marginBottom: '70px'}}>
+                                            <h3><Skeleton width={300} /></h3>
+                                        </div>
+                                        <div style={{padding:'10px'}}>
+                                            <div className='subtitle_bold'>
+                                                <Skeleton width={300} />
+                                            </div>
+                                            <div>
+                                                <Skeleton count={5} />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </SkeletonTheme>
+                                    
+                                </>
+                                :
+                                <Meaning 
+                                    meaning={meaning}
+                                    id = {id}
+                                    listOfCurrentTraductions = {listOfCurrentTraductions}
+                                    meaningTranslation = {meaningTranslation}
+                                    onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
+                                    searchLanguage = {searchLanguage}
+                                    isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
+                                    setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
+                                />
+                            }
+                            
                         </div>
                     </div>
                 </div>

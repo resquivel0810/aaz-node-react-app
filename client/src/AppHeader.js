@@ -4,7 +4,7 @@ import { NavLink } from "react-router-dom";
 
 
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f}) {
+export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f}) {
     let id = window.localStorage.getItem("id")
     return (
         <>
@@ -57,7 +57,11 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                             ?  
                             <>
                             <div style={{width:'300px', height:'200px', backgroundColor: '#F6F9E5', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
-                                <select onChange={() => onChange1(document.getElementById("language").value)} name="cars" id="language">
+                                <select 
+                                    onChange={() => {onChange1(document.getElementById("language").value); console.log('Change Language')}} 
+                                    name="cars" 
+                                    id="language"
+                                >
                                     <option value="de">GERMAN</option>
                                     <option value="fr">FRENCH</option>
                                     <option value="it">ITALIAN</option>
