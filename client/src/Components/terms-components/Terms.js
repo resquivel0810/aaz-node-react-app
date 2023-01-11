@@ -52,7 +52,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             
                                         }
 
-                                        <div id={t.attributes.terms.data[0].id} >
+                                        <div  >
                                         
                                         
                                         {t.attributes.terms.data.map((g) => (

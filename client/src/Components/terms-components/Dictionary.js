@@ -36,7 +36,7 @@ export default function Dictionary(props) {
     const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
 
     const [terms, setTerms] = useState([])
-    const [error, setError] = useState(null);
+    // const [error, setError] = useState(null);
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
     const [currentLetter, setCurrentLetter] = useState()
     const [displayedLetters, setDisplayedLetters] = useState(false)
@@ -61,22 +61,24 @@ export default function Dictionary(props) {
             // console.log("No access");
             window.location.href = '/'
         }
-        fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
-            headers, method: 'GET' 
-        })
-          .then(checkStatus)
-          .then(parseJSON)
-          .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
-        //   .then(setIsLoading(false))
-          .catch((error) => setError(error))
-
         fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, { 
             headers, method: 'GET' 
         })
             .then(checkStatus)
             .then(parseJSON)
             .then(data  => {setMeaning({...data.data.attributes}); setSearchLanguage({...data.data.attributes}.locale)})
-            .catch((error) => setError(error))
+
+        fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
+            headers, method: 'GET' 
+        })
+          .then(checkStatus)
+          .then(parseJSON)
+          .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
+       
+
+
+        
+ 
 
         
         
@@ -89,6 +91,7 @@ export default function Dictionary(props) {
             icon: 'icon-success'
         })
     }, [clipboardTitle])
+
     let id = props.match.params.id;
     // console.log(props.match.path)
 
@@ -127,7 +130,7 @@ export default function Dictionary(props) {
           .then(parseJSON)
           .then(({ data }) => {setTerms(data); setIsLoadingTerms(false)})
         //   .then(setIsLoading(false))
-          .catch((error) => setError(error))
+        //   .catch((error) => setError(error))
         
     }
 
