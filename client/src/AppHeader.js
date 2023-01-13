@@ -1,10 +1,23 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
+import Select from './Components/form-components/Select';
 
+
+const LANGUAGES = {
+    "de": "German",
+    "fr": "French",
+    "it": "Italian",
+    "en": "English",
+};
+
+function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+}
 
 export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f}) {
+    const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
         <>
@@ -56,18 +69,20 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                             options
                             ?  
                             <>
-                            <div style={{width:'300px', height:'200px', backgroundColor: '#F6F9E5', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
-                                <select 
-                                    onChange={() => {onChange1(document.getElementById("language").value); console.log('Change Language')}} 
-                                    name="cars" 
-                                    id="language"
-                                >
-                                    <option value="de">GERMAN</option>
-                                    <option value="fr">FRENCH</option>
-                                    <option value="it">ITALIAN</option>
-                                    <option value="en">ENGLISH</option>
-                                </select>
+                            <div style={{width:'300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
+
+                                <Select  
+                                    onSelected={(value) => {
+                                        onChange1(getKeyByValue(LANGUAGES, value)); 
+                                        setLanguage(value)
+                                    }}  
+                                    defaultValue={language} 
+                                    options={Object.values(LANGUAGES)} 
+                                />
+                                {console.log(Object.keys(LANGUAGES))}
+
                                 <div>
+                                    <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Recent research</div>
                                     <div>
                                         <Link onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} className={'link'} to={`${lastVisited.flat()[2]}`}>{lastVisited.flat()[3]}</Link>
                                     </div>
@@ -105,7 +120,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3"> 
                         <li className='nav-app-link'>
                             <NavLink 
-                                to={`/dictionary/0`}
+                                to={`/dictionary/1`}
                                 exact={true}
                                 className={'nav-link'}
                                 activeClassName="active"

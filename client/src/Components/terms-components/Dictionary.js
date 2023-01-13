@@ -66,22 +66,16 @@ export default function Dictionary(props) {
         })
             .then(checkStatus)
             .then(parseJSON)
-            .then(data  => {setMeaning({...data.data.attributes}); setSearchLanguage({...data.data.attributes}.locale)})
-
-        fetch('https://sandbox.linarys.com/api/folios?populate=*&locale=de', { 
-            headers, method: 'GET' 
-        })
-          .then(checkStatus)
-          .then(parseJSON)
-          .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
-       
-
-
-        
- 
-
-        
-        
+            .then(data  => {
+                setMeaning({...data.data.attributes}); 
+                setSearchLanguage({...data.data.attributes}.locale); 
+                fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${data.data.attributes.locale}`, { 
+                    headers, method: 'GET' 
+                })
+                .then(checkStatus)
+                .then(parseJSON)
+                .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
+            })
     }, [])
 
     useEffect(() => {

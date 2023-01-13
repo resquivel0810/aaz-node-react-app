@@ -1,0 +1,58 @@
+.dropDownContainer {
+    width: 5em;
+    /* margin: 0 auto; */
+}
+
+.dropDownHeader {
+    /* margin-bottom: 0.5em; */
+    text-align: center;
+    /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15); */
+    border: 1.5px solid #D8CFC5;
+    border-radius: 5px;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #292929;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fdfdfd;
+    width: 230px;
+}
+
+.dropDownListContainer {
+    position: absolute;
+    z-index: 100;
+    width: 5em;
+}
+
+.dropDownList {
+    padding: 0;
+    margin: 0;
+    /* padding-left: 1em; */
+    background: #ffffff;
+    /* border: 2px solid #e5e5e5; */
+    box-sizing: border-box;
+    color: #2C2C2C;
+    font-size: 13px;
+    font-weight: 500;
+    /* overflow-y: scroll; */
+    height: 120px;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15);
+    width: 230px;
+
+}
+
+.dropDownList:first-child {
+    padding-top: 0.8em;
+}
+
+.listItem {
+    list-style: none;
+    margin-bottom: 0.8em;
+    cursor: pointer;
+    padding: 0 15px;
+}
+
+.listItem:hover {
+    background-color: rgba(182, 106, 0, .25);
+}

@@ -102,7 +102,7 @@ export default class Login extends Component{
                     this.props.history.push({
                         // pathname: "/dictionary/"+ data.user.id,
                         
-                        pathname: "/dictionary/0",
+                        pathname: "/dictionary/1",
                     })
                 }
             })
