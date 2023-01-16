@@ -419,7 +419,7 @@ export default function Dictionary(props) {
           console.log("Congrats! Your browser supports Web Share API");
           navigator
             .share({
-              url: `https://aaz-node-react-app.herokuapp.com//dictionary/${id}`
+              url: `https://aaz-node-react-app.herokuapp.com/dictionary/${id}`
             })
             .then(() => {
               console.log("Sharing successfull");
