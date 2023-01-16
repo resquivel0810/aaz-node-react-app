@@ -46,14 +46,17 @@ export default function Dictionary(props) {
     const [searched, setSearched] = useState('')
     const [searchLanguage, setSearchLanguage] = useState('de')
     
-    const [clipboard, setClipboard] = useState('jajaja')
+    const [clipboard, setClipboard] = useState('')
     const [toastVisible, setToastVisible] = useState(false)
     const [clipboardTitle, setClipboardTitle] = useState('')
     const [toastProperties, setToastProperties] = useState([])
     const [link, setLink] = useState([])
+    const [mobile, setMobile] = useState(false)
+    const [mobileMeaningStyle, setMobileMeaningStyle] = useState(false)
 
     useEffect(() => {
         // setIsLoading(true)
+        window.innerWidth < 900 ? setMobile(true) : setMobile(false)
         setIsLoadingTerms(true)
         setIsLoadingMeaning(true)
         let t = window.localStorage.getItem("jwt");
@@ -597,6 +600,7 @@ export default function Dictionary(props) {
                                     setClipboardTitle = {(val) => setClipboardTitle(val)}
                                     setLink = {(val) => setLink([...[val], ...link])}
                                     setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
+                                    setMobileMeaningStyle = {(val) => mobile ? setMobileMeaningStyle(val) : setMobileMeaningStyle(false)}
 
                                 />
                                 </>
@@ -615,7 +619,7 @@ export default function Dictionary(props) {
                             
                             
                         </div>
-                        <div className='d-none d-lg-block col'>
+                        <div style={{display: mobileMeaningStyle ? 'block' : 'none'}} className='d-lg-block col'>
                             {
                                 isLoadingMeaning
                                 ?

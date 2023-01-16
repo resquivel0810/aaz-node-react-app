@@ -8,7 +8,7 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
-export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f, setShareId = f => f}) {
+export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f, setShareId = f => f, setMobileMeaningStyle = f => f}) {
     // const [clipboard, setClipboard] = useState('jajaja')
 
     useEffect(() => {
@@ -41,7 +41,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             :
                                             <Link
                                             key={t.id} 
-                                            onClick={() =>{onClick2(t.id); setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText])}}
+                                            onClick={() =>{onClick2(t.id); setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText]); setMobileMeaningStyle(true)}}
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
                                             id={t.attributes.title}
@@ -101,7 +101,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             </button>
                                        
                                        
-                                        <button onClick={() => {setShareId(t.id, document.getElementById(t.attributes.title).innerText)}} className='none'>
+                                        <button onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
                                             <i className='icon ms-1 icon-share'></i>
                                         </button>
                                         </div>
