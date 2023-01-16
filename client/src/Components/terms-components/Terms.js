@@ -55,7 +55,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                         }
 
                                         <div 
-                                            // id={t.attributes.terms.data[0].id} 
+                                            id={t.attributes.terms.data[0].id} 
                                         >
                                         {/* {console.log(t.attributes.terms)} */}
                                         

@@ -220,7 +220,7 @@ export default function Dictionary(props) {
           function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target) ) {
                 setDisplayedLetters(false)
-                setDisplayedSearchBarOptions(false)
+                // setDisplayedSearchBarOptions(false)
 
             }
           
@@ -232,7 +232,29 @@ export default function Dictionary(props) {
             document.removeEventListener("mousedown", handleClickOutside);
           };
         }, [ref]);
-      }
+    }
+
+    function useOutsideAlerter2(ref2) {
+        useEffect(() => {
+         
+           // Alert if clicked on outside of element
+         
+          function handleClickOutside(event) {
+            if (ref2.current && !ref2.current.contains(event.target) ) {
+                // setDisplayedLetters(false)
+                setDisplayedSearchBarOptions(false)
+
+            }
+          
+          }
+          // Bind the event listener
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref2]);
+    }
 
     const wrapperRef= useRef(null);
     
@@ -240,7 +262,7 @@ export default function Dictionary(props) {
 
     const wrapperRef2= useRef(null);
 
-    useOutsideAlerter(wrapperRef2);
+    useOutsideAlerter2(wrapperRef2);
 
     const FilterByLetter = ({currentLetters}) => {
 
@@ -446,7 +468,7 @@ export default function Dictionary(props) {
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
                 // onBlur1={() => setDisplayedSearchBarOptions(false)}
-                ref={wrapperRef2}
+                ref2={wrapperRef2}
                 options={displayedSearchBarOptions}
                 search={props.match.path}
                 onChange1={(lan) => {

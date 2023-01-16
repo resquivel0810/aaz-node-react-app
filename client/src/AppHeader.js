@@ -16,7 +16,7 @@ function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f}) {
+export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2}) {
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
@@ -69,7 +69,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                             options
                             ?  
                             <>
-                            <div style={{width:'300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
+                            <div ref={ref2}  style={{width:'300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
 
                                 <Select  
                                     onSelected={(value) => {
