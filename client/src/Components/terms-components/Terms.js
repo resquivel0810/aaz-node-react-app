@@ -101,7 +101,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             </button>
                                        
                                        
-                                        <button onClick={() => setShareId(t.id)} className='none'>
+                                        <button onClick={() => {setShareId(t.id, document.getElementById(t.attributes.title).innerText)}} className='none'>
                                             <i className='icon ms-1 icon-share'></i>
                                         </button>
                                         </div>

@@ -413,13 +413,15 @@ export default function Dictionary(props) {
     }
     let history = useHistory()
 
-    const handleShareButton = (ShareId) => {
+    const handleShareButton = (ShareId, ShareTitle) => {
         // Check if navigator.share is supported by the browser
         if (navigator.share) {
           console.log("Congrats! Your browser supports Web Share API");
           navigator
             .share({
-              url: `https://aaz-node-react-app.herokuapp.com/dictionary/${ShareId}`
+              url: `https://aaz-node-react-app.herokuapp.com/dictionary/${ShareId}`,
+              title: 'Accounting A-Z',
+              text: `${ShareTitle}`,
             })
             .then(() => {
               console.log("Sharing successfull");
@@ -572,7 +574,8 @@ export default function Dictionary(props) {
                                     setToastVisible = {(val) => setToastVisible(val)}
                                     setClipboardTitle = {(val) => setClipboardTitle(val)}
                                     setLink = {(val) => setLink([...[val], ...link])}
-                                    setShareId = {(val) => {handleShareButton(val); console.log(val)}}
+                                    setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
+
                                 />
                                 </>
                             }
