@@ -412,6 +412,26 @@ export default function Dictionary(props) {
         )
     }
     let history = useHistory()
+
+    const handleShareButton = (id) => {
+        // Check if navigator.share is supported by the browser
+        if (navigator.share) {
+          console.log("Congrats! Your browser supports Web Share API");
+          navigator
+            .share({
+              url: `http://localhost:3000/dictionary/${id}`
+            })
+            .then(() => {
+              console.log("Sharing successfull");
+            })
+            .catch(() => {
+              console.log("Sharing failed");
+            });
+        } else {
+          console.log("Sorry! Your browser does not support Web Share API");
+        }
+    };
+    
     return(
         <>
             <Toast
@@ -552,6 +572,7 @@ export default function Dictionary(props) {
                                     setToastVisible = {(val) => setToastVisible(val)}
                                     setClipboardTitle = {(val) => setClipboardTitle(val)}
                                     setLink = {(val) => setLink([...[val], ...link])}
+                                    setShareId = {(id) => handleShareButton(id)}
                                 />
                                 </>
                             }
