@@ -22,9 +22,8 @@ const headers = { 'Content-Type': 'application/json' };
 // let listOfTradcutions = []
 // let listOfCurrentTraductions = []
 
-export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage, isLoadingMeaningTranslation, setIsLoadingMeaningTranslation = f => f}) {
+export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage, isLoadingMeaningTranslation, setIsLoadingMeaningTranslation = f => f, mobile}) {
 
-  
 
     function createMarkup(str) {
         return {__html: str};
@@ -73,7 +72,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
-                                                GERMAN
+                                                {
+                                                    mobile
+                                                    ?
+                                                    <>DE</>
+                                                    :
+                                                    <>GERMAN</>
+                                                }
                                             </button>
                                             {(() => {
                                                 if (listOfCurrentTraductions[1] === 'fr') {
@@ -83,7 +88,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        FRENCH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>FR</>
+                                                            :
+                                                            <>FRENCH</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[3] === 'fr') {
@@ -93,7 +104,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        FRENCH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>FR</>
+                                                            :
+                                                            <>FRENCH</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[5] === 'fr'){
@@ -103,7 +120,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        FRENCH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>FR</>
+                                                            :
+                                                            <>FRENCH</>
+                                                        }
                                                     </button>
                                                 )
                                                 }
@@ -116,7 +139,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ITALIAN
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>IT</>
+                                                            :
+                                                            <>ITALIAN</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[3] === 'it') {
@@ -126,7 +155,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ITALIAN
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>IT</>
+                                                            :
+                                                            <>ITALIAN</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[5] === 'it'){
@@ -136,7 +171,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ITALIAN
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>IT</>
+                                                            :
+                                                            <>ITALIAN</>
+                                                        }
                                                     </button>
                                                 )
                                                 }
@@ -149,7 +190,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ENGLISH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>EN</>
+                                                            :
+                                                            <>ENGLISH</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[3] === 'en') {
@@ -159,7 +206,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ENGLISH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>EN</>
+                                                            :
+                                                            <>ENGLISH</>
+                                                        }
                                                     </button>
                                                 )
                                                 } else if (listOfCurrentTraductions[5] === 'en'){
@@ -169,7 +222,13 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
-                                                        ENGLISH
+                                                        {
+                                                            mobile
+                                                            ?
+                                                            <>EN</>
+                                                            :
+                                                            <>ENGLISH</>
+                                                        }
                                                     </button>
                                                 )
                                                 }

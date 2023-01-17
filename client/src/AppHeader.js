@@ -16,17 +16,32 @@ function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, setMobileMeaningStyle = f => f}) {
+export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle}) {
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
         <>
-        <header>
+        <header style={{height: '10vh'}}>
             <nav className='navbar navbar-dark navbar-expand-lg navbar-primary fixed-top'>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    <button onClick={() =>  setMobileMeaningStyle(false)} className='none'>
-                        <i style={{ transform: 'rotate(-180deg)', color: 'white'}} className='icon ms-1 icon-arrow'></i>
-                    </button>
+                    {
+                        mobile
+                        ?
+                        <>{
+                            mobileMeaningStyle
+                            ?
+                            <button onClick={() =>  setMobileMeaningStyle(false)} className='none'>
+                                <i style={{ transform: 'rotate(-180deg)', color: 'white'}} className='icon ms-1 icon-arrow'></i>
+                            </button>
+                            : 
+                            null
+                        }</>
+                        
+                        : 
+                        null
+                    }
+                    
+
                     <Link
                         to={`/`}
                         className={'navbar-brand'}

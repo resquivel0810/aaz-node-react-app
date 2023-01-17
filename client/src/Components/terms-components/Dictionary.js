@@ -15,6 +15,8 @@ import {useHistory} from 'react-router-dom'
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
 
+import classes from './Dictionary.module.css'
+
 const parseJSON = (resp) => (resp.json ? resp.json() : resp);
 const checkStatus = (resp) => {
     if (resp.status >= 200 && resp.status < 300) {
@@ -494,9 +496,11 @@ export default function Dictionary(props) {
                 lastVisited = {link}
                 getMeaning={(id) => getMeaning(id)}
                 setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
+                mobileMeaningStyle = {mobileMeaningStyle}
+                mobile = {mobile}
 
             />
-            <div className='bg_dictionary'>
+            <div className={classes.dictionary}>
                 <div className='container relative'>
                     <div className='row py-4'>
                         <div style={{display: mobileMeaningStyle ? 'none' : 'block', marginTop: mobile ? '130px': '0'}}  className='col'>
@@ -620,7 +624,7 @@ export default function Dictionary(props) {
                             
                             
                         </div>
-                        <div style={{display: mobileMeaningStyle ? 'block' : 'none'}} className='d-lg-block col'>
+                        <div style={{display: mobileMeaningStyle === true || mobile === false ? 'block' : 'none'}} className={classes.MeaningContainer}>
                             {
                                 isLoadingMeaning
                                 ?
@@ -657,6 +661,7 @@ export default function Dictionary(props) {
                                     searchLanguage = {searchLanguage}
                                     isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
                                     setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
+                                    mobile = {mobile}
                                 />
                             }
                             

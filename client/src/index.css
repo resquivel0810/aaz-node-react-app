@@ -13,9 +13,9 @@ body {
   overflow-x: hidden;
 }
 
-header{
+/* header{
   margin-top: 56px;
-}
+} */
 
 
 
@@ -84,15 +84,15 @@ footer .about{
 
 footer .imprint{
   background-color: #004F3D;
-  padding: 1rem 0rem;
+  /* padding: 1rem 0rem; */
 }
 
-.bg_dictionary{
-  height: 90vh;
+/* .bg_dictionary{
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 
 .bg_profile{
   height: 90vh;
@@ -838,7 +838,7 @@ input:hover {
 /* TERMS */
 .box_meaningTerm{
   background: #E0F2F0;
-  height: 70vh;
+  height: 74vh;
   /* overflow-y: scroll; */
 }
 

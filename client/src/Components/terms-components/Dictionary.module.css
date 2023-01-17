@@ -1,0 +1,22 @@
+.dictionary {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.MeaningContainer {
+    display: block ;
+    flex: 1 0;
+}
+
+@media screen and (max-width: 600px){
+    .MeaningContainer {
+        display: none ;
+        flex: 1 0;
+    }
+
+    .dictionary {
+        height: 75vh;
+    }
+}
