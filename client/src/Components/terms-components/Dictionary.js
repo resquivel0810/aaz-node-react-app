@@ -446,7 +446,7 @@ export default function Dictionary(props) {
             .share({
               url: `https://aaz-node-react-app.herokuapp.com/dictionary/${ShareId}`,
               title: 'Accounting dictionary - Register! More than 1,000 terms',
-              text: `${ShareTitle}`,
+              text: `Accounting dictionary - Register! More than 1,000 terms \n ${ShareTitle}`,
             })
             .then(() => {
               console.log("Sharing successfull");
