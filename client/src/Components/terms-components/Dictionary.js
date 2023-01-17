@@ -493,12 +493,13 @@ export default function Dictionary(props) {
                 }}
                 lastVisited = {link}
                 getMeaning={(id) => getMeaning(id)}
+                setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
 
             />
             <div className='bg_dictionary'>
                 <div className='container relative'>
                     <div className='row py-4'>
-                        <div className='col'>
+                        <div style={{display: mobileMeaningStyle ? 'none' : 'block', marginTop: mobile ? '130px': '0'}}  className='col'>
                             {(() => {
                                 if (currentLetter !== undefined && searched === '') {
                                 return (

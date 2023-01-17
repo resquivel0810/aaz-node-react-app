@@ -50,9 +50,9 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                 <h3>{meaning.title} </h3>  
                             </div>
                             <div style={{display:'flex', justifyContent: 'center'}}>
-                                <button className='none'>
+                                {/* <button className='none'>
                                     <i className='icon ms-1 icon-copy'></i>
-                                </button>
+                                </button> */}
                                 <button className='none'>
                                     <i className='icon ms-1 icon-share'></i>
                                 </button>
