@@ -1272,8 +1272,8 @@ div.registration_box img{
   .nav-tabs .nav-link{
     padding: 0.8rem;
     font-size: 0.6rem;
-    height: 75px;
-    width: 75px;
+    height: 12vh;
+    width: 12vh;
   }
 
   .nav-tabs .nav-link.active,
