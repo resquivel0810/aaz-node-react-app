@@ -2,12 +2,17 @@
     height: 85vh;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .MeaningContainer {
     display: block ;
     flex: 1 0;
+}
+
+.searchLanguage {
+    color: #A5A5A5;
+    margin-bottom: 20px;
 }
 
 @media screen and (max-width: 600px){
@@ -17,6 +22,10 @@
     }
 
     .dictionary {
-        height: 75vh;
+        height: 80vh;
+    }
+
+    .searchLanguage {
+        margin-bottom: 5px;
     }
 }

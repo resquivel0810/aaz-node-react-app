@@ -15,6 +15,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overflow-x: hidden;
+  overflow-y: hidden;
 }
 
 /* header{
@@ -854,7 +855,7 @@ input:hover {
 .container_term{
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 500px;
+  height: 60vh;
   max-height: 800px;
 }
 
@@ -1253,7 +1254,7 @@ div.registration_box img{
   .app-nav{
     background-color: #FDFDFD;
     filter: drop-shadow(0px -2px 2px #E1E2E1);
-    height: 5.5rem;
+    height: 10vh;
   }
 
   .app-nav-box{
@@ -1270,9 +1271,9 @@ div.registration_box img{
 
   .nav-tabs .nav-link{
     padding: 0.8rem;
-    font-size: 0.875rem;
-    height: 6rem;
-    width: 6rem;
+    font-size: 0.6rem;
+    height: 75px;
+    width: 75px;
   }
 
   .nav-tabs .nav-link.active,
@@ -1281,7 +1282,7 @@ div.registration_box img{
     color: #FDFDFD !important;
     
     border-radius: 100px;
-    border-top: solid 0.3em #FDFDFD;
+    /* border-top: solid 0.3em #FDFDFD; */
     border-color: #FDFDFD;
     --bs-nav-tabs-border-width: 3px;
     --bs-nav-tabs-border-color: #FDFDFD;

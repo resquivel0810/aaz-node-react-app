@@ -502,8 +502,8 @@ export default function Dictionary(props) {
             />
             <div className={classes.dictionary}>
                 <div className='container relative'>
-                    <div className='row py-4'>
-                        <div style={{display: mobileMeaningStyle ? 'none' : 'block', marginTop: mobile ? '130px': '0'}}  className='col'>
+                    <div className='row'>
+                        <div style={{display: mobileMeaningStyle ? 'none' : 'block'}}  className='col'>
                             {(() => {
                                 if (currentLetter !== undefined && searched === '') {
                                 return (
@@ -519,7 +519,7 @@ export default function Dictionary(props) {
                                 )
                                 }
                             })()}
-                            <div style={{color: '#A5A5A5', marginBottom:'20px'}}>
+                            <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {
                                     searchLanguage === 'de' ? <> german</> : null 

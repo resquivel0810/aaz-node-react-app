@@ -188,10 +188,10 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
             <div className='d-md-block d-lg-none'>
                 <nav className='navbar navbar-expand-lg fixed-bottom app-nav'>
                     <div className='position-absolute app-nav-box'>
-                        <ul className="navbar-nav nav-tabs">
+                        <ul style={{display:'flex', width:'100vw', justifyContent:'space-around'}} className="navbar-nav nav-tabs">
                             <li className=''>
                                 <NavLink 
-                                    to={`/dictionary`}
+                                    to={`/dictionary/1`}
                                     exact={true}
                                     className={'nav-link'}
                                     activeClassName="active"
