@@ -664,6 +664,7 @@ export default function Dictionary(props) {
                                 isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
                                 setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
                                 mobile = {mobile}
+                                setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
                             />
                         }
                         

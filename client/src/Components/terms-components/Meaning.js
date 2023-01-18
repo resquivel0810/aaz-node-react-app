@@ -22,7 +22,7 @@ const headers = { 'Content-Type': 'application/json' };
 // let listOfTradcutions = []
 // let listOfCurrentTraductions = []
 
-export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage, isLoadingMeaningTranslation, setIsLoadingMeaningTranslation = f => f, mobile}) {
+export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage, isLoadingMeaningTranslation, setIsLoadingMeaningTranslation = f => f, mobile, setShareId = f => f}) {
 
 
     function createMarkup(str) {
@@ -52,7 +52,10 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                 {/* <button className='none'>
                                     <i className='icon ms-1 icon-copy'></i>
                                 </button> */}
-                                <button className='none'>
+                                <button 
+                                    className='none'
+                                    onClick={() => {setShareId(id, null)}}
+                                >
                                     <i className='icon ms-1 icon-share'></i>
                                 </button>
                                 {/* <button className='none'>
