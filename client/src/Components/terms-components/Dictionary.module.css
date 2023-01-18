@@ -2,12 +2,13 @@
     height: 85vh;
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
 }
 
 .MeaningContainer {
     display: block ;
     flex: 1 0;
+    
 }
 
 .searchLanguage {
@@ -15,10 +16,55 @@
     margin-bottom: 20px;
 }
 
+.dictionaryContainer {
+    width: 100vw;
+    display: flex;
+    padding: 0 3vw;
+    height: 100%;
+}
+
+.filterButton{
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+    width: auto;
+    height: 30px;
+    width: 30px;
+
+}
+
+
+
+@media screen and (min-width: 1200px) {
+    .dictionaryContainer {
+        max-width: 1400px;
+    }
+}
+/* 
+@media screen and (min-width: 992px) {
+    .dictionaryContainer {
+        max-width: 960px;
+    }
+} */
+
+/* @media screen and (min-width: 576px) {
+    .dictionaryContainer {
+        max-width: 540px;
+    }
+} */
+
 @media screen and (max-width: 600px){
     .MeaningContainer {
         display: none ;
         flex: 1 0;
+    }
+
+    .dictionaryContainer {
+        padding: 0 1.5rem;
     }
 
     .dictionary {
@@ -27,5 +73,14 @@
 
     .searchLanguage {
         margin-bottom: 5px;
+    }
+
+    .searchParams {
+        height: 15vh;
+    }
+
+    .filterButton{
+        height: 20px;
+        width: 20px;
     }
 }

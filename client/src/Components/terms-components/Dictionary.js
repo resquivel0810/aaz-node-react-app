@@ -283,16 +283,16 @@ export default function Dictionary(props) {
                         
                         <div style={{display: 'flex'}}>
                             <button 
-                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['à', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
-                                className='none'
+                                style={{margin: '5px', borderRadius: '50%',backgroundColor: ['à', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
+                                className={classes.filterButton}
                                 id={Object.values(currentLetters)[0]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[0])}
                             >
                                 {Object.values(currentLetters)[0]}
                             </button>
                             <button 
-                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['B', 'E', 'H', 'K', 'N', 'Q', 'T', 'W', 'Z'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
-                                className='none'
+                                style={{margin: '5px', borderRadius: '50%',backgroundColor: ['B', 'E', 'H', 'K', 'N', 'Q', 'T', 'W', 'Z'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
+                                className={classes.filterButton}
                                 id={Object.values(currentLetters)[1]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[1])}
                             >
@@ -300,8 +300,8 @@ export default function Dictionary(props) {
                             </button>
                             {/* {Object.values(currentLetters)[2] } */}
                             <button 
-                                style={{margin: '5px', height: '30px', width: '30px', borderRadius: '50%',backgroundColor: ['C', 'F', 'I', 'L', 'O', 'R', 'U', 'X'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
-                                className='none'
+                                style={{margin: '5px', borderRadius: '50%',backgroundColor: ['C', 'F', 'I', 'L', 'O', 'R', 'U', 'X'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
+                                className={classes.filterButton}
                                 id={Object.values(currentLetters)[2]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[2])}
                             >
@@ -311,7 +311,7 @@ export default function Dictionary(props) {
                     </div>
                     {displayedLetters
                         ?
-                        <span ref={wrapperRef} style={{display:'block', position: 'absolute', backgroundColor: 'rgba(246,249,229,0.95)', padding: '20px 40px'}}>
+                        <span ref={wrapperRef}  style={{display:'block', position: 'absolute', backgroundColor: 'rgba(246,249,229,0.95)', padding: '20px 40px'}}>
                             <div>Select to search</div>
                             <div style={{display:'flex'}}>
                                 <div style={{margin:'5px 10px'}}>
@@ -501,9 +501,10 @@ export default function Dictionary(props) {
 
             />
             <div className={classes.dictionary}>
-                <div className='container relative'>
-                    <div className='row'>
-                        <div style={{display: mobileMeaningStyle ? 'none' : 'block'}}  className='col'>
+                <div className={classes.dictionaryContainer}>
+                  
+                    <div  style={{display: mobileMeaningStyle ? 'none' : 'block', flex:'1', marginRight:'1vw'}}  >
+                        <div className={classes.searchParams}>
                             {(() => {
                                 if (currentLetter !== undefined && searched === '') {
                                 return (
@@ -534,139 +535,140 @@ export default function Dictionary(props) {
                                     searchLanguage === 'en' ? <> english</> : null 
                                 }
                             </div>
-                            {/* {console.log(terms.length)} */}
-                           
                             <FilterByLetter currentLetters={currentLetters}/>
-                           {
-                                isLoadingTerms
-                                ?
-                                // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
-                                //     Sorry we couldn’t find any matches for the term “{searched}”.  
-                                //     Double check your search for any typos or spelling error or 
-                                //     search by letter. 
-                                // </div>
+                        </div>
 
-                                <>
-                                
-                                <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '500px'}}>
-                                <SkeletonTheme
-                                    baseColor="#E1E2E1"
-                                    highlightColor="#FDFDFD"
-                                    borderRadius="10"
-                                    duration={2}
-                                >
-                                    {[1,2,3,4,5].map(() => (
-                                        <div className='box_term'>
-                                        <Skeleton width={100} />
-                                        <div className='d-flex flex-row'>
-                                            <div className='body_text_len me-2'>DE.</div>
-                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                        </div>
-                                        <div className='d-flex flex-row'>
-                                            <div className='body_text_len me-2'>EN.</div>
-                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                        </div>
-                                        <div className='d-flex flex-row'>
-                                            <div className='body_text_len me-2'>FR.</div>
-                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                        </div>
-                                        <div className='d-flex flex-row'>
-                                            <div className='body_text_len me-2'>IT.</div>
-                                            <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                        </div>
-                                        
-                                        
+
+                        {
+                            isLoadingTerms
+                            ?
+                            // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
+                            //     Sorry we couldn’t find any matches for the term “{searched}”.  
+                            //     Double check your search for any typos or spelling error or 
+                            //     search by letter. 
+                            // </div>
+
+                            <>
+                            
+                            <div style={{overflowY: 'scroll', overflowX: 'hidden', height: '500px'}}>
+                            <SkeletonTheme
+                                baseColor="#E1E2E1"
+                                highlightColor="#FDFDFD"
+                                borderRadius="10"
+                                duration={2}
+                            >
+                                {[1,2,3,4,5].map(() => (
+                                    <div className='box_term'>
+                                    <Skeleton width={100} />
+                                    <div className='d-flex flex-row'>
+                                        <div className='body_text_len me-2'>DE.</div>
+                                        <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
                                     </div>
-                                    ))}
+                                    <div className='d-flex flex-row'>
+                                        <div className='body_text_len me-2'>EN.</div>
+                                        <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                    </div>
+                                    <div className='d-flex flex-row'>
+                                        <div className='body_text_len me-2'>FR.</div>
+                                        <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                    </div>
+                                    <div className='d-flex flex-row'>
+                                        <div className='body_text_len me-2'>IT.</div>
+                                        <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
+                                    </div>
                                     
                                     
-                                </SkeletonTheme>
                                 </div>
-                                </>
-                                :
-                                <>
-                                <Terms 
-                                    isLoading={isLoadingTerms}
-                                    terms={terms}
-                                    onClick2={(id) => getMeaning(id)} 
-                                    currentTerm = {meaning.title}
-                                    clipboard = {clipboard}
-                                    toastVisible = {toastVisible}
-                                    setClipboard = {(cli) => 
-                                        {   setClipboard(cli); 
-                                            setToastProperties({
-                                                description: `${clipboard.toUpperCase()}`,
-                                                borderColor: '#0A9DE4',
-                                                icon: 'icon-success'
-                                            })
-                                        }
-                                    }
-                                    setToastVisible = {(val) => setToastVisible(val)}
-                                    setClipboardTitle = {(val) => setClipboardTitle(val)}
-                                    setLink = {(val) => setLink([...[val], ...link])}
-                                    setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
-                                    setMobileMeaningStyle = {(val) => mobile ? setMobileMeaningStyle(val) : setMobileMeaningStyle(false)}
-
-                                />
-                                </>
-                            }
-                            {/* <Terms 
-                                isLoading={isLoading}
+                                ))}
+                                
+                                
+                            </SkeletonTheme>
+                            </div>
+                            </>
+                            :
+                            <>
+                            <Terms 
+                                isLoading={isLoadingTerms}
                                 terms={terms}
                                 onClick2={(id) => getMeaning(id)} 
                                 currentTerm = {meaning.title}
-                            /> */}
-                           
-                                
+                                clipboard = {clipboard}
+                                toastVisible = {toastVisible}
+                                setClipboard = {(cli) => 
+                                    {   setClipboard(cli); 
+                                        setToastProperties({
+                                            description: `${clipboard.toUpperCase()}`,
+                                            borderColor: '#0A9DE4',
+                                            icon: 'icon-success'
+                                        })
+                                    }
+                                }
+                                setToastVisible = {(val) => setToastVisible(val)}
+                                setClipboardTitle = {(val) => setClipboardTitle(val)}
+                                setLink = {(val) => setLink([...[val], ...link])}
+                                setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
+                                setMobileMeaningStyle = {(val) => mobile ? setMobileMeaningStyle(val) : setMobileMeaningStyle(false)}
 
-                 
+                            />
+                            </>
+                        }
+                        {/* <Terms 
+                            isLoading={isLoading}
+                            terms={terms}
+                            onClick2={(id) => getMeaning(id)} 
+                            currentTerm = {meaning.title}
+                        /> */}
+                        
                             
-                            
-                            
-                        </div>
-                        <div style={{display: mobileMeaningStyle === true || mobile === false ? 'block' : 'none'}} className={classes.MeaningContainer}>
-                            {
-                                isLoadingMeaning
-                                ?
-                                <>
-                                    <SkeletonTheme
-                                    baseColor="#E1E2E1"
-                                    highlightColor="#FDFDFD"
-                                    borderRadius="10"
-                                    duration={2}
-                                >
-                                    <div style={{padding: '25px'}} className='box_meaningTerm'>
-                                        <div style={{textAlign: 'center', marginBottom: '70px'}}>
-                                            <h3><Skeleton width={300} /></h3>
+
+                
+                        
+                        
+                        
+                    </div>
+                    <div style={{display: mobileMeaningStyle === true || mobile === false ? 'block' : 'none'}} className={classes.MeaningContainer}>
+                        {
+                            isLoadingMeaning
+                            ?
+                            <>
+                                <SkeletonTheme
+                                baseColor="#E1E2E1"
+                                highlightColor="#FDFDFD"
+                                borderRadius="10"
+                                duration={2}
+                            >
+                                <div style={{padding: '25px'}} className='box_meaningTerm'>
+                                    <div style={{textAlign: 'center', marginBottom: '70px'}}>
+                                        <h3><Skeleton width={300} /></h3>
+                                    </div>
+                                    <div style={{padding:'10px'}}>
+                                        <div className='subtitle_bold'>
+                                            <Skeleton width={300} />
                                         </div>
-                                        <div style={{padding:'10px'}}>
-                                            <div className='subtitle_bold'>
-                                                <Skeleton width={300} />
-                                            </div>
-                                            <div>
-                                                <Skeleton count={5} />
-                                            </div>
+                                        <div>
+                                            <Skeleton count={5} />
                                         </div>
                                     </div>
-                                </SkeletonTheme>
-                                    
-                                </>
-                                :
-                                <Meaning 
-                                    meaning={meaning}
-                                    id = {id}
-                                    listOfCurrentTraductions = {listOfCurrentTraductions}
-                                    meaningTranslation = {meaningTranslation}
-                                    onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
-                                    searchLanguage = {searchLanguage}
-                                    isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
-                                    setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
-                                    mobile = {mobile}
-                                />
-                            }
-                            
-                        </div>
+                                </div>
+                            </SkeletonTheme>
+                                
+                            </>
+                            :
+                            <Meaning 
+                                meaning={meaning}
+                                id = {id}
+                                listOfCurrentTraductions = {listOfCurrentTraductions}
+                                meaningTranslation = {meaningTranslation}
+                                onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}
+                                searchLanguage = {searchLanguage}
+                                isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
+                                setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
+                                mobile = {mobile}
+                            />
+                        }
+                        
                     </div>
+            
                 </div>
             </div>
 
