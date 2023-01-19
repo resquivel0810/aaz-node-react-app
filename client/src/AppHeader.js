@@ -16,6 +16,8 @@ function getKeyByValue(object, value) {
     return Object.keys(object).find(key => object[key] === value);
 }
 
+console.log(window.location.pathname)
+
 export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle}) {
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
@@ -90,7 +92,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                                 options
                                 ?  
                                 <>
-                                <div ref={ref2}  style={{width:'300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius: '10px'}}>
+                                <div ref={ref2}  style={{width: mobile ? '100vw' : '300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
 
                                     <Select  
                                         onSelected={(value) => {
@@ -143,10 +145,10 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                     <ul className="navbar-nav justify-content-end flex-grow-1 pe-3"> 
                         <li className='nav-app-link'>
                             <NavLink 
-                                to={`/dictionary/1`}
-                                exact={true}
-                                className={'nav-link'}
-                                activeClassName="active"
+                                to={`/dictionary/2`}
+                                exact={false}
+                                // className={'nav-link'}
+                                // activeClassName="active"
                             >
                                 <i className='icon-nav icon-dictionary'></i>
                                 <div>
@@ -192,9 +194,9 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                             <li className=''>
                                 <NavLink 
                                     to={`/dictionary/1`}
-                                    exact={true}
+                                    exact={false}
                                     className={'nav-link'}
-                                    activeClassName="active"
+                                    // activeClassName="active"
                                 >
                                     <i className='icon-nav icon-dictionary'></i>
                                     Dictionary

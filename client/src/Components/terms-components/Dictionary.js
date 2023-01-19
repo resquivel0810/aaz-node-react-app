@@ -460,6 +460,8 @@ export default function Dictionary(props) {
           console.log("Sorry! Your browser does not support Web Share API");
         }
     };
+
+    console.log(id)
     
     return(
         <>
@@ -664,8 +666,9 @@ export default function Dictionary(props) {
                                 isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
                                 setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
                                 mobile = {mobile}
-                                setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
+                                setShareId = {(val1, val2) => {handleShareButton(val1, null)}}
                             />
+                           
                         }
                         
                     </div>
