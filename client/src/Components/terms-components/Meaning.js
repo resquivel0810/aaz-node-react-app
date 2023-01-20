@@ -22,12 +22,30 @@ const headers = { 'Content-Type': 'application/json' };
 // let listOfTradcutions = []
 // let listOfCurrentTraductions = []
 
-export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTraductions, meaningTranslation, searchLanguage, isLoadingMeaningTranslation, setIsLoadingMeaningTranslation = f => f, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle, setShareId = f => f}) {
+export default function Meaning({
+    meaning, 
+    id, 
+    onClick4 = f => f, 
+    listOfCurrentTraductions, 
+    meaningTranslation, 
+    searchLanguage, 
+    isLoadingMeaningTranslation, 
+    setIsLoadingMeaningTranslation = f => f, 
+    mobile,
+    setMobileMeaningStyle = f => f, 
+    mobileMeaningStyle, 
+    setShareId = f => f,
+    skeletonWidth,
+    setSkeletonWidth = f => f}) {
+
+    // const [skeletonWidth, setSkeletonWidth] = useState()
 
 
     function createMarkup(str) {
         return {__html: str};
     }
+
+    
 
     return(
         <>
@@ -90,7 +108,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                         return (
                                             <>
                                             <button 
-                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true)}} 
+                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                 style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
@@ -106,7 +124,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -122,7 +140,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -138,7 +156,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'fr'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -157,7 +175,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -173,7 +191,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -189,7 +207,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'it'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -208,7 +226,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -224,7 +242,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -240,7 +258,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'en'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -264,7 +282,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -280,7 +298,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -296,7 +314,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'de'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -313,7 +331,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                             })()}
 
                                             <button 
-                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true)}} 
+                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                 style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
@@ -329,7 +347,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -345,7 +363,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -361,7 +379,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'it'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -381,7 +399,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -397,7 +415,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -413,7 +431,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'en'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -438,7 +456,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -454,7 +472,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -470,7 +488,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'de'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -489,7 +507,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -505,7 +523,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -521,7 +539,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'fr'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -538,7 +556,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                             })()}
 
                                             <button 
-                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true)}} 
+                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                 style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
@@ -554,7 +572,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -570,7 +588,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'en') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -586,7 +604,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'en'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -613,7 +631,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -629,7 +647,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'de') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -645,7 +663,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'de'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'de' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'de' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -664,7 +682,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px', backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -680,7 +698,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'fr') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -696,7 +714,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'fr'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'fr' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'fr' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -715,7 +733,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 if (listOfCurrentTraductions[1] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[0]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -731,7 +749,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[3] === 'it') {
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[2]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -747,7 +765,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 } else if (listOfCurrentTraductions[5] === 'it'){
                                                 return (
                                                     <button 
-                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true)}} 
+                                                        onClick={() => {onClick4(listOfCurrentTraductions[4]); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                         style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation.locale === 'it' ? '#BD8F16': '#FDFDFD', color: meaningTranslation.locale === 'it' ? '#FDFDFD' :'#BD8F16'}} 
                                                         className='none'
                                                     >
@@ -767,7 +785,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
 
 
                                             <button 
-                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true)}} 
+                                                onClick={() => {onClick4(id); setIsLoadingMeaningTranslation(true); setSkeletonWidth(document.getElementById('meaningText').offsetWidth)}} 
                                                 style={{height:'25px', padding: '0px 10px', borderRadius: '15px' ,backgroundColor: meaningTranslation === false || meaningTranslation.locale === 'en' ? '#BD8F16': '#FDFDFD', color: meaningTranslation === false || meaningTranslation.locale === 'en' ? '#FDFDFD' :'#BD8F16'}} 
                                                 className='none'
                                             >
@@ -801,10 +819,10 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                             
                                                 <div style={{padding:'10px'}}>
                                                     <div className='subtitle_bold'>
-                                                        <Skeleton width={300} />
+                                                        <Skeleton width={skeletonWidth - 20} />
                                                     </div>
                                                     <div>
-                                                        <Skeleton count={5} />
+                                                        <Skeleton count={11} />
                                                     </div>
                                                 </div>
                                          
@@ -822,7 +840,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                             }
                                         
                                         </div>
-                                        <div style={{overflowY: 'scroll',height: '50vh' }}>
+                                        <div id='meaningText' style={{overflowY: 'scroll',height: '50vh' }}>
                                             {
                                                 meaningTranslation === false
                                                 ?
@@ -831,6 +849,7 @@ export default function Meaning({meaning, id, onClick4 = f => f, listOfCurrentTr
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaningTranslation.terms}.data}[0]}.attributes}.definition)} />
                                             }
                                         </div>
+                                        
                                         </>
                                     }
                                     

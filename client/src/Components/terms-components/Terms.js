@@ -8,7 +8,22 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
-export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f, setShareId = f => f, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle}) {
+export default function Terms({
+    terms, 
+    onClick2 = f => f, 
+    currentTerm, 
+    isLoading, 
+    clipboard, 
+    setClipboard = f => f, 
+    toastVisible,
+    setToastVisible = f => f, 
+    setClipboardTitle = f => f, 
+    setLink= f =>f, 
+    setShareId = f => f, 
+    mobile,
+    setMobileMeaningStyle = f => f, 
+    mobileMeaningStyle,
+    setSkeletonWidth = f => f}) {
 
 
     useEffect(() => {
@@ -56,7 +71,13 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             :
                                             <Link
                                             key={t.id} 
-                                            onClick={() =>{onClick2(t.id); setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText]); setMobileMeaningStyle(true)}}
+                                            onClick={() =>{
+                                                onClick2(t.id); 
+                                                setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText]); 
+                                                setMobileMeaningStyle(true);
+                                                setSkeletonWidth(document.getElementById('meaningText').offsetWidth)
+
+                                            }}
                                             to={`/dictionary/${t.id}`}
                                             className={'link'}
                                             id={t.attributes.title}
@@ -117,8 +138,8 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                             </button>
                                        
                                        
-                                        <button onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
-                                            <i className='icon ms-1 icon-share'></i>
+                                        <button disabled onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
+                                            <i style={{color: 'grey'}} className='icon ms-1 icon-share'></i>
                                         </button>
                                         </div>
                                     </div>

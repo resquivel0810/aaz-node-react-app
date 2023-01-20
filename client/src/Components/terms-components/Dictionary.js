@@ -56,6 +56,8 @@ export default function Dictionary(props) {
     const [mobile, setMobile] = useState(false)
     const [mobileMeaningStyle, setMobileMeaningStyle] = useState(false)
 
+    const [skeletonWidth, setSkeletonWidth] = useState()
+
     useEffect(() => {
         // setIsLoading(true)
         window.innerWidth < 900 ? setMobile(true) : setMobile(false)
@@ -613,6 +615,7 @@ export default function Dictionary(props) {
                                 // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
                                 mobileMeaningStyle = {mobileMeaningStyle}
                                 mobile = {mobile}
+                                setSkeletonWidth = {(val) => setSkeletonWidth(val)}
 
                             />
                             </>
@@ -642,16 +645,16 @@ export default function Dictionary(props) {
                                 borderRadius="10"
                                 duration={2}
                             >
-                                <div style={{padding: '25px'}} className='box_meaningTerm'>
-                                    <div style={{textAlign: 'center', marginBottom: '70px'}}>
-                                        <h3><Skeleton width={300} /></h3>
+                                <div style={{padding: '25px', paddingTop:'50px'}} className='box_meaningTerm'>
+                                    <div style={{textAlign: 'center', marginBottom: mobile?'30px':'50px'}}>
+                                        <h3><Skeleton width={100} /></h3>
                                     </div>
                                     <div style={{padding:'10px'}}>
                                         <div className='subtitle_bold'>
-                                            <Skeleton width={300} />
+                                            <Skeleton  width={skeletonWidth}/>
                                         </div>
                                         <div>
-                                            <Skeleton count={5} />
+                                            <Skeleton  count={11} />
                                         </div>
                                     </div>
                                 </div>
@@ -671,10 +674,9 @@ export default function Dictionary(props) {
                                 mobile = {mobile}
                                 setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
                                 mobileMeaningStyle = {mobileMeaningStyle}
-                          
-                                
-
                                 setShareId = {(val1, val2) => {handleShareButton(val1, null)}}
+                                skeletonWidth = {skeletonWidth}
+                                setSkeletonWidth = {(val) => setSkeletonWidth(val)}
                             />
                            
                         }
