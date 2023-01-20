@@ -46,9 +46,8 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                     <div className='container_term'>
                         {terms.map((t) => (                             
                             <div className='box_term' id={t.id} key={t.id}>
-                                <div className='row'>
-                                    <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white'}} className='col-8'>
-                                    {/* 'rgba(225,226,225,0.6)' */}
+                                <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} className='row'>
+                                    <div  className='col-8'>
                                     
                                         {
                                             isLoading
