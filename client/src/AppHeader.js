@@ -18,7 +18,7 @@ function getKeyByValue(object, value) {
 
 console.log(window.location.pathname)
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle}) {
+export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, mobile}) {
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
@@ -26,7 +26,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
         <header style={{height: '10vh'}}>
             <nav className='navbar navbar-dark navbar-expand-lg navbar-primary fixed-top'>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {
+                    {/* {
                         mobile
                         ?
                         <>{
@@ -41,7 +41,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                         
                         : 
                         null
-                    }
+                    } */}
                     
 
                     <Link

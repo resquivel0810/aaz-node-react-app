@@ -8,8 +8,8 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 
-export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f, setShareId = f => f, setMobileMeaningStyle = f => f}) {
-    // const [clipboard, setClipboard] = useState('jajaja')
+export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading, clipboard, setClipboard = f => f, toastVisible,setToastVisible = f => f, setClipboardTitle = f => f, setLink= f =>f, setShareId = f => f, mobile,setMobileMeaningStyle = f => f, mobileMeaningStyle}) {
+
 
     useEffect(() => {
         navigator.clipboard.writeText(clipboard)
@@ -23,6 +23,22 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
     
     return(
         <>
+            {
+                mobile
+                ?
+                <>{
+                    mobileMeaningStyle
+                    ?
+                    null
+                    : 
+                    <button style={{margin:'0'}} onClick={() =>  setMobileMeaningStyle(true)} className='none'>
+                        <i style={{ transform: 'rotate(360deg)', color: '#BD8F16'}} className='icon ms-1 icon-arrow'></i>
+                    </button>
+                }</>
+                
+                : 
+                null
+            }
             <div className=''>
                 {/* <h3>All terms</h3> */}
                 <div className=''>
@@ -55,7 +71,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                         }
 
                                         <div 
-                                            id={t.attributes.terms.data[0].id} 
+                                            // id={t.attributes.terms.data[0].id} 
                                         >
                                         {/* {console.log(t.attributes.terms)} */}
                                         
@@ -81,6 +97,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                         <div style={{display: 'flex'}}>
                                 
                                             <button 
+                                                disabled
                                                 onClick={() => 
 
                                                     {  
@@ -97,7 +114,7 @@ export default function Terms({terms, onClick2 = f => f, currentTerm, isLoading,
                                                 } 
                                                 className='none'
                                             >
-                                                <i className='icon ms-1 icon-copy'></i>
+                                                <i style={{color: 'grey'}} className='icon ms-1 icon-copy'></i>
                                             </button>
                                        
                                        

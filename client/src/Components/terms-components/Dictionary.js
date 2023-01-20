@@ -497,8 +497,8 @@ export default function Dictionary(props) {
                 }}
                 lastVisited = {link}
                 getMeaning={(id) => getMeaning(id)}
-                setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
-                mobileMeaningStyle = {mobileMeaningStyle}
+                // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
+                // mobileMeaningStyle = {mobileMeaningStyle}
                 mobile = {mobile}
 
             />
@@ -610,6 +610,9 @@ export default function Dictionary(props) {
                                 setLink = {(val) => setLink([...[val], ...link])}
                                 setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
                                 setMobileMeaningStyle = {(val) => mobile ? setMobileMeaningStyle(val) : setMobileMeaningStyle(false)}
+                                // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
+                                mobileMeaningStyle = {mobileMeaningStyle}
+                                mobile = {mobile}
 
                             />
                             </>
@@ -666,6 +669,11 @@ export default function Dictionary(props) {
                                 isLoadingMeaningTranslation = {isLoadingMeaningTranslation}
                                 setIsLoadingMeaningTranslation = {(val) => setIsLoadingMeaningTranslation(val)}
                                 mobile = {mobile}
+                                setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
+                                mobileMeaningStyle = {mobileMeaningStyle}
+                          
+                                
+
                                 setShareId = {(val1, val2) => {handleShareButton(val1, null)}}
                             />
                            

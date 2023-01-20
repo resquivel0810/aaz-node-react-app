@@ -1280,7 +1280,6 @@ div.registration_box img{
   .nav-tabs .nav-link.active:hover{
     background: linear-gradient(180deg, #068B77 0%, #004F3D 100%);
     color: #FDFDFD !important;
-    
     border-radius: 100px;
     /* border-top: solid 0.3em #FDFDFD; */
     border-color: #FDFDFD;
