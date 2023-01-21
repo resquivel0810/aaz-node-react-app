@@ -73,7 +73,7 @@ export default function Terms({
                                             key={t.id} 
                                             onClick={() =>{
                                                 onClick2(t.id); 
-                                                setLink([document.getElementById(t.attributes.title).href.replace('http://localhost:3000', ''), document.getElementById(t.attributes.title).innerText]); 
+                                                setLink([document.getElementById(t.attributes.title).href.replace('https://aaz-node-react-app.herokuapp.com', ''), document.getElementById(t.attributes.title).innerText]); 
                                                 setMobileMeaningStyle(true);
                                                 setSkeletonWidth(document.getElementById('meaningText').offsetWidth)
 
