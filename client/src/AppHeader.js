@@ -43,24 +43,7 @@ export default function AppHeader2({
         <header style={{height: '10vh'}}>
             <nav className='navbar navbar-dark navbar-expand-lg navbar-primary fixed-top'>
                 <div style={{display: 'flex', alignItems: 'center'}}>
-                    {/* {
-                        mobile
-                        ?
-                        <>{
-                            mobileMeaningStyle
-                            ?
-                            <button onClick={() =>  setMobileMeaningStyle(false)} className='none'>
-                                <i style={{ transform: 'rotate(-180deg)', color: 'white'}} className='icon ms-1 icon-arrow'></i>
-                            </button>
-                            : 
-                            null
-                        }</>
-                        
-                        : 
-                        null
-                    } */}
                     
-
                     <Link
                         to={`/`}
                         className={'navbar-brand'}
@@ -112,7 +95,7 @@ export default function AppHeader2({
                                 ?  
                                 <>
                                 
-                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
+                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'350px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
 
                                     <Select  
                                         onSelected={(value) => {
@@ -125,14 +108,18 @@ export default function AppHeader2({
                                     {
                                         displayedPredicted
                                         ?
-                                        <>{predictedTerms.map(t => (
+                                        <>
+                                        <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with </div>
+                                        {predictedTerms.map(t => (
+                    
                                             <div>
                                                 <Link onClick={() => getMeaning(t.id)} className={'link'} to={`/dictionary/${t.id}`} >
                                                     {t.attributes.title}
                                                 </Link>
                                             </div>
                                             
-                                        ))}</>
+                                        ))}
+                                        </>
                                         :
                                         null
                                     }   
