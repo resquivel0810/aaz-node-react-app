@@ -47,6 +47,8 @@ export default function Dictionary(props) {
     const [meaningTranslation, setMeaningTranslation] = useState(false)
     const [searched, setSearched] = useState('')
     const [searchLanguage, setSearchLanguage] = useState('de')
+    const [displayedPredicted, setDisplayedPredicted] = useState(false)
+    const [predictedTerms, setPredictedTerms] = useState([])
     
     const [clipboard, setClipboard] = useState('')
     const [toastVisible, setToastVisible] = useState(false)
@@ -192,6 +194,19 @@ export default function Dictionary(props) {
             setIsLoadingMeaningTranslation(false)
         })
     }
+
+    const getTermsWithPredictive = (lan, search) => {
+        // setIsLoadingTerms(true)
+        fetch(`https://sandbox.linarys.com/api/folios?populate=terms&locale=${lan}&filters[title][$startsWith]=${search}&pagination[limit]=5`, { 
+            headers, method: 'GET' 
+        })
+          .then(checkStatus)
+          .then(parseJSON)
+          .then(({ data }) => {setPredictedTerms(data);setDisplayedPredicted(true)})
+   
+        
+    }
+
     let traductions = {...meaning.localizations}.data
     // console.log(Object.values({...traductions}))
     let listOfTradcutions = []
@@ -463,7 +478,7 @@ export default function Dictionary(props) {
         }
     };
 
-    console.log(id)
+
     
     return(
         <>
@@ -477,6 +492,10 @@ export default function Dictionary(props) {
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
                 // onBlur1={() => setDisplayedSearchBarOptions(false)}
+                getTermsWithPredictive={(partial) => getTermsWithPredictive(searchLanguage ,partial)}
+                displayedPredicted={displayedPredicted}
+                predictedTerms = {predictedTerms}
+                displayedSearchBarOptions={displayedSearchBarOptions}
                 ref2={wrapperRef2}
                 options={displayedSearchBarOptions}
                 search={props.match.path}

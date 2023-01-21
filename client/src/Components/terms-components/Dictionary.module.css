@@ -19,7 +19,7 @@
 .dictionaryContainer {
     width: 100vw;
     display: flex;
-    padding: 0 3vw;
+    padding: 3vh 3vw;
     height: 100%;
 }
 

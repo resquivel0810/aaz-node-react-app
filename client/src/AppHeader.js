@@ -18,7 +18,24 @@ function getKeyByValue(object, value) {
 
 console.log(window.location.pathname)
 
-export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f, onFocus1 = f => f, onBlur1 = f => f, options, onChange1 = f => f, lastVisited, getMeaning = f => f, onChange2 = f => f, ref2, mobile}) {
+export default function AppHeader2({
+    onClick3 = f => f, 
+    search, 
+    onClick5 = f => f, 
+    onFocus1 = f => f, 
+    onBlur1 = f => f, 
+    options, 
+    onChange1 = f => f, 
+    lastVisited, 
+    getMeaning = f => f, 
+    onChange2 = f => f, 
+    ref2, 
+    mobile,
+    getTermsWithPredictive = f => f,
+    displayedSearchBarOptions,
+    displayedPredicted,
+    predictedTerms        }) {
+    
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
@@ -83,16 +100,19 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                                 placeholder='Search'
                                 onFocus={() => onFocus1()}
                                 onBlur={() => onBlur1()}
+                                onKeyUp={() => getTermsWithPredictive(document.getElementById('search').value)}
                                 autocomplete="off"
                                 style={{width: window.innerWidth < 600 ? '185px' : '275px'}}
+
                             />  
                             <button onClick={() => {onClick3(document.getElementById('search').value); onClick5(document.getElementById('search').value)}} style={{width:'unset', height: '30px', padding: '0 10px', position: 'relative', right: '70px'}} className='btn ochre'>SEARCH</button>   
                             </div>
-                            {
+                            <>{
                                 options
                                 ?  
                                 <>
-                                <div ref={ref2}  style={{width: mobile ? '100vw' : '300px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
+                                
+                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
 
                                     <Select  
                                         onSelected={(value) => {
@@ -102,7 +122,20 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                                         defaultValue={language} 
                                         options={Object.values(LANGUAGES)} 
                                     />
-                                    {console.log(Object.keys(LANGUAGES))}
+                                    {
+                                        displayedPredicted
+                                        ?
+                                        <>{predictedTerms.map(t => (
+                                            <div>
+                                                <Link onClick={() => getMeaning(t.id)} className={'link'} to={`/dictionary/${t.id}`} >
+                                                    {t.attributes.title}
+                                                </Link>
+                                            </div>
+                                            
+                                        ))}</>
+                                        :
+                                        null
+                                    }   
 
                                     <div>
                                         <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Recent research</div>
@@ -130,7 +163,7 @@ export default function AppHeader2({onClick3 = f => f, search, onClick5 = f => f
                                 :
                                 null
 
-                            }
+                            }</>
                             
                             </>
                             :
