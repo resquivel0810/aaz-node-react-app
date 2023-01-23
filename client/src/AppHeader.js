@@ -122,7 +122,7 @@ export default function AppHeader2({
                                                     // id={t.id} 
                                                     onClick={() => {
                                                         getMeaning(t.id); 
-                                                        setLink([`http://localhost:3000/dictionary/${t.id}`, t.attributes.title]); 
+                                                        setLink([`/dictionary/${t.id}`, t.attributes.title]); 
                                                     }} 
                                                     className={'link'} 
                                                     to={`/dictionary/${t.id}`} 
