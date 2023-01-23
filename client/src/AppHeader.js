@@ -34,7 +34,11 @@ export default function AppHeader2({
     getTermsWithPredictive = f => f,
     displayedSearchBarOptions,
     displayedPredicted,
-    predictedTerms        }) {
+    predictedTerms,
+    currentSearch,
+    setCurrentSearch = f => f,
+    setLink= f =>f,
+}) {
     
     const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
@@ -83,7 +87,7 @@ export default function AppHeader2({
                                 placeholder='Search'
                                 onFocus={() => onFocus1()}
                                 onBlur={() => onBlur1()}
-                                onKeyUp={() => getTermsWithPredictive(document.getElementById('search').value)}
+                                onKeyUp={() => {getTermsWithPredictive(document.getElementById('search').value); setCurrentSearch(document.getElementById('search').value)}}
                                 autocomplete="off"
                                 style={{width: window.innerWidth < 600 ? '185px' : '275px'}}
 
@@ -109,11 +113,20 @@ export default function AppHeader2({
                                         displayedPredicted
                                         ?
                                         <>
-                                        <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with </div>
+                                        <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with <span style={{fontStyle:'italic'}}>{currentSearch}</span></div>
                                         {predictedTerms.map(t => (
-                    
+                                            
                                             <div>
-                                                <Link onClick={() => getMeaning(t.id)} className={'link'} to={`/dictionary/${t.id}`} >
+                                                {console.log(t.attributes.title)}
+                                                <Link 
+                                                    // id={t.id} 
+                                                    onClick={() => {
+                                                        getMeaning(t.id); 
+                                                        setLink([`http://localhost:3000/dictionary/${t.id}`, t.attributes.title]); 
+                                                    }} 
+                                                    className={'link'} 
+                                                    to={`/dictionary/${t.id}`} 
+                                                >
                                                     {t.attributes.title}
                                                 </Link>
                                             </div>

@@ -39,6 +39,7 @@ export default function Dictionary(props) {
 
     const [terms, setTerms] = useState([])
     // const [error, setError] = useState(null);
+    const [currentSearch, setCurrentSearch] = useState('')
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
     const [currentLetter, setCurrentLetter] = useState()
     const [displayedLetters, setDisplayedLetters] = useState(false)
@@ -222,6 +223,12 @@ export default function Dictionary(props) {
  
         
     })
+
+    const handleSearchChange = e => {
+        const  value  = e.target.value;
+        setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
+        // setCurrentLetter(null)
+    };
 
     const handleChange = e => {
         const  value  = e.target.value;
@@ -492,6 +499,8 @@ export default function Dictionary(props) {
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
                 // onBlur1={() => setDisplayedSearchBarOptions(false)}
+                setCurrentSearch={(val) => setCurrentSearch(val)}
+                currentSearch={currentSearch}
                 getTermsWithPredictive={(partial) => getTermsWithPredictive(searchLanguage ,partial)}
                 displayedPredicted={displayedPredicted}
                 predictedTerms = {predictedTerms}
@@ -521,6 +530,7 @@ export default function Dictionary(props) {
                 // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
                 // mobileMeaningStyle = {mobileMeaningStyle}
                 mobile = {mobile}
+                setLink = {(val) => setLink([...[val], ...link])}
 
             />
             <div className={classes.dictionary}>
