@@ -172,7 +172,7 @@ export default function Dictionary(props) {
             
             // setCurrentLetter(json.data[0].attributes.title.charAt(0))
             // console.log(json.data[0].attributes.title.charAt(0))
-            console.log(json.data.length > 0 )
+            // console.log(json.data.length > 0 )
         })
     }
 
@@ -510,14 +510,14 @@ export default function Dictionary(props) {
                 search={props.match.path}
                 onChange1={(lan) => {
                     setSearchLanguage(lan);
-                    console.log(listOfCurrentTraductions); 
+                    // console.log(listOfCurrentTraductions); 
                     let translationId = listOfCurrentTraductions[listOfCurrentTraductions.indexOf(lan)-1];  
                     if(translationId === undefined) {
                         var currentId = props.match.params.id
                     } else {
                         currentId = translationId
                     }; 
-                    console.log(currentId);
+                    // console.log(currentId);
                     getMeaning(currentId)
                     
                     history.push(`/dictionary/${currentId}`)
@@ -531,6 +531,7 @@ export default function Dictionary(props) {
                 // mobileMeaningStyle = {mobileMeaningStyle}
                 mobile = {mobile}
                 setLink = {(val) => setLink([...[val], ...link])}
+                language={searchLanguage}
 
             />
             <div className={classes.dictionary}>
@@ -593,20 +594,20 @@ export default function Dictionary(props) {
                                 {[1,2,3,4,5].map(() => (
                                     <div className='box_term'>
                                     <Skeleton width={100} />
-                                    <div className='d-flex flex-row'>
+                                    {/* <div className='d-flex flex-row'>
                                         <div className='body_text_len me-2'>DE.</div>
                                         <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
-                                    </div>
+                                    </div> */}
                                     <div className='d-flex flex-row'>
-                                        <div className='body_text_len me-2'>EN.</div>
+                                        {/* <div className='body_text_len me-2'>EN.</div> */}
                                         <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
                                     </div>
                                     <div className='d-flex flex-row'>
-                                        <div className='body_text_len me-2'>FR.</div>
+                                        {/* <div className='body_text_len me-2'>FR.</div> */}
                                         <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
                                     </div>
                                     <div className='d-flex flex-row'>
-                                        <div className='body_text_len me-2'>IT.</div>
+                                        {/* <div className='body_text_len me-2'>IT.</div> */}
                                         <div><Skeleton highlightColor="#FDFDFD" width={100} /></div>
                                     </div>
                                     
@@ -645,6 +646,7 @@ export default function Dictionary(props) {
                                 mobileMeaningStyle = {mobileMeaningStyle}
                                 mobile = {mobile}
                                 setSkeletonWidth = {(val) => setSkeletonWidth(val)}
+                                searchLanguage = {searchLanguage}
 
                             />
                             </>

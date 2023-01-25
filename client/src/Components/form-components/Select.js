@@ -27,8 +27,8 @@ const Select = ({onSelected=s=>s, defaultValue, selectedOption,options, ...props
                     <div className={classes.dropDownListContainer}>
                         <ul className={classes.dropDownList}>
                         {options.map(option => (
-                            <li className={classes.listItem} onClick={onOptionClicked(option)} key={Math.random()}>
-                            {option}
+                            <li style={{backgroundColor: option === selectedOption? 'rgba(182, 106, 0, .25)' : null}} className={classes.listItem} onClick={onOptionClicked(option)} key={Math.random()}>
+                                <span>{option}</span>
                             </li>   
                         ))}
                         </ul>

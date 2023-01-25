@@ -23,7 +23,8 @@ export default function Terms({
     mobile,
     setMobileMeaningStyle = f => f, 
     mobileMeaningStyle,
-    setSkeletonWidth = f => f}) {
+    setSkeletonWidth = f => f,
+    searchLanguage}) {
 
 
     useEffect(() => {
@@ -34,7 +35,6 @@ export default function Terms({
         
     }, [clipboard, toastVisible, setToastVisible])
 
-    
     
     return(
         <>
@@ -93,22 +93,543 @@ export default function Terms({
                                         <div 
                                             // id={t.attributes.terms.data[0].id} 
                                         >
-                                        {/* {console.log(t.attributes.terms)} */}
-                                        
-                                        
-                                        {t.attributes.terms.data.map((g) => (
-                                            <div className='d-flex flex-row' key={g.id}>
-                                                <div className='body_text_len me-2'>{g.attributes.locale}.</div>
-                                                <div className='body_text'>{g.attributes.text}</div>
-                                            </div> 
-                                        ))}
 
-                                        {t.attributes.localizations.data.map((l) => (
-                                            <div className='d-flex flex-row' key={l.id}>
-                                                <div className='body_text_len me-2'>{l.attributes.locale}.</div>
-                                                <div className='body_text'>{l.attributes.title}</div>
-                                            </div> 
-                                        ))}
+                                        {
+                                            searchLanguage === 'de' 
+                                            ?
+                                            <>
+                                            {(() => {
+                                            if (t.attributes.localizations.data[0].attributes.locale === 'en' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                            return (
+                                                <>
+                                                    
+                                                    {(() => {
+                                                        if (t.attributes.localizations.data[1].attributes.locale === 'fr') {
+                                                        return (
+                                                            <>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                            <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                        } else if (t.attributes.localizations.data[2].attributes.locale === 'fr') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    <div className='d-flex flex-row' >
+                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                    </div>
+                                                </>
+                                            )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'fr' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        <div className='d-flex flex-row' >
+                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                            <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                        </div>
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'en') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'en') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                        
+                                                    </>
+                                                )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'it' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'en') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                </div>
+                                                                </>
+                                                            )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'en') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                       
+                                                    </>
+                                                )
+                                            }
+                                            })()}
+                                            </>
+                                            :
+                                            null
+                                        }
+                                        {
+                                            searchLanguage === 'fr' 
+                                            ?
+                                            <>
+                                            {(() => {
+                                            if (t.attributes.localizations.data[0].attributes.locale === 'de' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                            return (
+                                                <>
+                                                    <div className='d-flex flex-row' >
+                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                    </div>
+                                                    {(() => {
+                                                        if (t.attributes.localizations.data[1].attributes.locale === 'it') {
+                                                        return (
+                                                            <>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                            <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                        } else if (t.attributes.localizations.data[2].attributes.locale === 'it') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    
+                                                </>
+                                            )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'it' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'en') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'en') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                    </div>
+                                                                        <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                        
+                                                    </>
+                                                )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'en' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                   
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                         <div className='d-flex flex-row' >
+                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                            <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                        </div>
+                                                       
+                                                    </>
+                                                )
+                                            }
+                                            })()}
+                                            </>
+                                            :
+                                            null
+                                        }
+                                        {
+                                            searchLanguage === 'it' 
+                                            ?
+                                            <>
+                                            {(() => {
+                                            if (t.attributes.localizations.data[0].attributes.locale === 'de' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                            return (
+                                                <>
+                                                    <div className='d-flex flex-row' >
+                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                    </div>
+                                                    {(() => {
+                                                        if (t.attributes.localizations.data[1].attributes.locale === 'en') {
+                                                        return (
+                                                            <>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                            </div>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                            </>
+                                                        )
+                                                        } else if (t.attributes.localizations.data[2].attributes.locale === 'en') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    
+                                                </>
+                                            )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'en' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'fr') {
+                                                            return (
+                                                                <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'fr') {
+                                                                return (
+                                                                    <>
+                                                                        <div className='d-flex flex-row' >
+                                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                            <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                        </div>
+                                                                        
+                                                                        <div className='d-flex flex-row' >
+                                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                            <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                        </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                        <div className='d-flex flex-row' >
+                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                            <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                        </div>
+                                                    </>
+                                                )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'fr' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                         
+                                                       
+                                                    </>
+                                                )
+                                            }
+                                            })()}
+                                            </>
+                                            :
+                                            null
+                                        }
+                                        {
+                                            searchLanguage === 'en' 
+                                            ?
+                                            <>
+                                            {(() => {
+                                            if (t.attributes.localizations.data[0].attributes.locale === 'de' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                            return (
+                                                <>
+                                                    <div className='d-flex flex-row' >
+                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                    </div>
+                                                    {(() => {
+                                                        if (t.attributes.localizations.data[1].attributes.locale === 'fr') {
+                                                        return (
+                                                            <>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                            </div>
+                                                            <div className='d-flex flex-row' >
+                                                                <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                            </div>
+                                                            </>
+                                                        )
+                                                        } else if (t.attributes.localizations.data[2].attributes.locale === 'fr') {
+                                                            return (
+                                                                <>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                </div>
+                                                                <div className='d-flex flex-row' >
+                                                                    <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                    <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                </div>
+                                                                </>
+                                                            )
+                                                        }
+                                                    })()}
+                                                    
+                                                </>
+                                            )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'fr' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'it') {
+                                                            return (
+                                                                <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                    </div>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                </>
+                                                            )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'it') {
+                                                                return (
+                                                                    <>
+                                                                        <div className='d-flex flex-row' >
+                                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                            <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                        </div>
+                                                                        <div className='d-flex flex-row' >
+                                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                                            <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                                        </div>
+                                                                        <div className='d-flex flex-row' >
+                                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                            <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                        </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                    </>
+                                                )
+                                            } else if (t.attributes.localizations.data[0].attributes.locale === 'it' && Object.keys(t.attributes.localizations.data).length === 3) {
+                                                return (
+                                                    <>
+                                                        
+                                                        {(() => {
+                                                            if (t.attributes.localizations.data[1].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                   
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            } else if (t.attributes.localizations.data[2].attributes.locale === 'de') {
+                                                                return (
+                                                                    <>
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[2].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[2].attributes.title}</div>
+                                                                    </div>
+                                                                   
+                                                                    <div className='d-flex flex-row' >
+                                                                        <div className='body_text_len me-2'>{t.attributes.localizations.data[1].attributes.locale}.</div>
+                                                                        <div className='body_text'>{t.attributes.localizations.data[1].attributes.title}</div>
+                                                                    </div>
+                                                                    </>
+                                                                )
+                                                            }
+                                                        })()}
+                                                        <div className='d-flex flex-row' >
+                                                            <div className='body_text_len me-2'>{t.attributes.localizations.data[0].attributes.locale}.</div>
+                                                            <div className='body_text'>{t.attributes.localizations.data[0].attributes.title}</div>
+                                                        </div>
+                                                       
+                                                    </>
+                                                )
+                                            }
+                                            })()}
+                                            </>
+                                            :
+                                            null
+                                        }
+                                        
                                         </div>
                                         
 

@@ -38,9 +38,11 @@ export default function AppHeader2({
     currentSearch,
     setCurrentSearch = f => f,
     setLink= f =>f,
+    language,
+    setLanguage = f => f
 }) {
     
-    const [language, setLanguage] = useState('German')
+    // const [language, setLanguage] = useState('German')
     let id = window.localStorage.getItem("id")
     return (
         <>
@@ -89,7 +91,7 @@ export default function AppHeader2({
                                 onBlur={() => onBlur1()}
                                 onKeyUp={() => {getTermsWithPredictive(document.getElementById('search').value); setCurrentSearch(document.getElementById('search').value)}}
                                 autocomplete="off"
-                                style={{width: window.innerWidth < 600 ? '185px' : '275px'}}
+                                style={{width: window.innerWidth < 600 ? '185px' : '275px', paddingRight: '75px'}}
 
                             />  
                             <button onClick={() => {onClick3(document.getElementById('search').value); onClick5(document.getElementById('search').value)}} style={{width:'unset', height: '30px', padding: '0 10px', position: 'relative', right: '70px'}} className='btn ochre'>SEARCH</button>   
@@ -102,11 +104,32 @@ export default function AppHeader2({
                                 <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'350px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
 
                                     <Select  
+                                        // selectedOption={language}
                                         onSelected={(value) => {
                                             onChange1(getKeyByValue(LANGUAGES, value)); 
                                             setLanguage(value)
                                         }}  
-                                        defaultValue={language} 
+                                        selectedOption={ 
+                                            (() => {
+                                                if (language === 'de') {
+                                                    return (
+                                                        'German'
+                                                    )
+                                                } else if (language === 'fr') {
+                                                    return (
+                                                        'French'
+                                                    )
+                                                } else if (language === 'it') {
+                                                    return (
+                                                        'Italian'
+                                                    )
+                                                } else if (language === 'en') {
+                                                    return (
+                                                        'English'
+                                                    )
+                                                }
+                                            })()
+                                        }
                                         options={Object.values(LANGUAGES)} 
                                     />
                                     {
@@ -140,7 +163,11 @@ export default function AppHeader2({
                                     <div>
                                         <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Recent research</div>
                                         <div>
-                                            <Link onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} className={'link'} to={`${lastVisited.flat()[2]}`}>{lastVisited.flat()[3]}</Link>
+                                            <Link 
+                                                onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} className={'link'} to={`${lastVisited.flat()[2]}`}
+                                            >
+                                                {lastVisited.flat()[3]}
+                                            </Link>
                                         </div>
                                         <div>
                                             <Link onClick={() => {getMeaning(lastVisited.flat()[4].slice(12));console.log(lastVisited.flat()[4].slice(12))}} className={'link'} to={`${lastVisited.flat()[4]}`}>{lastVisited.flat()[5]}</Link>
