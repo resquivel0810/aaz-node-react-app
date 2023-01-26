@@ -91,7 +91,7 @@ export default function Terms({
                                         }
 
                                         <div 
-                                            // id={t.attributes.terms.data[0].id} 
+                                            id={t.attributes.terms.data[0].id} 
                                         >
 
                                         {
@@ -638,7 +638,7 @@ export default function Terms({
                                         <div style={{display: 'flex'}}>
                                 
                                             <button 
-                                                disabled
+                                                
                                                 onClick={() => 
 
                                                     {  
@@ -655,12 +655,12 @@ export default function Terms({
                                                 } 
                                                 className='none'
                                             >
-                                                <i style={{color: 'grey'}} className='icon ms-1 icon-copy'></i>
+                                                <i className='icon ms-1 icon-copy'></i>
                                             </button>
                                        
                                        
-                                        <button disabled onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
-                                            <i style={{color: 'grey'}} className='icon ms-1 icon-share'></i>
+                                        <button  onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
+                                            <i className='icon ms-1 icon-share'></i>
                                         </button>
                                         </div>
                                     </div>

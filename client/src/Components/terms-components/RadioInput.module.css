@@ -1,0 +1,43 @@
+.modernRadioContainer {
+    /* margin: 24px 0; */
+    display: flex;
+    cursor: pointer;
+    user-select: none;
+}
+  
+.radioOuterCircle {
+    width: 18px;
+    height: 18px;
+    min-width: 18px;
+    min-height: 18px;
+    border: 2px solid #B66A00;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+    margin-right: 6px;
+    transition: all 0.1s linear;
+    background-color: #F3BF4C;
+}
+  
+.radioInnerCircle {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #B66A00;
+    transition: all 0.1s linear;
+}
+.unselected {
+    border: 2px solid #B66A00;
+    background-color: transparent;
+}
+.unselectedCircle {
+    width: 0;
+    height: 0;
+}
+.helperText {
+    color: #292929;
+    padding-right: 8px;
+}
+  

@@ -7,6 +7,7 @@ import Terms from './../terms-components/Terms';
 import Meaning from './Meaning';
 import Input from '../form-components/Input';
 import Toast from '../toast/Toast2';
+import RadioInput from './RadioInput'
 
 import {useHistory} from 'react-router-dom'
 
@@ -60,6 +61,8 @@ export default function Dictionary(props) {
     const [mobileMeaningStyle, setMobileMeaningStyle] = useState(false)
 
     const [skeletonWidth, setSkeletonWidth] = useState()
+
+    const [selected, setSelected] = useState(['A','B','C']);
 
     useEffect(() => {
         // setIsLoading(true)
@@ -340,114 +343,87 @@ export default function Dictionary(props) {
                             <div style={{display:'flex'}}>
                                 <div style={{margin:'5px 10px'}}>
                                     <div style={{display:'flex'}}>
-                                    <Input 
-                                        type = {"radio"}
-                                        id = {"ABC"}
-                                        name = {"current_letters"}
-                                        value = {['A','B','C']}
-                                        checked={Object.values(currentLetters)[0]=== Object.values(['A','B','C'])[0]}
-                                        handleChange={handleChange}
-                                        style={{width:'unset', height: 'unset', marginRight:'5px'}}
+                     
+                                    <RadioInput 
+                                        value={['A','B','C']}
+                                        selected={selected}
+                                        text="ABC"
+                                        onChange={(val) => {setSelected(val); console.log(val); setCurrentLetters(val)}}
                                     />
-                                    <label for="ABC">ABC</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"DEF"}
-                                            name = {"current_letters"}
-                                            value = {['D','E','F']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['D','E','F'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                     
+                                        <RadioInput 
+                                            value={['D','E','F']}
+                                            selected={selected}
+                                            text="DEF"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="DEF">DEF</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"GHI"}
-                                            name = {"current_letters"}
-                                            value = {['G','H','I']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['G','H','I'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                
+                                        <RadioInput 
+                                            value={['G','H','I']}
+                                            selected={selected}
+                                            text="GHI"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="GHI">GHI</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"JKL"}
-                                            name = {"current_letters"}
-                                            value = {['J','K','L']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['J','K','L'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                           
+                                        <RadioInput 
+                                            value={['J','K','L']}
+                                            selected={selected}
+                                            text="JKL"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="JKL">JKL</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"MNO"}
-                                            name = {"current_letters"}
-                                            value = {['M','N','O']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['M','N','O'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                      
+                                        <RadioInput 
+                                            value={['M','N','O']}
+                                            selected={selected}
+                                            text="MNO"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="MNO">MNO</label>
                                     </div>
                                 </div>
                                 <div style={{margin:'5px 10px'}}>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"PQR"}
-                                            name = {"current_letters"}
-                                            value = {['P','Q','R']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['P','Q','R'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                  
+                                        <RadioInput 
+                                            value={['P','Q','R']}
+                                            selected={selected}
+                                            text="PQR"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="PQR">PQR</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"STU"}
-                                            name = {"current_letters"}
-                                            value = {['S','T','U']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['S','T','U'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                   
+                                        <RadioInput 
+                                            value={['S','T','U']}
+                                            selected={selected}
+                                            text="STU"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="STU">STU</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"VWX"}
-                                            name = {"current_letters"}
-                                            value = {['V','W','X']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['V','W','X'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                   
+                                        <RadioInput 
+                                            value={['V','W','X']}
+                                            selected={selected}
+                                            text="VWX"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="VWX">VWX</label>
                                     </div>
                                     <div style={{display:'flex'}}>
-                                        <Input 
-                                            type = {"radio"}
-                                            id = {"YZ"}
-                                            name = {"current_letters"}
-                                            value = {['Y','Z']}
-                                            checked={Object.values(currentLetters)[0]=== Object.values(['Y','Z'])[0]}
-                                            handleChange={handleChange}
-                                            style={{width:'unset', height: 'unset'}}
+                                        
+                                        <RadioInput 
+                                            value={['Y','Z']}
+                                            selected={selected}
+                                            text="YZ"
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val)} }
                                         />
-                                        <label for="YZ">YZ</label>
                                     </div>
                                 </div>
                             </div>
