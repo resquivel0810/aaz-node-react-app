@@ -162,12 +162,12 @@ export default function Dictionary(props) {
             // setMeaning([])
             // props.history.push('/dictionary/0')
             if(json.data.length > 0 && searched !== '') {
-                setCurrentLetter(json.data[0].attributes.title.charAt(0))
+                setCurrentLetter(json.data[0].attributes.title.charAt(0).toUpperCase())
                 setSearched('')
 
             } 
             else if(json.data.length > 0 && searched === '') {
-                setCurrentLetter(json.data[0].attributes.title.charAt(0))
+                setCurrentLetter(json.data[0].attributes.title.charAt(0).toUpperCase())
             }
             else if (json.data.length === 0) {
                 setCurrentLetter('')
@@ -227,17 +227,17 @@ export default function Dictionary(props) {
         
     })
 
-    const handleSearchChange = e => {
-        const  value  = e.target.value;
-        setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
-        // setCurrentLetter(null)
-    };
+    // const handleSearchChange = e => {
+    //     const  value  = e.target.value;
+    //     setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
+    //     // setCurrentLetter(null)
+    // };
 
-    const handleChange = e => {
-        const  value  = e.target.value;
-        setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
-        // setCurrentLetter(null)
-    };
+    // const handleChange = e => {
+    //     const  value  = e.target.value;
+    //     setCurrentLetters([value.charAt(0), value.charAt(2), value.charAt(4)]);
+    //     // setCurrentLetter(null)
+    // };
 
     const changeDisplayedLetters = () => {
         setDisplayedLetters(!displayedLetters)
@@ -300,7 +300,7 @@ export default function Dictionary(props) {
 
         return (
             <>
-            <div>
+            <div style={{fontFamily: 'Work Sans'}}>
                 <div>
                     <div style={{display:'flex', backgroundColor: '#E1E2E1', width: '250px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center'}}>
                         <div style={{display: 'flex', alignItems: 'center', backgroundColor: '#FDFDFD', padding: '0 10px',borderRadius: '10px'}}>
@@ -310,7 +310,7 @@ export default function Dictionary(props) {
                         
                         <div style={{display: 'flex'}}>
                             <button 
-                                style={{margin: '5px', borderRadius: '50%',backgroundColor: ['à', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
+                                style={{margin: '5px', borderRadius: '50%',backgroundColor: ['A', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[0]} 
                                 onClick={() => getTermsWithLetter(Object.values(currentLetters)[0])}
@@ -339,7 +339,7 @@ export default function Dictionary(props) {
                     {displayedLetters
                         ?
                         <span ref={wrapperRef}  style={{display:'block', position: 'absolute', backgroundColor: 'rgba(246,249,229,0.95)', padding: '20px 40px'}}>
-                            <div>Select to search</div>
+                            <div style={{color:'#004F3D'}}>Select to search</div>
                             <div style={{display:'flex'}}>
                                 <div style={{margin:'5px 10px'}}>
                                     <div style={{display:'flex'}}>
@@ -501,7 +501,7 @@ export default function Dictionary(props) {
                     
                    
                 }}
-                lastVisited = {link}
+                lastVisited = {localStorage.getItem('recentSearch') !== null ? localStorage.getItem('recentSearch').split(','): null}
                 getMeaning={(id) => getMeaning(id)}
                 // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
                 // mobileMeaningStyle = {mobileMeaningStyle}
@@ -615,7 +615,7 @@ export default function Dictionary(props) {
                                 }
                                 setToastVisible = {(val) => setToastVisible(val)}
                                 setClipboardTitle = {(val) => setClipboardTitle(val)}
-                                setLink = {(val) => setLink([...[val], ...link])}
+                                setLink = {(val) => {setLink([...[val], ...link]); localStorage.setItem('recentSearch',[...[val], ...link])}}
                                 setShareId = {(val1, val2) => {handleShareButton(val1, val2)}}
                                 setMobileMeaningStyle = {(val) => mobile ? setMobileMeaningStyle(val) : setMobileMeaningStyle(false)}
                                 // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}

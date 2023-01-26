@@ -101,7 +101,7 @@ export default function AppHeader2({
                                 ?  
                                 <>
                                 
-                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'350px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
+                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'370px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
 
                                     <Select  
                                         // selectedOption={language}
@@ -164,13 +164,17 @@ export default function AppHeader2({
                                         <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Recent research</div>
                                         <div>
                                             <Link 
-                                                onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} className={'link'} to={`${lastVisited.flat()[2]}`}
+                                                onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} 
+                                                className={'link'} 
+                                                to={`${lastVisited.flat()[2]}`}
                                             >
                                                 {lastVisited.flat()[3]}
                                             </Link>
                                         </div>
                                         <div>
-                                            <Link onClick={() => {getMeaning(lastVisited.flat()[4].slice(12));console.log(lastVisited.flat()[4].slice(12))}} className={'link'} to={`${lastVisited.flat()[4]}`}>{lastVisited.flat()[5]}</Link>
+                                            <Link 
+                                                onClick={() => {getMeaning(lastVisited.flat()[4].slice(12));console.log(lastVisited.flat()[4].slice(12))}} className={'link'} 
+                                                to={`${lastVisited.flat()[4]}`}>{lastVisited.flat()[5]}</Link>
                                         </div>
                                         <div>
                                             <Link onClick={() => {getMeaning(lastVisited.flat()[6].slice(12));console.log(lastVisited.flat()[6].slice(12))}} className={'link'} to={`${lastVisited.flat()[6]}`}>{lastVisited.flat()[7]}</Link>

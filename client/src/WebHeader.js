@@ -40,7 +40,7 @@ export default class WebHeader extends Component{
             registerLinkM = <NavLink to={`/registration`} exact={true} className={'nav-link'} activeClassName="active"><i className='icon-nav icon-register'></i> Register </NavLink>
         }else{
             // loginLink = <Link className={'btn ochre size-auto'} to="/" onClick={this.logout}><i className='icon-nav icon-logout'></i>  Logout</Link>
-            applink = <Link className={'nav-link'} to="/dictionary/0"><i className='icon-nav icon-goback'></i>  Go to app</Link>
+            applink = <Link className={'nav-link'} to="/dictionary/1"><i className='icon-nav icon-goback'></i>  Go to app</Link>
         }
 
         return(
