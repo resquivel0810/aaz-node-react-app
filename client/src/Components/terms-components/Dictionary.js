@@ -501,7 +501,7 @@ export default function Dictionary(props) {
                     
                    
                 }}
-                lastVisited = {localStorage.getItem('recentSearch') !== null ? localStorage.getItem('recentSearch').split(/\,\/|\,(?=[a-zA-Z])/g).concat(['', '', '']): ['', '', '']}
+                lastVisited = {localStorage.getItem('recentSearch') !== null ? localStorage.getItem('recentSearch').split(/\,\/|\,(?=[a-zA-Z])/g).concat(['', '', '', '', '', '', '', '', '', '', '']): ['', '', '']}
                 getMeaning={(id) => getMeaning(id)}
                 // setMobileMeaningStyle = {(val) => setMobileMeaningStyle(val)}
                 // mobileMeaningStyle = {mobileMeaningStyle}
