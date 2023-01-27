@@ -165,7 +165,7 @@ export default function AppHeader2({
                                         <div>
                                             <Link 
                                                 onClick={() => {
-                                                    getMeaning(lastVisited.flat()[2].slice(12));
+                                                    getMeaning(lastVisited.flat()[2].slice(11));
                                                     console.log(lastVisited.flat()[2].slice(11))
                                                 }} 
                                                 className={'link'} 
