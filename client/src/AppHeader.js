@@ -181,7 +181,7 @@ export default function AppHeader2({
                                                     console.log(lastVisited.flat()[4].slice(11))
                                                 }} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[4]}`}
+                                                to={`/dictionary/${lastVisited.flat()[4].slice(11)}`}
                                             >
                                                 {lastVisited.flat()[5]}
                                             </Link>
@@ -193,7 +193,7 @@ export default function AppHeader2({
                                                     console.log(lastVisited.flat()[6].slice(11))
                                                 }} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[6]}`}
+                                                to={`/dictionary/${lastVisited.flat()[6].slice(11)}`}
                                             >
                                                 {lastVisited.flat()[7]}
                                             </Link>
@@ -205,7 +205,7 @@ export default function AppHeader2({
                                                     console.log(lastVisited.flat()[8].slice(11))
                                                 }} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[8]}`}
+                                                to={`/dictionary/${lastVisited.flat()[8].slice(11)}`}
                                             >
                                                 {lastVisited.flat()[9]}
                                             </Link>
@@ -217,7 +217,7 @@ export default function AppHeader2({
                                                     console.log(lastVisited.flat()[10].slice(11))
                                                 }} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[10]}`}
+                                                to={`/dictionary/${lastVisited.flat()[10].slice(11)}`}
                                             >
                                                 {lastVisited.flat()[11]}
                                             </Link>
