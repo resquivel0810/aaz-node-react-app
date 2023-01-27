@@ -166,7 +166,7 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[2]}`}
+                                                to={`${lastVisited.flat()[2].slice(12)}`}
                                             >
                                                 {lastVisited.flat()[3]}
                                             </Link>
