@@ -164,14 +164,17 @@ export default function AppHeader2({
                                         <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Recent research</div>
                                         <div>
                                             <Link 
-                                                onClick={() => {getMeaning(lastVisited.flat()[2].slice(12));console.log(lastVisited.flat()[2].slice(12))}} 
+                                                onClick={() => {
+                                                    getMeaning(lastVisited.flat()[2].slice(12));
+                                                    console.log(lastVisited.flat()[2].slice(11))
+                                                }} 
                                                 className={'link'} 
-                                                to={`${lastVisited.flat()[2].slice(12)}`}
+                                                to={`/dictionary/${lastVisited.flat()[2].slice(11)}`}
                                             >
                                                 {lastVisited.flat()[3]}
                                             </Link>
                                         </div>
-                                        <div>
+                                        {/* <div>
                                             <Link 
                                                 onClick={() => {getMeaning(lastVisited.flat()[4].slice(12));console.log(lastVisited.flat()[4].slice(12))}} className={'link'} 
                                                 to={`${lastVisited.flat()[4]}`}>{lastVisited.flat()[5]}</Link>
@@ -184,7 +187,7 @@ export default function AppHeader2({
                                         </div>
                                         <div>
                                             <Link onClick={() => {getMeaning(lastVisited.flat()[10].slice(12));console.log(lastVisited.flat()[10].slice(12))}} className={'link'} to={`${lastVisited.flat()[10]}`}>{lastVisited.flat()[11]}</Link>
-                                        </div>
+                                        </div> */}
         
                                 
                                     </div>
