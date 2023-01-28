@@ -42,7 +42,7 @@ export default function Dictionary(props) {
     // const [error, setError] = useState(null);
     const [currentSearch, setCurrentSearch] = useState('')
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
-    const [currentLetter, setCurrentLetter] = useState()
+    const [currentLetter, setCurrentLetter] = useState('A')
     const [displayedLetters, setDisplayedLetters] = useState(false)
     const [displayedSearchBarOptions, setDisplayedSearchBarOptions] = useState(false)
     const [meaning, setMeaning] = useState([])
@@ -464,7 +464,7 @@ export default function Dictionary(props) {
 
     
     return(
-        <>
+        <div className={classes.container}>
             <Toast
                 toastList={toastProperties}
                 position="top-right" 
@@ -698,7 +698,7 @@ export default function Dictionary(props) {
 
 
             <AppFooter />
-        </>
+        </div>
     );
 
 }
