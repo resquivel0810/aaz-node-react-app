@@ -130,7 +130,7 @@ export default function Dictionary(props) {
 
     const getTermsWithLanguage = (lan) => {
         setIsLoadingTerms(true)
-        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lan}`, { 
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lan}&filters[title][$startsWith]=${currentLetter}` , { 
             headers, method: 'GET' 
         })
           .then(checkStatus)
