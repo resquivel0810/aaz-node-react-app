@@ -101,7 +101,7 @@ export default function Meaning({
                             
                             <div>
                                 {/* {console.log(meaningTranslation)} */}
-                                <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'60%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px', height: '35px', alignItems: 'center'}}>
+                                <div style={{display: 'flex', backgroundColor:'#FDFDFD', width:'70%', justifyContent: 'space-evenly', margin: 'auto',borderRadius: '15px', height: '35px', alignItems: 'center'}}>
                                  
                                     {(() => {
                                         if (searchLanguage === 'de') {

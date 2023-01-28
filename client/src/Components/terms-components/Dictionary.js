@@ -508,6 +508,7 @@ export default function Dictionary(props) {
                 mobile = {mobile}
                 setLink = {(val) => setLink([...[val], ...link])}
                 language={searchLanguage}
+                setTermVisible={(val) => {setSearched(val); getTermsWithLetter(val)}}
 
             />
             <div className={classes.dictionary}>

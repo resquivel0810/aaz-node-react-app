@@ -39,7 +39,8 @@ export default function AppHeader2({
     setCurrentSearch = f => f,
     setLink= f =>f,
     language,
-    setLanguage = f => f
+    setLanguage = f => f,
+    setTermVisible = f => f
 }) {
     
     // const [language, setLanguage] = useState('German')
@@ -140,12 +141,14 @@ export default function AppHeader2({
                                         {predictedTerms.map(t => (
                                             
                                             <div>
-                                                {console.log(t.attributes.title)}
+                                                
                                                 <Link 
                                                     // id={t.id} 
                                                     onClick={() => {
                                                         getMeaning(t.id); 
-                                                        setLink([`/dictionary/${t.id}`, t.attributes.title]); 
+                                                        setLink([`/dictionary/${t.id}`, t.attributes.title]);
+                                                        // console.log(t.attributes.title.slice(0, 2)) 
+                                                        setTermVisible(t.attributes.title.slice(0, 2))
                                                     }} 
                                                     className={'link'} 
                                                     to={`/dictionary/${t.id}`} 
