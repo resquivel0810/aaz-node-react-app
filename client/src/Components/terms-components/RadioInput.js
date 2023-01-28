@@ -7,7 +7,7 @@ export default function RadioInput({selected, onChange = f=> f, text, value}) {
         <>
             <div
                 className={classes.modernRadioContainer}
-                onClick={() => {onChange(value); console.log(typeof(value) , typeof(selected),Object.values(value)[0] === Object.values(selected)[0])}}
+                onClick={() => {onChange(value); console.log(value , typeof(selected),Object.values(value)[0] === Object.values(selected)[0])}}
             >
                 <div
                     className={`${classes.radioOuterCircle } ${Object.values(value)[0] !== Object.values(selected)[0] && classes.unselected }`}

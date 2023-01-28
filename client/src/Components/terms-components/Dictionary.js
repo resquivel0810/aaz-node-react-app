@@ -509,6 +509,7 @@ export default function Dictionary(props) {
                 setLink = {(val) => setLink([...[val], ...link])}
                 language={searchLanguage}
                 setTermVisible={(val) => {setSearched(val); getTermsWithLetter(val)}}
+                setCurrentLetters={(val) => setCurrentLetters(val)}
 
             />
             <div className={classes.dictionary}>
@@ -516,7 +517,7 @@ export default function Dictionary(props) {
                   
                     <div  style={{display: mobileMeaningStyle ? 'none' : 'block', flex:'1', marginRight:'1vw'}}  >
                         <div className={classes.searchParams}>
-                            {(() => {
+                            {/* {(() => {
                                 if (currentLetter !== undefined && searched === '') {
                                 return (
                                     <h3 style={{margin: '0'}}>All terms with {currentLetter}</h3>
@@ -527,10 +528,11 @@ export default function Dictionary(props) {
                                 )
                                 } else {
                                 return (
-                                    <h3 style={{margin: '0'}}>All terms</h3>
+                                    <h3 style={{margin: '0'}}>Terms</h3>
                                 )
                                 }
-                            })()}
+                            })()} */}
+                            <h3 style={{margin: '0'}}>Terms</h3>
                             <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {

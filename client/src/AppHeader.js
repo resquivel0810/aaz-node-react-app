@@ -40,10 +40,15 @@ export default function AppHeader2({
     setLink= f =>f,
     language,
     setLanguage = f => f,
-    setTermVisible = f => f
+    setTermVisible = f => f,
+    setCurrentLetters = f => f
 }) {
     
-    // const [language, setLanguage] = useState('German')
+    
+   
+
+
+
     let id = window.localStorage.getItem("id")
     return (
         <>
@@ -147,8 +152,34 @@ export default function AppHeader2({
                                                     onClick={() => {
                                                         getMeaning(t.id); 
                                                         setLink([`/dictionary/${t.id}`, t.attributes.title]);
-                                                        // console.log(t.attributes.title.slice(0, 2)) 
-                                                        setTermVisible(t.attributes.title.slice(0, 2))
+                                                        // console.log(t.attributes.title.slice(0, 1)) ;
+                                                        setTermVisible(t.attributes.title.slice(0, 4));
+                                                        currentLetter = t.attributes.title.slice(0, 1).toUpperCase() ;
+                                                        console.log(currentLetter)
+                                                        let currentLetters, currentLetter;
+                                                        if (currentLetter === 'A' || currentLetter==='B' || currentLetter==='C'){
+                                                            currentLetters = ["A", "B", "C"]
+                                                        } else if (currentLetter === 'D' || currentLetter==='E' || currentLetter==='F') {
+                                                            currentLetters = ["D", "E", "F"]
+                                                        } else if (currentLetter === 'G' ||  currentLetter==='H' ||  currentLetter==='I') {
+                                                            currentLetters = ["G", "H", "I"]
+                                                        }else if (currentLetter === 'J' ||  currentLetter==='K' ||  currentLetter==='L') {
+                                                            currentLetters = ["J", "K", "L"]
+                                                        }else if (currentLetter === 'M' ||  currentLetter==='N' ||  currentLetter==='O') {
+                                                            currentLetters = ["M", "N", "O"]
+                                                        }else if (currentLetter === 'P' ||  currentLetter==='Q' ||  currentLetter==='R') {
+                                                            currentLetters = ["P", "Q", "R"]
+                                                        }else if (currentLetter === 'S' ||  currentLetter==='T' ||  currentLetter==='U') {
+                                                            currentLetters = ["S", "T", "U"]
+                                                        }else if (currentLetter === 'V' ||  currentLetter==='W' ||  currentLetter==='X') {
+                                                            currentLetters = ["V", "W", "X"]
+                                                        }else if (currentLetter === 'Y' ||  currentLetter==='Z') {
+                                                            currentLetters = ["Y", "Z"]
+                                                        }
+                                                        setCurrentLetters(currentLetters)
+
+
+                                                        
                                                     }} 
                                                     className={'link'} 
                                                     to={`/dictionary/${t.id}`} 
