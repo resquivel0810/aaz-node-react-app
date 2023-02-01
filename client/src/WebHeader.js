@@ -44,13 +44,13 @@ export default class WebHeader extends Component{
         }
 
         return(
-            <header>
+            <header style={{height:'10vh'}}>
                 <nav className="navbar navbar-dark navbar-expand-lg navbar-primary fixed-top">
                     <Link
                         to={`/`}
                         className={'navbar-brand'}
                     >
-                        <svg style={{margin: '0 50px'}} width={'200px'} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 22">
+                        <svg style={{margin: window.innerWidth > 600 ? '0 50px': '0 15px'}}  width={window.innerWidth > 600 ? "200" : "120"} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 22">
                             <g>
                                 <path style={{fill: '#fff'}} d="M31.54,19.31h-1.97l-.38,1.18h-1.19l2.03-5.71h1.04l2.04,5.71h-1.19l-.38-1.18Zm-1.67-.95h1.36l-.69-2.14-.68,2.14Z"/>
                                 <path style={{fill: '#fff'}} d="M35.81,18.5h-2.11v-.91h2.11v.91Z"/>

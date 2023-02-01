@@ -127,24 +127,24 @@ export default class App extends Component{
             <WebFooter />
           </Route>
 
-          <Route path='/abouttheapp'>
+          <Route exact path='/abouttheapp'>
             <WebHeader />
             <AboutAppPage />
             <WebFooter />
           </Route>
-          <Route path='/aboutthebook'>
+          <Route exact path='/aboutthebook'>
             <WebHeader />
             <AboutBookPage />
             <WebFooter />
           </Route>
 
-          <Route path='/abouttheauthor'>
+          <Route exact path='/abouttheauthor'>
             <WebHeader />
             <AboutAuthorPage />
             <WebFooter />
           </Route>
 
-          <Route path='/imprint'>
+          <Route exact path='/imprint'>
             <WebHeader />
             <ImprintPage />
             <WebFooter />
