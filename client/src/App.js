@@ -70,18 +70,9 @@ export default class App extends Component{
       <Router>
         <Switch>
           {/* APP */}
-          <Route path='/dictionary/:id' component={Dictionary}>
-            {/* <Dictionary /> */}
-          </Route>
-          {/* <Route path='/term'>
-            <Term />
-          </Route> */}
-          {/* <Route path="/dictionary/:id" component={Dictionary}></Route> */}
-          {/* <Route path='/profile'>
-            <AppHeader />
-            <Profile />
-            <AppFooter />
-          </Route> */}
+          <Route path='/dictionary/:id' component={Dictionary} />
+         
+      
           <Route path="/profile/:id" component={Profile}>
           </Route>
 
@@ -160,12 +151,13 @@ export default class App extends Component{
           </Route>
 
           
-          <Route path='/'>
+          <Route exact path='/'>
             <WebHeader />
             <HomePage />
             <WebFooter />
           </Route>
-          <Route path="*" >
+
+          <Route path="*">
             <WebHeader />
             <NotFoundPage />
             <WebFooter />
