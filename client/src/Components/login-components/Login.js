@@ -1,14 +1,13 @@
-import React, {Component, Fragment, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 
 import Button from '../form-components/Button';
 import Input from "../form-components/Input";
-// import Alert from "../ui-components/Alert";
+
 import WebHeader from "../../WebHeader";
 import WebFooter from "../../WebFooter";
-// import Alert from './ui-login-components/Alert';
 
-// import GoogleLoginComponent from './ui-login-components/GoogleLoginComponent';
+
 
 import backgroundImage from '../../Images/AAZ-DesktopBackNude.png';
 import loginImage from '../../Images/Login_Desktop.png';
@@ -18,6 +17,58 @@ export default function Login(props) {
         pwd: '',
         txt: ''
     })
+    const [enteredUserTouched, setEnteredUserTouched] = useState(false);
+    const [enteredPwdTouched, setEnteredPwdTouched] = useState(false);
+
+    const initError = {
+        exists: false,
+        helperText: null,
+    };
+
+    const [userError, setUserError] = useState(initError);
+    const [pwdError, setPwdError] = useState(initError);
+    const [passwordShown, setPasswordShown] = useState(false);
+
+    useEffect(() => {
+        if (!credentials.txt && enteredUserTouched) {
+            setUserError({
+              exists: true,
+              helperText: "Write username or Email",
+            });
+        } else {
+            setUserError({
+              exists: false,
+              helperText: null,
+            });
+        }
+        if (!credentials.pwd && enteredPwdTouched) {
+            setPwdError({
+              exists: true,
+              helperText: "Write your password",
+            });
+        } else {
+            setPwdError({
+              exists: false,
+              helperText: null,
+            });
+        }
+    }, [credentials, enteredUserTouched, enteredPwdTouched])
+
+    const userIsValid = !userError.exists && enteredUserTouched;
+    const pwdIsValid = !pwdError.exists && enteredPwdTouched;
+
+    const togglePasswordVisiblity = () => {
+        setPasswordShown(passwordShown ? false : true);
+    };
+
+    const userBlurHandler = (e) => {
+        setEnteredUserTouched(true);
+    };
+
+    const pwdBlurHandler = (e) => {
+        setEnteredPwdTouched(true);
+    };
+
     const handleChange = (evt) => {
         let value = evt.target.value;
         let name = evt.target.name;
@@ -28,6 +79,16 @@ export default function Login(props) {
     }
     const handleSubmit = (evt) => {
         evt.preventDefault();
+        setEnteredUserTouched(true);
+        setEnteredPwdTouched(true);
+
+
+        if (!userIsValid) {
+            return;
+        }
+        if (!pwdIsValid) {
+            return;
+        }
 
         const requestOptions = {
             method: "POST",
@@ -39,8 +100,16 @@ export default function Login(props) {
             .then((response) => response.json())
             .then((data) => {
                 if (data.user.id === 0 && data.user.confirmed === 0) {
-                    console.log("NO ACCESS")
-                    
+                    setUserError({
+                        exists: true,
+                        helperText: "Wrong user or password",
+                    });
+                    setPwdError({
+                        exists: true,
+                        helperText: "Wrong user or password",
+                    });
+                    setEnteredUserTouched(true);
+                    setEnteredPwdTouched(true);
                     return false;
                 }
                 else{
@@ -65,10 +134,7 @@ export default function Login(props) {
                 <div className='bg_login'>   
                     <div className='container position-relative'>
                         <div className='login_box'>
-                            {/* <Alert 
-                                alertType = { this.state.alert.type }
-                                alertMessage = { this.state.alert.message }
-                            /> */}
+                      
                             <div className='row'>
                                 <div className='col-12 col-lg-2 align-self-center'>
                                     <img src={loginImage} alt="" className="img-login" />
@@ -86,23 +152,27 @@ export default function Login(props) {
                                                     placeholder = {"User name / E-mail"}
                                                     value={credentials.txt}
                                                     handleChange={handleChange}
-                                                    // className={this.hasError("email") ? "is-invalid": ""}
-                                                    // errorDiv = {this.hasError("email") ? "text-danger" : "d-none"}
-                                                    // errorMsg = {"Please enter a valid email address"}
+                                                    handleBlur={userBlurHandler}
+                                                    className={userError.exists ? "is-invalid": ""}
+                                                    errorDiv = {userError.exists ? "text-danger" : "d-none"}
+                                                    errorMsg = {userError.helperText}
                                                 />
                                             </div>
-                                            <div className='mb-4'>
+                                            <div style={{position:'relative'}} className='mb-4'>
                                                 <Input 
                                                     title = {"password"}
-                                                    type = {"password"}
+                                                    // type = {"password"}
                                                     name = {"pwd"}
                                                     placeholder = {"Password"}
                                                     value={credentials.pwd}
                                                     handleChange={handleChange}
-                                                    // className={this.hasError("password") ? "is-invalid": ""}
-                                                    // errorDiv = {this.hasError("password") ? "text-danger" : "d-none"}
-                                                    // errorMsg = {"Please enter a valid password"}
+                                                    handleBlur={pwdBlurHandler}
+                                                    className={pwdError.exists ? "is-invalid": ""}
+                                                    errorDiv = {pwdError.exists ? "text-danger" : "d-none"}
+                                                    errorMsg = {pwdError.helperText}
+                                                    type={passwordShown ? "text" : "password"}
                                                 />
+                                                <i style={{position: 'absolute', top:'8px', right:'15px', cursor:'pointer'}} onClick={togglePasswordVisiblity}>{EyeLogo()}</i>
                                             </div>
                                     
                                             <div className='mb-4'>
@@ -166,5 +236,15 @@ export default function Login(props) {
                 <WebFooter />
             </>
         );
-    }
+}
+const EyeLogo = () => {
+    return(
+      <svg width="23" height="16" viewBox="0 0 23 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M11.0125 15.75C5.94249 15.75 1.5325 12.65 0.0225 8.02997C-0.0075 7.92997 -0.0075 7.81997 0.0225 7.71997C1.5325 3.09997 5.94249 0 11.0125 0C16.0825 0 20.4925 3.09997 22.0025 7.71997C22.0325 7.81997 22.0325 7.92997 22.0025 8.02997C20.4925 12.65 16.0825 15.75 11.0125 15.75ZM1.0225 7.87C2.4425 11.99 6.43249 14.75 11.0125 14.75C15.5925 14.75 19.5825 11.99 21.0025 7.87C19.5825 3.75 15.5925 0.98999 11.0125 0.98999C6.43249 0.98999 2.4425 3.75 1.0225 7.87Z" fill="#B66A00"/>
+        <path d="M11.0125 12.7999C8.30251 12.7999 6.09253 10.5899 6.09253 7.87994C6.09253 7.59994 6.31253 7.37994 6.59253 7.37994C6.87253 7.37994 7.09253 7.59994 7.09253 7.87994C7.09253 10.0399 8.85251 11.7999 11.0125 11.7999C13.1725 11.7999 14.9326 10.0399 14.9326 7.87994C14.9326 5.71994 13.1725 3.95996 11.0125 3.95996C10.7325 3.95996 10.5125 3.73996 10.5125 3.45996C10.5125 3.17996 10.7325 2.95996 11.0125 2.95996C13.7225 2.95996 15.9326 5.16994 15.9326 7.87994C15.9326 10.5899 13.7225 12.7999 11.0125 12.7999Z" fill="#B66A00"/>
+      </svg>
+    )
+}
+
+
 

@@ -404,11 +404,16 @@ h3{
 }
 
 /* ALERTS */
+
 .text-danger{
   font-family: 'Roboto', sans-serif;
   font-size: 0.75rem;
   font-weight: 400;
   color: #F33757;
+/*   
+  -webkit-transition: all .5s ease;
+  -moz-transition: all .5s ease;
+  transition: all .5s ease; */
 }
 .is-invalid{
   border: 1px solid #F33757;

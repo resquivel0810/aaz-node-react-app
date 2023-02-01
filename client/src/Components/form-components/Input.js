@@ -14,11 +14,12 @@ const Input = (props) => {
                 value={props.value}
                 onChange={props.handleChange}
                 onKeyDown={props.handleKeyDown}
+                onBlur={props.handleBlur}
                 placeholder={props.placeholder}
                 disabled={props.disabled}
                 autoFocus={props.autoFocus}
                 style={props.style}
-                required
+                // required
                 checked={props.checked}
                 data-checked={props.checked}
                 
