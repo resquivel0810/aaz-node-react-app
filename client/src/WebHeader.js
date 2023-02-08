@@ -27,11 +27,12 @@ export default function WebHeader2(props) {
     // toggle burger menu change
     const updateMenu = () => {
         if(!navbarOpen) {
-            // setBurgerClass("burger-bar clicked")
+            
             setMenuClass("visible")
+            
         }
         else {
-            // setBurgerClass("burger-bar unclicked")
+            
             setMenuClass("hidden")
         }
         setNavbarOpen(!navbarOpen)
@@ -56,7 +57,7 @@ export default function WebHeader2(props) {
           function handleClickOutside(event) {
             if (ref.current && !ref.current.contains(event.target) ) {
                 setNavbarOpen(false)
-                // setDisplayedSearchBarOptions(false)
+                setMenuClass("hidden")
 
             }
           
@@ -84,7 +85,7 @@ export default function WebHeader2(props) {
                 null
             }
             
-            <nav className={classes.navbar}>
+            <nav ref={wrapperRef} className={classes.navbar}>
                 <Link
                     to={`/`}
                     style={{display:'flex'}}
@@ -136,7 +137,7 @@ export default function WebHeader2(props) {
                             
                         }} 
                         className={`${classes.navbarLinks} ${navbarOpen ? classes.visible: classes.hidden}`}
-                        ref={wrapperRef}
+                        
                     >
                             <div>
                                 <NavLink 

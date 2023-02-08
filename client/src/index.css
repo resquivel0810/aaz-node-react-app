@@ -1431,13 +1431,13 @@ div.registration_box img{
 .fade-center-top{
   animation: fade-bottom 1s ease-in;
 }
-.active.fade-bottom {
+.active.fade-bottom, .fade-bottom {
   animation: fade-bottom 1s ease-in;
 }
-.active.fade-left {
+.active.fade-left, .fade-left {
   animation: fade-left 1s ease-in;
 }
-.active.fade-right {
+.active.fade-right, .fade-right {
   animation: fade-right 1s ease-in;
 }
 

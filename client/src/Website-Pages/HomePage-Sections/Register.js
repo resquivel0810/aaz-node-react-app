@@ -17,7 +17,7 @@ export default class Register extends Component{
                         </div>
                         <div className='center-grid py-4'>
                             <Link
-                                to={`/login`}
+                                to={`/registration`}
                                 className={'btn ochre'}
                             >
                                 Register

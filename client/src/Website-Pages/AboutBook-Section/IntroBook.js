@@ -9,10 +9,10 @@ export default class IntroBook extends Component{
                         <div className='fade-center-top'>
                             <h1 className='text-center py-4'>The Book</h1>
                         </div>
-                        <div className='py-4 reveal fade-bottom'>
+                        <div className='py-4 fade-bottom'>
                             <img src={book} alt="" className="img_book_intro_AB" />
                         </div>
-                        <div className='py-4 reveal fade-bottom'>
+                        <div className='py-4 fade-bottom'>
                             <a 
                                 href='https://www.schellenberg-consulting.com/' 
                                 target='_blank'
