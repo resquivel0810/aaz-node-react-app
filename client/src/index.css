@@ -744,6 +744,7 @@ input:hover {
 
 .nav-link{
   padding-bottom: 0.5rem;
+  font-weight: 600;
 }
 
 .navbar-dark .navbar-toggler{
@@ -768,10 +769,10 @@ input:hover {
   flex-direction: initial;
 }
 
-/* .nav-link.active,
+.nav-link.active,
 .nav-link.active .icon-nav{
   color: #DDE295 !important;
-} */
+}
 
 .nav-link:hover > .icon-nav,
 .nav-link:hover

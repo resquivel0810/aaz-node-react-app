@@ -23,6 +23,18 @@
 
 @media screen and (max-width: 991px) {
 
+    .navbar {
+        display: flex;
+        justify-content: flex-start;
+        background-color: #068b77;
+        height: inherit;
+        width: 100vw;
+        position: fixed;
+        top: 0;
+        z-index: 100;
+        box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+    }
+
     .navbarLinks {
         position: absolute;
         display: block;
@@ -45,6 +57,34 @@
     .visible {
         transition: all .1s linear;
         left: 0;
+    }
+
+    .burgerButton {
+        width: 40px;
+        height: 40px;
+        border-radius: 0;
+        background-color: #068b77;
+        display: block;
+        line-height: 40px;
+        text-align: center;
+        position: fixed;
+        right: 5vw;
+        top: 25px;
+        z-index: 11;
+        color: white;
+        cursor: pointer;
+    }
+
+    .bar {
+        width: 25px;
+        height: 3px;
+        background-color: #fff;
+        margin: 6px 0;
+        /* transition: 0.2s; */
+        position: relative;
+        top: 3px;
+        left: 7px;
+        border-radius: 3px;
     }
 
     

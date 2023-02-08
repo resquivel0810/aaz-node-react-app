@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
@@ -45,12 +45,34 @@ export default function WebHeader2(props) {
         registerLinkM = <NavLink to={`/registration`} exact={true} className={'nav-link'} activeClassName="active"><i className='icon-nav icon-register'></i> Register </NavLink>
     }else{
         // loginLink = <Link className={'btn ochre size-auto'} to="/" onClick={this.logout}><i className='icon-nav icon-logout'></i>  Logout</Link>
-        applink = <Link  style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}} className={'nav-link'} to="/dictionary/1"><i className='icon-nav icon-goback'></i>  Go to app</Link>
+        applink = <Link  style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}} className={'nav-link'} to="/dictionary/1"><i className='icon-nav icon-goback'></i>  Go to app</Link>
     }
 
-    // const navbar = () => {
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+         
+           // Alert if clicked on outside of element
+         
+          function handleClickOutside(event) {
+            if (ref.current && !ref.current.contains(event.target) ) {
+                setNavbarOpen(false)
+                // setDisplayedSearchBarOptions(false)
 
-    // }
+            }
+          
+          }
+          // Bind the event listener
+          document.addEventListener("mousedown", handleClickOutside);
+          return () => {
+            // Unbind the event listener on clean up
+            document.removeEventListener("mousedown", handleClickOutside);
+          };
+        }, [ref]);
+    }
+
+    const wrapperRef= useRef(null);
+    
+    useOutsideAlerter(wrapperRef);
 
     return(
         <header style={{height:'10vh'}}>
@@ -67,7 +89,7 @@ export default function WebHeader2(props) {
                     to={`/`}
                     style={{display:'flex'}}
                 >
-                    <svg style={{margin: window.innerWidth > 600 ? '0 50px': '0 15px'}}  width={window.innerWidth > 600 ? "200" : "120"} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 22">
+                    <svg style={{margin: window.innerWidth > 600 ? '0 50px': '0 10px'}}  width={window.innerWidth > 600 ? "200" : "120"} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 22">
                         <g>
                             <path style={{fill: '#fff'}} d="M31.54,19.31h-1.97l-.38,1.18h-1.19l2.03-5.71h1.04l2.04,5.71h-1.19l-.38-1.18Zm-1.67-.95h1.36l-.69-2.14-.68,2.14Z"/>
                             <path style={{fill: '#fff'}} d="M35.81,18.5h-2.11v-.91h2.11v.91Z"/>
@@ -93,9 +115,13 @@ export default function WebHeader2(props) {
                 {
                     window.innerWidth < 991
                     ?
-                    <button onClick={updateMenu} style={{backgroundColor:'antiquewhite'}} className="navbar-toggler" type="button" >
-                        hamburger
-                    </button>
+                    
+                        <div onClick={updateMenu} className={classes.burgerButton}>
+                            <div className={classes.bar}></div>
+                            <div className={classes.bar}></div>
+                            <div className={classes.bar}></div>
+                        </div>
+                
                     :
                     null
                 }
@@ -106,11 +132,11 @@ export default function WebHeader2(props) {
                             width: jwt === "" && window.innerWidth > 991 ? '900px'
                                     : window.innerWidth < 991 ? '230px'
                                     : jwt === "" && window.innerWidth < 991 ? '230px'
-                                    : '800px'
+                                    : '830px'
                             
                         }} 
                         className={`${classes.navbarLinks} ${navbarOpen ? classes.visible: classes.hidden}`}
-                    
+                        ref={wrapperRef}
                     >
                             <div>
                                 <NavLink 
