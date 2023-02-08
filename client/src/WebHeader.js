@@ -103,7 +103,7 @@ export default function WebHeader2(props) {
                
                     <div 
                         style={{ 
-                            width: jwt === "" ? '900px' : window.innerWidth < 991 ? '230px' : '750px'
+                            width: jwt === "" ? window.innerWidth < 991 ? '230px' : window.innerWidth < 991 ? '230px' : '900px' : ''
                         }} 
                         className={`${classes.navbarLinks} ${navbarOpen ? classes.visible: classes.hidden}`}
                     
@@ -159,17 +159,38 @@ export default function WebHeader2(props) {
                             <div>
                                 {applink}
                             </div>
-                            <div className={classes.navbarButtons}>
-                                {loginLink}
-                            </div>
-                            <div className={classes.navbarButtons}>
-                                {registerLink}
-                            </div>
+
+                            {
+                                window.innerWidth < 991 && jwt === ""
+                                ?
+                                <div>
+                                    <NavLink
+                                        to={`/login`}
+                                        exact={true}
+                                        className={'nav-link'}
+                                        activeClassName="active"
+                                        style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                    >
+                                        <i className='icon-nav icon-signin'></i>
+                                        Login
+                                    </NavLink>
+                                </div>
+                                :
+                                <>
+                                    <div className={classes.navbarButtons}>
+                                        {loginLink}
+                                    </div>
+                                    <div className={classes.navbarButtons}>
+                                        {registerLink}
+                                    </div>
+                                </>
+                            }
+                            
 
                             {/* RESPONSIVE */}
-                            <div className="nav-item d-flex align-items-center d-md-block d-lg-none">
+                            {/* <div className="nav-item d-flex align-items-center d-md-block d-lg-none">
                                 {registerLinkM}
-                            </div>
+                            </div> */}
                  
                     </div>
            
