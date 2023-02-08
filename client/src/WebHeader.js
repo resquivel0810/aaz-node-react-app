@@ -103,7 +103,11 @@ export default function WebHeader2(props) {
                
                     <div 
                         style={{ 
-                            width: jwt === "" ? window.innerWidth < 991 ? '230px' : window.innerWidth < 991 ? '230px' : '900px' : '800px'
+                            width: jwt === "" && window.innerWidth > 991 ? '900px'
+                                    : window.innerWidth < 991 ? '230px'
+                                    : jwt === "" && window.innerWidth < 991 ? '230px'
+                                    : '800px'
+                            
                         }} 
                         className={`${classes.navbarLinks} ${navbarOpen ? classes.visible: classes.hidden}`}
                     
