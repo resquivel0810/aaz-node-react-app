@@ -776,11 +776,11 @@ input:hover {
 .nav-link:hover > .icon-nav,
 .nav-link:hover
 {
-  color: #F3BF4C !important;
+  color: #DDE295!important;
 }
 
 .nav-link.active{
-  border-bottom: 3px rgb(182, 106, 0) solid;
+  border-bottom: 3px #DDE295 solid;
 }
 
 .fixed-bottom{
@@ -1217,7 +1217,7 @@ div.registration_box img{
 
   /* NAVBAR */
   .nav-link.active{
-    width: 90%;
+    border-bottom: 0px #DDE295 solid;
   }
   .nav-web .nav-link,
   .nav-web .nav-link .icon-nav{
@@ -1232,7 +1232,7 @@ div.registration_box img{
 
   .nav-web .nav-link.active,
   .nav-web .nav-link.active .icon-nav{
-    color: #B66A00 !important;
+    color: #DDE295 !important;
     font-weight: 500;
   }
 

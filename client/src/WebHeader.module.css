@@ -39,7 +39,7 @@
     /* ------------- sliding menu ------------------ */
     .hidden {
         transition: all .1s linear;
-        left: -230px;
+        left: -235px;
     }
 
     .visible {

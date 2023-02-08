@@ -103,7 +103,7 @@ export default function WebHeader2(props) {
                
                     <div 
                         style={{ 
-                            width: jwt === "" ? window.innerWidth < 991 ? '230px' : window.innerWidth < 991 ? '230px' : '900px' : ''
+                            width: jwt === "" ? window.innerWidth < 991 ? '230px' : window.innerWidth < 991 ? '230px' : '900px' : '800px'
                         }} 
                         className={`${classes.navbarLinks} ${navbarOpen ? classes.visible: classes.hidden}`}
                     
@@ -114,7 +114,7 @@ export default function WebHeader2(props) {
                                     exact={true}
                                     className={'nav-link'}
                                     activeClassName="active"
-                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
                                 >
                                     <i className='icon-nav icon-home'></i>
                                     Home
@@ -126,7 +126,7 @@ export default function WebHeader2(props) {
                                     exact={true}
                                     className={'nav-link'}
                                     activeClassName="active"
-                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
                                 >
                                     <i className='icon-nav icon-app'></i>
                                     About the app
@@ -138,7 +138,7 @@ export default function WebHeader2(props) {
                                     exact={true}
                                     className={'nav-link'}
                                     activeClassName="active"
-                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
                                 >
                                     <i className='icon-nav icon-book'></i>
                                     About the book
@@ -150,7 +150,7 @@ export default function WebHeader2(props) {
                                     exact={true}
                                     className={'nav-link'}
                                     activeClassName="active"
-                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                    style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
                                 >
                                     <i className='icon-nav icon-author'></i>
                                     About the author
@@ -169,7 +169,7 @@ export default function WebHeader2(props) {
                                         exact={true}
                                         className={'nav-link'}
                                         activeClassName="active"
-                                        style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD'}}
+                                        style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
                                     >
                                         <i className='icon-nav icon-signin'></i>
                                         Login
