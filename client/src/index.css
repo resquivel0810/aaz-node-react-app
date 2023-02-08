@@ -724,13 +724,13 @@ input:hover {
   /* padding-bottom: 0px; */
   padding-top: 0.5rem;
 }
-.navbar-brand{
+/* .navbar-brand{
   font-family: 'Work Sans', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   color: #FFFFFF;
   padding-left: 1rem;
-}
+} */
 
 .navbar-nav .nav-link{
   font-family: 'Roboto', sans-serif;
@@ -747,7 +747,7 @@ input:hover {
 }
 
 .navbar-dark .navbar-toggler{
-  margin-right: 1rem;
+  /* margin-right: 1rem; */
 }
 
 .navbar-expand-lg .offcanvas{

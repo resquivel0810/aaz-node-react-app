@@ -6,6 +6,7 @@ import Benefits from './HomePage-Sections/Benefits';
 import AboutAuthor from "./HomePage-Sections/AboutAuthor";
 import Comments from './HomePage-Sections/Comments';
 import Register from './HomePage-Sections/Register';
+import UserFeedback from './HomePage-Sections/UserFeedback';
 
 
 export default class HomePage extends Component{
@@ -16,7 +17,8 @@ export default class HomePage extends Component{
                 {/* <AppResume /> */}
                 <Benefits />
                 <AboutAuthor />
-                <Comments />
+                {/* <UserFeedback /> */}
+                {/* <Comments /> */}
                 <Register />
             </Fragment>
         );
