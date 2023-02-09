@@ -405,15 +405,26 @@ h3{
 
 /* ALERTS */
 
+.no-danger{
+  /* display: none; */
+  opacity: 0;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 400;
+}
+
 .text-danger{
   font-family: 'Roboto', sans-serif;
   font-size: 0.75rem;
   font-weight: 400;
   color: #F33757;
-/*   
-  -webkit-transition: all .5s ease;
-  -moz-transition: all .5s ease;
-  transition: all .5s ease; */
+  /* display: block; */
+  opacity: 1;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  margin-left: 15px;
+
 }
 .is-invalid{
   border: 1px solid #F33757;

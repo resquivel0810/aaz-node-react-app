@@ -2,7 +2,7 @@ import React from 'react';
 
 const Input = (props) => {
     return(
-        <div>
+        <div style={{height:'55px'}}>
             {/* <label htmlFor="props.name" className="form-label">
                 {props.title}
             </label> */}
