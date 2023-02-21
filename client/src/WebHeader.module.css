@@ -49,13 +49,21 @@
         padding: 50px 25px;
     }
     /* ------------- sliding menu ------------------ */
+    .hiddenTransparency {
+
+    }
+
+    .visibleTransparency {
+        
+    }
+
     .hidden {
-        transition: all .15s linear;
+        transition: all .25s ease-out;
         left: -245px;
     }
 
     .visible {
-        transition: all .15s linear;
+        transition: all .25s ease-in;
         left: 0;
     }
 

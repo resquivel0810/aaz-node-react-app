@@ -108,7 +108,7 @@ footer .imprint{
 
 /* CONFIRMATION */
 .bg_confirmation{
-  height: 100vh;
+  height: 75vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -402,6 +402,8 @@ h3{
 .enter-space{
   white-space: pre-line;
 }
+
+
 
 /* ALERTS */
 
@@ -782,7 +784,7 @@ input:hover {
 
 .nav-link.active,
 .nav-link.active .icon-nav{
-  color: #DDE295 !important;
+  color: #DDE295;
 }
 
 .nav-link:hover > .icon-nav,
@@ -1237,6 +1239,8 @@ div.registration_box img{
     margin-left: 1rem;
   }
 
+  
+
   .nav-link .icon-nav, 
   .btn .icon-nav{
     margin-right: 0rem;
@@ -1244,7 +1248,7 @@ div.registration_box img{
 
   .nav-web .nav-link.active,
   .nav-web .nav-link.active .icon-nav{
-    color: #DDE295 !important;
+    color: #886200;
     font-weight: 500;
   }
 

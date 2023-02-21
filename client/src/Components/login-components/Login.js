@@ -7,10 +7,10 @@ import Input from "../form-components/Input";
 import WebHeader from "../../WebHeader";
 import WebFooter from "../../WebFooter";
 
-
-
 import backgroundImage from '../../Images/AAZ-DesktopBackNude.png';
 import loginImage from '../../Images/Login_Desktop.png';
+
+import ConfirmationRegistrationMail from './ConfirmationRegistrationMail';
 
 export default function Login(props) {
     const [credentials, setCredentials] = useState({
@@ -27,7 +27,10 @@ export default function Login(props) {
 
     const [userError, setUserError] = useState(initError);
     const [pwdError, setPwdError] = useState(initError);
+    
     const [passwordShown, setPasswordShown] = useState(false);
+
+    const [confirmed, setConfirmed] = useState(true);
 
     useEffect(() => {
         if (!credentials.txt && enteredUserTouched) {
@@ -99,29 +102,36 @@ export default function Login(props) {
         fetch("https://accounting.linarys.com/v1/login/", requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                if (data.user.id === 0 && data.user.confirmed === 0) {
-                    setUserError({
-                        exists: true,
-                        helperText: "Wrong user or password",
-                    });
-                    setPwdError({
-                        exists: true,
-                        helperText: "Wrong user or password",
-                    });
-                    setEnteredUserTouched(true);
-                    setEnteredPwdTouched(true);
-                    return false;
-                }
-                else{
-                    console.log(data);
-                    console.log(data.user.token);
-              
-                    window.localStorage.setItem("jwt", JSON.stringify(data.user.token));
-                    window.localStorage.setItem("id", JSON.stringify(data.user.id));
-                    props.history.push({
-                        pathname: "/dictionary/1",
+                console.log(data)
+                fetch(`https://accounting.linarys.com/v1/user/${data.user.id}`)
+                    .then((response) => response.json())
+                    .then((data) => {
+                        console.log(data)
+                        if (data.user.id === 0) {
+                            setUserError({
+                                exists: true,
+                                helperText: "Wrong user or password",
+                            });
+                            setPwdError({
+                                exists: true,
+                                helperText: "Wrong user or password",
+                            });
+                            setEnteredUserTouched(true);
+                            setEnteredPwdTouched(true);
+                            return false;
+                        } else if (data.user.confirmed === 1){
+                            window.localStorage.setItem("jwt", JSON.stringify(data.user.token));
+                            window.localStorage.setItem("id", JSON.stringify(data.user.id));
+                            props.history.push({
+                                pathname: "/dictionary/1",
+                            })
+                        } 
+                        else if(data.user.confirmed === 0) {
+                            setConfirmed(false)
+                        }
                     })
-                }
+
+                
             }
         )
 
@@ -130,109 +140,111 @@ export default function Login(props) {
         return(
             <>
                 <WebHeader />
-                <img src={backgroundImage} alt="" className="img_bg_login" />
-                <div className='bg_login'>   
-                    <div className='container position-relative'>
-                        <div className='login_box'>
-                      
-                            <div className='row'>
-                                <div className='col-12 col-lg-2 align-self-center'>
-                                    <img src={loginImage} alt="" className="img-login" />
-                                </div>
-                                <div className='col-12 col-lg-5'>
-                                    
-                                    <h3 className='text-center mb-4'>Sign in</h3>
-                                    <div className='center-grid'>
-                                        <form onSubmit={handleSubmit}>
-                                            <div style={{marginBottom:'10px'}} className=''>
-                                                <Input 
-                                                    title = {"email"}
-                                                    type = {"text"}
-                                                    name = {"txt"}
-                                                    placeholder = {"User name / E-mail"}
-                                                    value={credentials.txt}
-                                                    handleChange={handleChange}
-                                                    handleBlur={userBlurHandler}
-                                                    className={userError.exists ? "is-invalid": ""}
-                                                    errorDiv = {userError.exists ? "text-danger" : "no-danger"}
-                                                    errorMsg = {userError.helperText}
-                                                />
-                                            </div>
-                                            <div style={{position:'relative'}} className=''>
-                                                <Input 
-                                                    title = {"password"}
-                                                    // type = {"password"}
-                                                    name = {"pwd"}
-                                                    placeholder = {"Password"}
-                                                    value={credentials.pwd}
-                                                    handleChange={handleChange}
-                                                    handleBlur={pwdBlurHandler}
-                                                    className={pwdError.exists ? "is-invalid": ""}
-                                                    errorDiv = {pwdError.exists ? "text-danger" : "no-danger"}
-                                                    errorMsg = {pwdError.helperText}
-                                                    type={passwordShown ? "text" : "password"}
-                                                />
-                                                <i style={{position: 'absolute', top:'8px', right:'15px', cursor:'pointer'}} onClick={togglePasswordVisiblity}>{passwordShown ? EyeLogo() : EyeLogoClosed()}</i>
-                                            </div>
-                                    
-                                            <div className='mb-4'>
-                                                <Link
-                                                    to={`/forgotpassword`}
-                                                    className={"link"}
-                                                >
-                                                    FORGOT YOUR PASSWORD?
-                                                </Link>
-                                            </div>
-                                            <div className=''>
-                                                <Button
-                                                    title={"Log in"}
-                                                    className={"ochre"}
-                                                />
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div>
-                                    {/* <pre>{JSON.stringify(this.state,null,3)}</pre> */}
-                                </div>
-                                </div>
-                                <div className='col-12 col-lg-5'>
-                                    <div className='py-2'>
-                                        {/* <div className='subtitle mb-4 text-center'>
-                                            or
-                                        </div> */}
-                                        <div className='center-grid'>
-                                            {/* <div className='mb-4'>
-                                                <Button
-                                                    title={"Facebook"}
-                                                />
-                                            </div> */}
-                                            {/* <div className='mb-4'>
-                                                <GoogleLoginComponent 
-                                                />
-                                            </div> */}
+                {
+                    confirmed
+                    ?
+                    <>
+                        <img src={backgroundImage} alt="" className="img_bg_login" />
+                        <div className='bg_login'>   
+                            <div className='container position-relative'>
+                                <div className='login_box'>
+                            
+                                    <div className='row'>
+                                        <div className='col-12 col-lg-2 align-self-center'>
+                                            <img src={loginImage} alt="" className="img-login" />
                                         </div>
-                                    </div>
+                                        <div className='col-12 col-lg-5'>
+                                            
+                                            <h3 className='text-center mb-4'>Sign in</h3>
+                                            <div className='center-grid'>
+                                                <form onSubmit={handleSubmit}>
+                                                    <div style={{marginBottom:'10px'}} className=''>
+                                                        <Input 
+                                                            
+                                                            title = {"email"}
+                                                            type = {"text"}
+                                                            name = {"txt"}
+                                                            placeholder = {"User name / E-mail"}
+                                                            value={credentials.txt}
+                                                            handleChange={handleChange}
+                                                            handleBlur={userBlurHandler}
+                                                            className={userError.exists ? "is-invalid": ""}
+                                                            errorDiv = {userError.exists ? "text-danger" : "no-danger"}
+                                                            errorMsg = {userError.helperText}
+                                                        />
+                                                    </div>
+                                                    <div style={{position:'relative'}} className=''>
+                                                        <Input 
+                                                        
+                                                            title = {"password"}
+                                                            // type = {"password"}
+                                                            name = {"pwd"}
+                                                            placeholder = {"Password"}
+                                                            value={credentials.pwd}
+                                                            handleChange={handleChange}
+                                                            handleBlur={pwdBlurHandler}
+                                                            className={pwdError.exists ? "is-invalid": ""}
+                                                            errorDiv = {pwdError.exists ? "text-danger" : "no-danger"}
+                                                            errorMsg = {pwdError.helperText}
+                                                            type={passwordShown ? "text" : "password"}
+                                                        />
+                                                        <i style={{position: 'absolute', top:'8px', right:'15px', cursor:'pointer'}} onClick={togglePasswordVisiblity}>{passwordShown ? EyeLogo() : EyeLogoClosed()}</i>
+                                                    </div>
+                                            
+                                                    <div className='mb-4'>
+                                                        <Link
+                                                            to={`/forgotpassword`}
+                                                            className={"link"}
+                                                        >
+                                                            FORGOT YOUR PASSWORD?
+                                                        </Link>
+                                                    </div>
+                                                    <div className=''>
+                                                        <Button
+                                                            title={"Log in"}
+                                                            className={"ochre"}
+                                                        />
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div>
+                                        
+                                        </div>
+                                        </div>
+                                        <div className='col-12 col-lg-5'>
+                                            <div className='py-2'>
+                                                
+                                                <div className='center-grid'>
+                                                    
+                                                </div>
+                                            </div>
 
-                                    <div className='py-2'>
-                                        <div className='subtitle mb-4 text-center'>
-                                            Don't have an account?
+                                            <div className='py-2'>
+                                                <div className='subtitle mb-4 text-center'>
+                                                    Don't have an account?
+                                                </div>
+                                                <div className='center-grid'>
+                                                    <Link
+                                                        to={`/registration`}
+                                                        className={"link"}
+                                                    >
+                                                        REGISTER
+                                                    </Link>
+                                                </div>
+                                            
+                                            </div>
                                         </div>
-                                        <div className='center-grid'>
-                                            <Link
-                                                to={`/registration`}
-                                                className={"link"}
-                                            >
-                                                REGISTER
-                                            </Link>
-                                        </div>
-                                    
+                                        
                                     </div>
                                 </div>
-                                
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </>
+                    :
+                    <ConfirmationRegistrationMail />
+                }
+                
+                
                 <WebFooter />
             </>
         );
