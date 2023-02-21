@@ -11,6 +11,7 @@ import backgroundImage from '../../Images/AAZ-DesktopBackNude.png';
 import loginImage from '../../Images/Login_Desktop.png';
 
 import ConfirmationRegistrationMail from './ConfirmationRegistrationMail';
+import ConfirmationForLogin from './ConfirmationForLogin';
 
 export default function Login(props) {
     const [credentials, setCredentials] = useState({
@@ -102,11 +103,14 @@ export default function Login(props) {
         fetch("https://accounting.linarys.com/v1/login/", requestOptions)
             .then((response) => response.json())
             .then((data) => {
-                console.log(data)
+                console.log({...data}.user.token)
+                const JWToken = {...data}.user.token
+
                 fetch(`https://accounting.linarys.com/v1/user/${data.user.id}`)
                     .then((response) => response.json())
                     .then((data) => {
-                        console.log(data)
+                        // console.log({...data}.user)
+                        
                         if (data.user.id === 0) {
                             setUserError({
                                 exists: true,
@@ -120,7 +124,7 @@ export default function Login(props) {
                             setEnteredPwdTouched(true);
                             return false;
                         } else if (data.user.confirmed === 1){
-                            window.localStorage.setItem("jwt", JSON.stringify(data.user.token));
+                            window.localStorage.setItem("jwt", JSON.stringify(JWToken));
                             window.localStorage.setItem("id", JSON.stringify(data.user.id));
                             props.history.push({
                                 pathname: "/dictionary/1",
@@ -241,7 +245,7 @@ export default function Login(props) {
                         </div>
                     </>
                     :
-                    <ConfirmationRegistrationMail />
+                    <ConfirmationForLogin />
                 }
                 
                 
