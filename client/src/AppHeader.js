@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { NavLink } from "react-router-dom";
 
+import classes from './AppHeader.module.css'
+
 import Select from './Components/form-components/Select';
 
 
@@ -19,6 +21,8 @@ function getKeyByValue(object, value) {
 console.log(window.location.pathname)
 
 export default function AppHeader2({
+    currentPathName,
+    currentId = 1,
     onClick3 = f => f, 
     search, 
     onClick5 = f => f, 
@@ -53,7 +57,7 @@ export default function AppHeader2({
     return (
         <>
         <header style={{height: '10vh'}}>
-            <nav className='navbar navbar-dark navbar-expand-lg navbar-primary fixed-top'>
+            <nav className={classes.navbar}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     
                     <Link
@@ -84,12 +88,13 @@ export default function AppHeader2({
                             </g>
                         </svg>
                     </Link>
-                    <div>
+                </div>
+                <div style={{display:'flex', alignItems:'center'}}>
                         {
                             search === '/dictionary/:id'
                             ?
                             <>
-                            <div className='d-flex align-items-center'>
+                            <div style={{width:'350px'}} className='d-flex align-items-center'>
                             <input
                                 id='search'
                                 placeholder='Search'
@@ -107,7 +112,7 @@ export default function AppHeader2({
                                 ?  
                                 <>
                                 
-                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'370px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'unset'}}>
+                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'370px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'calc(5vh + 17.5px)'}}>
 
                                     <Select  
                                         // selectedOption={language}
@@ -269,56 +274,54 @@ export default function AppHeader2({
                             
                             </>
                             :
-                            null
+                            <div style={{width:'350px'}}></div>
 
                         }
                         
                     </div>
-                </div>
-                
-                <div className='app-nav offcanvas offcanvas-end'>
-                    <ul className="navbar-nav justify-content-end flex-grow-1 pe-3"> 
-                        <li className='nav-app-link'>
-                            <NavLink 
-                                to={`/dictionary/2`}
-                                exact={false}
-                                // className={'nav-link'}
-                                // activeClassName="active"
+                <div className={classes.navbarLinksContainer}>
+                    <div className={`${classes.navbarLinks} `}> 
+                        <div
+                            className={`${classes.navLink} ${currentPathName.startsWith("/dictionary/") ? classes.active : null}`}
+                        >
+                            <Link 
+                                to={`/dictionary/1`}
+                                exact={false}    
                             >
                                 <i className='icon-nav icon-dictionary'></i>
                                 <div>
                                     Dictionary
                                 </div>
-                            </NavLink> 
-                        </li>
-                        <li>
-                            <NavLink
+                            </Link> 
+                        </div>
+                        <div
+                            className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") ? classes.active : null}`} 
+                        >
+                            <Link
                                 to={`/profile/${id}`}
-                                exact={true}
-                                className={'nav-link'}
-                                activeClassName="active"
+                                exact={false}
                             >
                                 <i className='icon-nav icon-profile'></i>
                                 <div>
                                     Profile
                                 </div> 
-                            </NavLink>
-                        </li>
-                        <li>
+                            </Link>
+                        </div>
+                        <div
+                        className={`${classes.navLink}`}
+                        >
                             
-                            <NavLink
+                            <Link
                                 to={`/`}
                                 exact={true}
-                                className={'nav-link'}
-                                activeClassName="active"
                             >
                                 <i className='icon-nav icon-website'></i>
                                 <div>
                                     Website
                                 </div> 
-                            </NavLink>
-                        </li>
-                    </ul>
+                            </Link>
+                        </div>
+                    </div>
                 </div>
             </nav>
 
@@ -328,7 +331,7 @@ export default function AppHeader2({
                         <ul style={{display:'flex', width:'100vw', justifyContent:'space-around'}} className="navbar-nav nav-tabs">
                             <li className=''>
                                 <NavLink 
-                                    to={`/dictionary/1`}
+                                    to={`/dictionary/1 `}
                                     exact={false}
                                     className={'nav-link'}
                                     // activeClassName="active"

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 export default class AppFooter extends Component{
     render(){
         return(
-            <footer>
+            <footer style={{height:'5vh'}}>
                 <div>
                     <div style={{display: window.innerWidth < 900 ? 'none' : 'block'}} className='imprint'>
                         <div className='container py-2 text-center'>

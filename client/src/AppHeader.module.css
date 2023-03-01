@@ -1,0 +1,70 @@
+.navbar {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: #068b77;
+    height: inherit;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+}
+
+.navbarLinksContainer {
+    width: 300px;
+    height: 100%;
+}
+
+.navbarLinks {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.navLink{
+    font-family: 'Roboto', sans-serif;
+    color: #FDFDFD;
+    font-size: 1rem;
+    border-bottom: 3px #068b77 solid;
+    text-align: center;
+}
+ 
+.navLink{
+    padding-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.navLink div, .navLink i {
+    color: #FDFDFD;
+}
+/*     
+.active,
+.active .iconNav{
+    color: #DDE295;
+} */
+  
+/* .navLink:hover > .iconNav,
+.navLink:hover
+{
+    color: #DDE295
+} */
+  
+.active{
+    border-bottom: 3px #DDE295 solid;
+    color: #DDE295
+}
+
+.active div, .active i{
+    color: #DDE295
+}
+  
+  
+
+@media screen and (max-width: 991px) {
+    .navbarLinksContainer {
+        display: none;
+    }
+    
+
+}

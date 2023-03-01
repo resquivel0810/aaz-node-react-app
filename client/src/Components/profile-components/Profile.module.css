@@ -1,0 +1,8 @@
+.profileContainer {
+    display: flex;
+    height: 85vh;
+    justify-content: space-evenly;
+    align-items: baseline;
+    padding-top: 10vh;
+}
+

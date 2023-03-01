@@ -46,9 +46,7 @@ export default function Terms({
                     ?
                     null
                     : 
-                    <button style={{margin:'0'}} onClick={() =>  setMobileMeaningStyle(true)} className='none'>
-                        <i style={{ transform: 'rotate(360deg)', color: '#BD8F16'}} className='icon ms-1 icon-arrow'></i>
-                    </button>
+                    null
                 }</>
                 
                 : 

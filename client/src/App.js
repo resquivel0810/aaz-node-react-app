@@ -76,9 +76,8 @@ export default class App extends Component{
           <Route path="/profile/:id" component={Profile}>
           </Route>
 
-          <Route path='/changePassword'>
-            <ChangePassword />
-          </Route>
+          <Route path='/changePassword' component={ChangePassword} />
+      
 
           <Route path='/confirmChangePassword'>
             <AppHeader />

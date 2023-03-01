@@ -471,6 +471,8 @@ export default function Dictionary(props) {
                 visible={toastVisible}
             />
             <AppHeader 
+                currentPathName={props.location.pathname}
+                currentId={{...{...{...meaning.terms}.data}[0]}.id}
                 onClick3={(letters) => getTermsWithLetter(letters) }
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
