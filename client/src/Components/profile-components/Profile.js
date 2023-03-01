@@ -403,12 +403,13 @@ export default function Profile2(props) {
                                 setToastVisible(false)
                             }, 5000)
                             if (data.status === 200){
+                                window.localStorage.setItem("userName", JSON.parse(requestOptions.body).username);
                                 setToastProperties({
                                     description: `YOUR ${lastEdited.toUpperCase()}`,
                                     borderColor: '#8DD037',
                                     icon: 'icon-success'
                                 })
-                                
+                                setEditUsername(false);
                             }else{
                                 console.log(data.status)
                             }
@@ -758,7 +759,7 @@ export default function Profile2(props) {
                                 style={{width:'unset'}}
                                 className='ochre'
                                 type='button'
-                                onClick={() => console.log("CLOSE")}
+                                onClick={() => setIsOpenModalChangeEmail(false)}
                             >
                                 Cancel
                             </button>
