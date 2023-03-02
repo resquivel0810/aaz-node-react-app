@@ -20,6 +20,7 @@
     align-items: end;
     justify-content: space-between;
     height: 100%;
+ 
 }
 
 .navLink{
@@ -29,6 +30,11 @@
     border-bottom: 3px #068b77 solid;
     text-align: center;
 }
+
+.navLink span {
+    font-size: 13px;
+}
+
  
 .navLink{
     padding-bottom: 0.5rem;
@@ -78,8 +84,13 @@
         border: none;
     }
 
+    .navbarLinks {
+        width: 80vw;
+    }
+
     .navLink a{
         display: grid;
+       
         height: 100%;
         align-content: center;
         color: #4FB8A8;
@@ -87,6 +98,7 @@
 
     .active  a{
         color: #FDFDFD;
+        align-content: flex-start;
     }
 
     .navLink i{

@@ -335,7 +335,7 @@ export default function AppHeader2({
                                     exact={false}
                                 >
                                     <i className='icon-dictionary'></i>
-                                    Dictionary
+                                    <span>Dictionary</span>
                                 </Link>      
                             </div>
                             <div className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") ? classes.active : null}`} >
@@ -344,7 +344,7 @@ export default function AppHeader2({
                                     exact={true}
                                 >
                                     <i className='icon-profile'></i>
-                                    Profile 
+                                    <span>Profile</span>
                                 </Link>
                             </div>
                             <div className={`${classes.navLink}`}>
@@ -353,7 +353,7 @@ export default function AppHeader2({
                                     exact={true}
                                 >
                                     <i className='icon-website'></i>
-                                    Website 
+                                    <span>Website </span>
                                 </Link>
                             </div>
                         </div>
