@@ -1022,8 +1022,8 @@ export default function Profile2(props) {
                             </div>
 
                         </div>
-                        
-                        <div>
+                        <div className={classes.divisionLine}></div>
+                        <div className={classes.settingsContainer}>
                             <div className='subtitle_bold primary_dark'>
                                 Settings
                             </div>

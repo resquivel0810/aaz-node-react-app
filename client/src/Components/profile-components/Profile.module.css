@@ -2,7 +2,32 @@
     display: flex;
     height: 85vh;
     justify-content: space-evenly;
-    align-items: baseline;
+    align-items: flex-start;
     padding-top: 10vh;
+}
+
+.divisionLine {
+    height: 80%;
+    width: 2px;
+    background-color: #E1E2E1;
+}
+
+@media screen and (max-width: 991px) {
+    .profileContainer {
+        display: block;
+        height: 85vh;
+        padding: 5vh 10vw 0 10vw;
+    }
+
+    .divisionLine {
+        height: 2px;
+        width: 80%;
+        background-color: #E1E2E1;
+        margin: 3vh 0;
+    }
+    .settingsContainer div{
+        margin: 5px 0;
+    }
+
 }
 

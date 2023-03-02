@@ -328,39 +328,35 @@ export default function AppHeader2({
             <div className='d-md-block d-lg-none'>
                 <nav className='navbar navbar-expand-lg fixed-bottom app-nav'>
                     <div className='position-absolute app-nav-box'>
-                        <ul style={{display:'flex', width:'100vw', justifyContent:'space-around'}} className="navbar-nav nav-tabs">
-                            <li className=''>
-                                <NavLink 
+                        <div className={`${classes.navbarLinks} `}> 
+                            <div className={`${classes.navLink} ${currentPathName.startsWith("/dictionary/") ? classes.active : null}`}>
+                                <Link 
                                     to={`/dictionary/1 `}
                                     exact={false}
-                                    className={'nav-link'}
-                                    // activeClassName="active"
                                 >
-                                    <i className='icon-nav icon-dictionary'></i>
+                                    <i className='icon-dictionary'></i>
                                     Dictionary
-                                </NavLink>      
-                            </li>
-                            <li>
-                                <NavLink 
+                                </Link>      
+                            </div>
+                            <div className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") ? classes.active : null}`} >
+                                <Link 
                                     to={`/profile/${id}`}
                                     exact={true}
-                                    className={'nav-link'}
                                 >
-                                    <i className='icon-nav icon-profile'></i>
+                                    <i className='icon-profile'></i>
                                     Profile 
-                                </NavLink>
-                            </li>
-                            <li>
-                                <NavLink
+                                </Link>
+                            </div>
+                            <div className={`${classes.navLink}`}>
+                                <Link
                                     to={`/`}
                                     exact={true}
-                                    className={'nav-link'}
                                 >
-                                    <i className='icon-nav icon-website'></i>
+                                    <i className='icon-website'></i>
                                     Website 
-                                </NavLink>
-                            </li>
-                        </ul>
+                                </Link>
+                            </div>
+                        </div>
                     </div>
                 </nav>
             </div>

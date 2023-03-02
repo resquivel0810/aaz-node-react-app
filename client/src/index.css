@@ -869,6 +869,7 @@ input:hover {
 .box_term{
   padding: 1rem 0.5rem;
   border-bottom: 1px solid #E1E2E1;
+  margin-right: 15px;
 }
 
 .container_term{
@@ -1222,7 +1223,7 @@ div.registration_box img{
   .btn{
     width: auto;
     height: 30px;
-    margin: auto;
+    /* margin: auto; */
   }
   button span, 
   button div{

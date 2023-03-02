@@ -64,6 +64,8 @@ export default function Dictionary(props) {
 
     const [selected, setSelected] = useState(['A','B','C']);
 
+    let id = 1
+
     useEffect(() => {
         // setIsLoading(true)
         window.innerWidth < 900 ? setMobile(true) : setMobile(false)
@@ -74,7 +76,7 @@ export default function Dictionary(props) {
             // console.log("No access");
             window.location.href = '/'
         }
-        fetch(`https://sandbox.linarys.com/api/folios/`+id+`?populate=*`, { 
+        fetch(`https://sandbox.linarys.com/api/folios/${id}?populate=*`, { 
             headers, method: 'GET' 
         })
             .then(checkStatus)
@@ -99,7 +101,7 @@ export default function Dictionary(props) {
         })
     }, [clipboardTitle])
 
-    let id = props.match.params.id;
+    
     // console.log(props.match.path)
 
     const getMeaning = (id) => {
@@ -657,7 +659,7 @@ export default function Dictionary(props) {
                                 borderRadius="10"
                                 duration={2}
                             >
-                                <div style={{padding: '25px', paddingTop:'50px'}} className='box_meaningTerm'>
+                                <div style={{padding: '25px', paddingTop:'50px', marginTop:'25px'}} className='box_meaningTerm'>
                                     <div style={{textAlign: 'center', marginBottom: mobile?'30px':'50px'}}>
                                         <h3><Skeleton width={100} /></h3>
                                     </div>

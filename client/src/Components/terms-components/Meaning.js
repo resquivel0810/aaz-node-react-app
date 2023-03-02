@@ -50,7 +50,7 @@ export default function Meaning({
     return(
         <>
             <div  className=''>
-                <div style={{padding: '25px'}} className='box_meaningTerm'>
+                <div style={{padding: '25px', marginTop: '25px'}} className='box_meaningTerm'>
               
 
                     {(() => {

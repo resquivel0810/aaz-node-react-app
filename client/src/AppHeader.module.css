@@ -35,7 +35,11 @@
     font-weight: 600;
 }
 
-.navLink div, .navLink i {
+.navLink i {
+    color: #FDFDFD;
+}
+
+.navLink div {
     color: #FDFDFD;
 }
 /*     
@@ -65,6 +69,44 @@
     .navbarLinksContainer {
         display: none;
     }
+    .navLink{
+        padding: 0.8rem;
+        font-size: 0.6rem;
+        height: 11vh;
+        width: 11vh;
+        padding: 1vh;
+        border: none;
+    }
+
+    .navLink a{
+        display: grid;
+        height: 100%;
+        align-content: center;
+        color: #4FB8A8;
+    }
+
+    .active  a{
+        color: #FDFDFD;
+    }
+
+    .navLink i{
+        font-size: 3em;
+        color: #4FB8A8;
+    }
+
+    .active div, .active i{
+        color: #FDFDFD
+    }
+
+    .active{
+        background: linear-gradient(180deg, #068B77 0%, #004F3D 100%);
+        border-radius: 100%;
+        border: solid .5em #FDFDFD;
+        border-color: #FDFDFD;
+        --bs-nav-tabs-border-width: 3px;
+        --bs-nav-tabs-border-color: #FDFDFD;
+    }
+
     
 
 }
