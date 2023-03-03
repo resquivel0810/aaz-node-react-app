@@ -295,7 +295,7 @@ export default function AppHeader2({
                             </Link> 
                         </div>
                         <div
-                            className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") ? classes.active : null}`} 
+                            className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") || currentPathName.startsWith("/confirmChangePassword") ? classes.active : null}`} 
                         >
                             <Link
                                 to={`/profile/${id}`}

@@ -1,13 +1,9 @@
-/* html {
+html {
   min-height: calc(100% + env(safe-area-inset-top));
   padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
  
-  background-attachment: fixed;
-  background-image: url('/bg.svg');
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
+
+}
 
 
 body {
@@ -108,7 +104,7 @@ footer .imprint{
 
 /* CONFIRMATION */
 .bg_confirmation{
-  height: 75vh;
+  height: 85vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -875,7 +871,7 @@ input:hover {
 .container_term{
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 68vh;
+  height: 64vh;
   /* max-height: 800px; */
 }
 

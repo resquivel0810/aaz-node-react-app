@@ -16,9 +16,13 @@
     
 }
 
+.searchParams {
+    height: 15vh;
+}
+
 .searchLanguage {
     color: #A5A5A5;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .dictionaryContainer {

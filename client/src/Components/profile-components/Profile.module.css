@@ -12,6 +12,13 @@
     background-color: #E1E2E1;
 }
 
+.settingsContainer{
+    padding-top: 80px;
+}
+.settingsContainer div{
+    margin: 5px 0;
+}
+
 @media screen and (max-width: 991px) {
     .profileContainer {
         display: block;
@@ -27,6 +34,9 @@
     }
     .settingsContainer div{
         margin: 5px 0;
+    }
+    .settingsContainer{
+        padding-top: 0;
     }
 
 }

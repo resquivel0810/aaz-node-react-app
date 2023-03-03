@@ -79,11 +79,8 @@ export default class App extends Component{
           <Route path='/changePassword' component={ChangePassword} />
       
 
-          <Route path='/confirmChangePassword'>
-            <AppHeader />
-            <ConfirmChangePassword />
-            <AppFooter />
-          </Route>
+          <Route path='/confirmChangePassword' component={ConfirmChangePassword}/>
+          
 
           {/* WEBSITE */}
           <Route
