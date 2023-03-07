@@ -72,16 +72,12 @@ export default class App extends Component{
           {/* APP */}
           <Route path='/dictionary/:id' component={Dictionary} />
          
-      
-          <Route path="/profile/:id" component={Profile}>
-          </Route>
+          <Route path="/profile/:id" component={Profile} />
 
           <Route path='/changePassword' component={ChangePassword} />
       
-
           <Route path='/confirmChangePassword' component={ConfirmChangePassword}/>
           
-
           {/* WEBSITE */}
           <Route
             exact

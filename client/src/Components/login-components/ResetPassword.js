@@ -1,9 +1,95 @@
-import React, {Component, Fragment} from 'react';
+import React, {Component, Fragment, useEffect, useState} from 'react';
 import WebHeader from '../../WebHeader';
 import WebFooter from '../../WebFooter'
 import Button from "../form-components/Button";
 import textureImage from '../../Images/AAZ-DesktopBackGreen.png';
 import PasswordValidation from './ui-login-components/PasswordValidation';
+
+// export default function ResetPassword2(props) {
+    
+//     const [cwpdData, setCpwdData] = useState({
+//         id: '',
+//         pwd: ''
+//     })
+
+//     useEffect(() => {
+//         fetch(`https://accounting.linarys.com/v1/getid/${props.match.params.id}`, {method: "GET"})
+//         .then(response => response.json())
+//         .then(data => {
+
+//             console.log(data.ID)
+//             setCpwdData((prevState) => ({
+//                 ...prevState,
+//                 id: data.ID
+//             }))  
+            
+//         })
+//     }, [])
+
+//     const handleChange = (evt) => {
+       
+//         let value = evt.target.value;
+//         let name = evt.target.name;
+//         setCpwdData((prevState) => ({
+//             ...prevState,
+//             [name]: value,  
+//         }))
+//     }
+
+//     const handleSubmit = (evt) => {
+
+//         evt.preventDefault();
+
+//         const requestOptions = {
+//             method: "POST",
+//             body: JSON.stringify(cwpdData),
+//         };
+
+        
+//         fetch('https://accounting.linarys.com/v1/cpwd/', requestOptions)
+
+
+ 
+        
+
+//     }
+
+//     return(
+//         <>
+//             <WebHeader />
+//                 <div className="bg_forgotPassword">
+//                     <div className="container position-relative">
+//                         <div className="forgotPassword_box">
+//                             <img src={textureImage} alt="" className="" />
+//                             <div>
+//                                 <h3 className='text-center mb-4'>Reset your password</h3>
+//                                 <div className='center-grid'>
+//                                     <form onSubmit={handleSubmit}>
+//                                         <PasswordValidation 
+//                                             title = {"Password"}
+//                                             type = {"password"}
+//                                             name = {"pwd"}
+//                                             placeholder = {"New Password"}
+//                                             value = {cwpdData.pwd}
+//                                             handleChange = {handleChange}
+//                                         />
+//                                         <div className='py-4'>
+//                                             <Button
+//                                                 title={"Reset"}
+//                                                 className={"ochre"}
+//                                             />
+//                                         </div>
+//                                     </form>
+//                                 </div>
+//                             </div>
+//                         </div>
+//                     </div>
+//                 </div>
+//                 <WebFooter />
+//         </>
+//     )
+
+// }
 
 export default class ResetPassword extends Component{
     state = {
@@ -69,7 +155,7 @@ export default class ResetPassword extends Component{
         console.log(payload)
         console.log(requestOptions)
       
-
+        
 
         fetch('https://accounting.linarys.com/v1/cpwd/', requestOptions)
             .then(response => response.json())
@@ -81,8 +167,8 @@ export default class ResetPassword extends Component{
                     console.log(data);
                     console.log(payload)
 
-                    fetch('https://accounting.linarys.com/v1/closecode/' + this.props.match.params.id, {method: "GET"})
-                        window.location.href='/confirmationforgotpasswordmail'
+                    // fetch('https://accounting.linarys.com/v1/closecode/' + this.props.match.params.id, {method: "GET"})
+                    // window.location.href='/confirmationforgotpasswordmail'
                 }
             })
             
@@ -104,31 +190,31 @@ export default class ResetPassword extends Component{
 
     componentDidMount(){
 
-        fetch(`https://accounting.linarys.com/v1/confirm/` + this.props.match.params.id, {method: "GET"})
-            console.log(this.props.match.params.id)
+        // fetch(`https://accounting.linarys.com/v1/confirm/` + this.props.match.params.id, {method: "GET"})
+        //     console.log(this.props.match.params.id)
 
        
-        fetch(`https://accounting.linarys.com/v1/getid/` + this.props.match.params.id, {method: "GET"})
-            .then(response => response.json())
-            .then(data => {
+        // fetch(`https://accounting.linarys.com/v1/getid/` + this.props.match.params.id, {method: "GET"})
+        //     .then(response => response.json())
+        //     .then(data => {
                 
-                if(data.erro){
-                    console.log("Error");
-                }else{
-                    console.log(data);
-                    // user.id = data;
+        //         if(data.erro){
+        //             console.log("Error");
+        //         }else{
+        //             console.log(data);
+        //             // user.id = data;
                     
-                    this.setState({
-                        user: {
-                            idU: data,
-                        }
-                    })
+        //             this.setState({
+        //                 user: {
+        //                     idU: data,
+        //                 }
+        //             })
 
-                    if (data.ID === 0){
-                        window.location.href='/login'
-                    }
-                }
-            });
+        //             if (data.ID === 0){
+        //                 window.location.href='/login'
+        //             }
+        //         }
+        //     });
     }
 
     render(){
