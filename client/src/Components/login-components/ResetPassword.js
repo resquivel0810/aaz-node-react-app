@@ -190,31 +190,31 @@ export default class ResetPassword extends Component{
 
     componentDidMount(){
 
-        // fetch(`https://accounting.linarys.com/v1/confirm/` + this.props.match.params.id, {method: "GET"})
-        //     console.log(this.props.match.params.id)
+        fetch(`https://accounting.linarys.com/v1/confirm/` + this.props.match.params.id, {method: "GET"})
+            console.log(this.props.match.params.id)
 
        
-        // fetch(`https://accounting.linarys.com/v1/getid/` + this.props.match.params.id, {method: "GET"})
-        //     .then(response => response.json())
-        //     .then(data => {
+        fetch(`https://accounting.linarys.com/v1/getid/` + this.props.match.params.id, {method: "GET"})
+            .then(response => response.json())
+            .then(data => {
                 
-        //         if(data.erro){
-        //             console.log("Error");
-        //         }else{
-        //             console.log(data);
-        //             // user.id = data;
+                if(data.erro){
+                    console.log("Error");
+                }else{
+                    console.log(data);
+                    // user.id = data;
                     
-        //             this.setState({
-        //                 user: {
-        //                     idU: data,
-        //                 }
-        //             })
+                    this.setState({
+                        user: {
+                            idU: data,
+                        }
+                    })
 
-        //             if (data.ID === 0){
-        //                 window.location.href='/login'
-        //             }
-        //         }
-        //     });
+                    if (data.ID === 0){
+                        window.location.href='/login'
+                    }
+                }
+            });
     }
 
     render(){
