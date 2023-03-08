@@ -113,7 +113,7 @@ export default function ResetPassword2(props) {
             }))
         } 
 
-        setPasswordCheck(document.getElementById("pwdCheck").value)
+        // setPasswordCheck(document.getElementById("pwdCheck").value)
 
 
     },[cwpdData,passwordCheck])
