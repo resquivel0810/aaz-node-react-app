@@ -13,6 +13,9 @@ import loginImage from '../../Images/Login_Desktop.png';
 import ConfirmationRegistrationMail from './ConfirmationRegistrationMail';
 import ConfirmationForLogin from './ConfirmationForLogin';
 
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
+
 export default function Login(props) {
     const [credentials, setCredentials] = useState({
         pwd: '',
@@ -237,6 +240,16 @@ export default function Login(props) {
                                                 </div>
                                             
                                             </div>
+                                            <GoogleLogin
+                                                onSuccess={credentialResponse => {
+                                                    console.log(credentialResponse);
+                                                    var decoded = jwt_decode(credentialResponse.credential);
+                                                    console.log(decoded)
+                                                }}
+                                                onError={() => {
+                                                    console.log('Login Failed');
+                                                }}
+                                            />
                                         </div>
                                         
                                     </div>
