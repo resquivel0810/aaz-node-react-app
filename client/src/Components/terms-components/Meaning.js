@@ -45,12 +45,10 @@ export default function Meaning({
         return {__html: str};
     }
 
-    
-
     return(
         <>
             <div  className=''>
-                <div style={{padding: '25px', marginTop: '25px'}} className='box_meaningTerm'>
+                <div style={{padding: '25px 35px', marginTop: '25px'}} className='box_meaningTerm'>
               
 
                     {(() => {
@@ -63,7 +61,7 @@ export default function Meaning({
                         } else {
                         return (
                             <>
-                            <div style={{display:'flex', justifyContent: 'space-between'}}>
+                            <div style={{display:'flex', justifyContent: 'end'}}>
                             {
                                 mobile
                                 ?
@@ -96,7 +94,7 @@ export default function Meaning({
                                 </button> */}
                             </div>
                             <div style={{textAlign: 'center'}} >
-                                <h3>{meaning.title} </h3>  
+                                <h3 style={{margin:'15px 0'}}>{meaning.title} </h3>  
                             </div>
                             
                             <div>
@@ -834,20 +832,75 @@ export default function Meaning({
                                             {
                                                 meaningTranslation === false
                                                 ?
-                                                <>{meaning.title}</>
+                                                <>
+                                                    <div style={{margin: '15px 0'}}>{meaning.title}</div>
+                                                    <div 
+                                                        style={{fontSize: '16px', margin: '15px 0'}}
+                                                    >   
+                                                        {
+                                                            {...{...{...{...meaning.terms}.data}[1]}.attributes}.text !== undefined && {...{...{...{...meaning.terms}.data}[2]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonim: {{...{...{...{...meaning.terms}.data}[1]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                        {
+                                                            {...{...{...{...meaning.terms}.data}[2]}.attributes}.text !== undefined && {...{...{...{...meaning.terms}.data}[3]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonims: {{...{...{...{...meaning.terms}.data}[1]}.attributes}.text}, {{...{...{...{...meaning.terms}.data}[2]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                        {
+                                                            {...{...{...{...meaning.terms}.data}[3]}.attributes}.text !== undefined && {...{...{...{...meaning.terms}.data}[4]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonims: {{...{...{...{...meaning.terms}.data}[1]}.attributes}.text}, {{...{...{...{...meaning.terms}.data}[2]}.attributes}.text}, {{...{...{...{...meaning.terms}.data}[3]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                        
+                                                    </div>
+                                                </>
                                                 :
-                                                <>{meaningTranslation.title}</>
+                                                <>
+                                                    <div style={{margin: '15px 0'}}>{meaningTranslation.title}</div>
+                                                    <div 
+                                                        style={{fontSize: '16px', margin: '15px 0'}}
+                                                    >   
+                                                        {
+                                                            {...{...{...{...meaningTranslation.terms}.data}[1]}.attributes}.text !== undefined && {...{...{...{...meaningTranslation.terms}.data}[2]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonim: {{...{...{...{...meaningTranslation.terms}.data}[1]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                        {
+                                                            {...{...{...{...meaningTranslation.terms}.data}[2]}.attributes}.text !== undefined && {...{...{...{...meaningTranslation.terms}.data}[3]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonims: {{...{...{...{...meaningTranslation.terms}.data}[1]}.attributes}.text}, {{...{...{...{...meaningTranslation.terms}.data}[2]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                        {
+                                                            {...{...{...{...meaningTranslation.terms}.data}[3]}.attributes}.text !== undefined && {...{...{...{...meaningTranslation.terms}.data}[4]}.attributes}.text === undefined
+                                                            ?
+                                                            <>Synonims: {{...{...{...{...meaningTranslation.terms}.data}[1]}.attributes}.text}, {{...{...{...{...meaningTranslation.terms}.data}[2]}.attributes}.text}, {{...{...{...{...meaningTranslation.terms}.data}[3]}.attributes}.text}</>
+                                                            :
+                                                            <></>
+                                                        }
+                                                    </div>
+                                                </>
                                             }
                                         
                                         </div>
-                                        <div id='meaningText' style={{overflowY: 'scroll',height: '50vh' }}>
-                                            {
+                                        <div id='meaningText' style={{height: '50vh' }}>
+                                            {/* {
                                                 meaningTranslation === false
                                                 ?
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaning.terms}.data}[0]}.attributes}.definition)} />
                                                 :
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaningTranslation.terms}.data}[0]}.attributes}.definition)} />
-                                            }
+                                            } */}
                                         </div>
                                         
                                         </>

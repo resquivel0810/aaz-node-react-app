@@ -9,6 +9,8 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 export default function Terms({
+    currentSearch,
+    termNotFound,
     terms, 
     onClick2 = f => f, 
     currentTerm, 
@@ -55,38 +57,99 @@ export default function Terms({
             <div className=''>
                 {/* <h3>All terms</h3> */}
                 <div className=''>
-                    
+                {
+                    termNotFound
+                    ?
+                    <div style={{width: '250px', color: '#F33757'}}>
+                        Sorry we couldn’t find any matches for the term.  
+                        Double check your search for any typos or spelling error or 
+                        search by letter. 
+                    </div>
+                    :
+                    null
+                }
                     <div className='container_term'>
+                    
                         {terms.map((t) => (                             
                             <div className='box_term' id={t.id} key={t.id}>
-                                <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(225,226,225,0.6)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} className='row'>
-                                    <div  className='col-8'>
+                                <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(243,191,76,0.25)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} className='row'>
+                                    <div  style={{width:'95%'}}>
+                                       
                                     
                                         {
                                             isLoading
                                             ?
                                             <Skeleton height={10} width={70} />
                                             :
-                                            <Link
-                                            key={t.id} 
-                                            onClick={() =>{
-                                                onClick2(t.id); 
-                                                setLink([document.getElementById(t.attributes.title).href.replace('https://aaz-node-react-app.herokuapp.com', ''), document.getElementById(t.attributes.title).innerText]); 
-                                                setMobileMeaningStyle(true);
-                                                setSkeletonWidth(document.getElementById('meaningText').offsetWidth)
+                                         
+                                            <>
+                                                <div style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                                                <Link
+                                                    key={t.id} 
+                                                    onClick={() =>{
+                                                        onClick2(t.id); 
+                                                        setLink([document.getElementById(t.attributes.title).href.replace('https://aaz-node-react-app.herokuapp.com', ''), document.getElementById(t.attributes.title).innerText]); 
+                                                        setMobileMeaningStyle(true);
+                                                        setSkeletonWidth(document.getElementById('meaningText').offsetWidth)
 
-                                            }}
-                                            to={`/dictionary/${t.id}`}
-                                            className={'link'}
-                                            id={t.attributes.title}
+                                                    }}
+                                                    to={`/dictionary/${t.id}`}
+                                                    className={'link'}
+                                                    id={t.attributes.title}    
+                                                >
+                                                    {t.attributes.title}
+                                                </Link>
+                                                <div style={{display: 'flex'}}>
+                                                    <button 
+                                                        
+                                                        onClick={() => 
+
+                                                            {  
+
+                                                                setClipboard(document.getElementById(t.attributes.terms.data[0].id).innerText)
+                                                                setToastVisible(true)
+                                                                setTimeout(() => {
+                                                                    setToastVisible(false)
+                                                                }, 5000)
+                                                                setClipboardTitle(document.getElementById(t.attributes.title).innerText)
+                                                                
+                                                        
+                                                            }
+                                                        } 
+                                                        className='none'
+                                                    >
+                                                        <i className='icon ms-1 icon-copy'></i>
+                                                    </button>  
+                                                    <button  onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
+                                                        <i className='icon ms-1 icon-share'></i>
+                                                    </button>
+                                                </div>
+                                                
+                                                </div>    
+                                                <div>
+                                                    {
+                                                        {...{...{...t.attributes.terms.data}[1]}.attributes}.text !== undefined
+                                                        ?
+                                                        <div style={{marginBottom:'15px'}}>
+                                                        <span style={{fontWeight:'600'}}>Synonim.</span> {{...{...{...t.attributes.terms.data}[1]}.attributes}.text} 
+                                                        {
+                                                        {...{...{...t.attributes.terms.data}[2]}.attributes}.text !== undefined
+                                                        ?
+                                                        <>,&nbsp;{{...{...{...t.attributes.terms.data}[2]}.attributes}.text}</>
+                                                        : 
+                                                        null
+                                                        }
+                                                        
+                                                        </div>
+                                                        :
+                                                        null
+                                                    }
+                                                </div>
+                                              
                                             
-                                            
-                                            
-                                        >
-                                            {t.attributes.title}
-                                        </Link>
-                                            
+                                            </>
                                         }
+                                        
 
                                         <div 
                                             id={t.attributes.terms.data[0].id} 
@@ -632,36 +695,7 @@ export default function Terms({
                                         
 
                                     </div>
-                                    <div className='col-4 text-end'>
-                                        <div style={{display: 'flex'}}>
-                                
-                                            <button 
-                                                
-                                                onClick={() => 
-
-                                                    {  
-
-                                                        setClipboard(document.getElementById(t.attributes.terms.data[0].id).innerText)
-                                                        setToastVisible(true)
-                                                        setTimeout(() => {
-                                                            setToastVisible(false)
-                                                        }, 5000)
-                                                        setClipboardTitle(document.getElementById(t.attributes.title).innerText)
-                                                        
-                                                 
-                                                    }
-                                                } 
-                                                className='none'
-                                            >
-                                                <i className='icon ms-1 icon-copy'></i>
-                                            </button>
-                                       
-                                       
-                                        <button  onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
-                                            <i className='icon ms-1 icon-share'></i>
-                                        </button>
-                                        </div>
-                                    </div>
+                                  
                                 </div>
                                 
                             </div>

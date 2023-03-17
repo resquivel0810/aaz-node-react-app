@@ -64,7 +64,8 @@ export default function Dictionary(props) {
 
     const [selected, setSelected] = useState(['A','B','C']);
 
-    let id = 1
+    let id = props.location.pathname.replace('/dictionary/','')
+    // console.log(typeof(props.location.pathname), props.location.pathname.replace('/dictionary/',''))
 
     useEffect(() => {
         // setIsLoading(true)
@@ -304,7 +305,7 @@ export default function Dictionary(props) {
             <>
             <div style={{fontFamily: 'Work Sans'}}>
                 <div>
-                    <div style={{display:'flex', backgroundColor: '#E1E2E1', width: '250px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center'}}>
+                    <div style={{display:'flex', backgroundColor: '#F5F5F6', width: '250px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center', boxShadow: '0px 0px 4px rgb(0 0 0 / 25%)' }}>
                         <div style={{display: 'flex', alignItems: 'center', backgroundColor: '#FDFDFD', padding: '0 10px',borderRadius: '10px'}}>
                             <span>{currentLetters}</span>
                             <button onClick={() => changeDisplayedLetters()} className='none'><i className='icon ms-1 icon-more'></i></button>
@@ -519,7 +520,7 @@ export default function Dictionary(props) {
             <div className={classes.dictionary}>
                 <div className={classes.dictionaryContainer}>
                   
-                    <div  style={{display: mobileMeaningStyle ? 'none' : 'block', flex:'1', marginRight:'1vw'}}  >
+                    <div  style={{display: mobileMeaningStyle ? 'none' : 'block', flex:'1', marginRight:'3vw'}}  >
                         <div className={classes.searchParams}>
                             {/* {(() => {
                                 if (currentLetter !== undefined && searched === '') {
@@ -540,16 +541,16 @@ export default function Dictionary(props) {
                             <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {
-                                    searchLanguage === 'de' ? <> german</> : null 
+                                    searchLanguage === 'de' ? <span style={{color:'#292929', fontWeight: '600'}}> German</span> : null 
                                 }
                                 {
-                                    searchLanguage === 'fr' ? <> french</> : null 
+                                    searchLanguage === 'fr' ? <span style={{color:'#292929', fontWeight: '600'}}> French</span> : null 
                                 }
                                 {
-                                    searchLanguage === 'it' ? <> italian</> : null 
+                                    searchLanguage === 'it' ? <span style={{color:'#292929', fontWeight: '600'}}> Italian</span> : null 
                                 }
                                 {
-                                    searchLanguage === 'en' ? <> english</> : null 
+                                    searchLanguage === 'en' ? <span style={{color:'#292929', fontWeight: '600'}}> English</span> : null 
                                 }
                             </div>
                             <FilterByLetter currentLetters={currentLetters}/>
@@ -559,11 +560,7 @@ export default function Dictionary(props) {
                         {
                             isLoadingTerms
                             ?
-                            // <div style={{width: '250px', margin: '35px 0', color: '#F33757'}}>
-                            //     Sorry we couldn’t find any matches for the term “{searched}”.  
-                            //     Double check your search for any typos or spelling error or 
-                            //     search by letter. 
-                            // </div>
+                           
 
                             <>
                             
@@ -604,7 +601,10 @@ export default function Dictionary(props) {
                             </>
                             :
                             <>
+                            {/* {console.log(terms.length)} */}
                             <Terms 
+                                currentSearch={currentSearch}
+                                termNotFound={terms.length === 0}
                                 isLoading={isLoadingTerms}
                                 terms={terms}
                                 onClick2={(id) => getMeaning(id)} 
@@ -676,6 +676,7 @@ export default function Dictionary(props) {
                                 
                             </>
                             :
+                            // <></>
                             <Meaning 
                                 meaning={meaning}
                                 id = {id}
