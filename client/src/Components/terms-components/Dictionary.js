@@ -133,7 +133,7 @@ export default function Dictionary(props) {
 
     const getTermsWithLanguage = (lan) => {
         setIsLoadingTerms(true)
-        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lan}&filters[title][$startsWith]=${currentLetter}` , { 
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lan}&filters[title][$startsWith]=${currentLetter}&sort[0]=title%3Aasc` , { 
             headers, method: 'GET' 
         })
           .then(checkStatus)
@@ -151,7 +151,7 @@ export default function Dictionary(props) {
       
         }
 
-        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=` + letter, requestOptions)
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${letter}&sort[0]=title%3Aasc`, requestOptions)
         .then((response) => {
             if(response.status !== "200"){
                 let err = Error;
