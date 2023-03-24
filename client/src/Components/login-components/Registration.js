@@ -7,8 +7,11 @@ import { Link } from 'react-router-dom';
 
 import textureImage from '../../Images/AAZ-DesktopBackGreen.png';
 
+import { GoogleLogin } from '@react-oauth/google';
+import jwt_decode from "jwt-decode";
 
-export default function Registration2() {
+
+export default function Registration2(props) {
 
     const [user, setUser] = useState({
         username: "",
@@ -558,6 +561,41 @@ export default function Registration2() {
                                     >
                                         Login
                                     </Link>
+                                    <div
+                                                style={{display: 'flex', justifyContent: 'center', margin: '3rem'}}
+                                            >
+                                                <GoogleLogin
+                                                onSuccess={credentialResponse => {
+                                                    console.log(credentialResponse);
+                                                    var decoded = jwt_decode(credentialResponse.credential);
+                                                    console.log(decoded)
+                                                            const requestOptions = {
+                                                                method: "POST",
+                                                                body: JSON.stringify({
+                                                                    username: '',
+                                                                    name: decoded.given_name,
+                                                                    lastname: decoded.family_name,
+                                                                    email: decoded.email,
+                                                                    pwd: '',
+                                                                    picture:  decoded.picture    
+                                                                }),
+                                                            };
+                                                            console.log(requestOptions)
+                
+                                                            fetch('https://accounting.linarys.com/v1/googleauth/', requestOptions)
+                                                                .then(response => response.json())
+                                                                .then(data => {
+                                                                    console.log(data);
+                                                                    window.localStorage.setItem("jwt", JSON.stringify({...data}.user.token));
+                                                                    window.localStorage.setItem("id", JSON.stringify(data.user.id));
+                                                                    props.history.push({
+                                                                        pathname: "/dictionary/1",
+                                                                    })
+                                                                });
+                                                    
+                                                }}
+                                            />
+                                            </div>
                                 </div>
                             </div>
                         </div>
