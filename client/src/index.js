@@ -6,7 +6,7 @@ import App from './App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 
-import * as serviceWorker from './serviceWorker';
+import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 
 import {GoogleOAuthProvider} from '@react-oauth/google';
 
@@ -27,10 +27,10 @@ ReactDOM.render(
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.register({
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.register({
   onUpdate: (registration) => {
-    registration.waiting.postMessage({ type: 'SKIP_WAITING' })
-    window.location.reload()
-  },
-})
+      registration.waiting.postMessage({type: 'SKIP_WAITING'});
+      window.location.reload();
+  }
+});
