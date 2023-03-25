@@ -64,11 +64,13 @@ export default function Dictionary(props) {
 
     const [selected, setSelected] = useState(['A','B','C']);
 
-    let id = props.location.pathname.replace('/dictionary/','')
+    let termId = props.location.pathname.replace('/dictionary/','')
+    window.localStorage.setItem("termId", termId);
     // console.log(typeof(props.location.pathname), props.location.pathname.replace('/dictionary/',''))
 
     useEffect(() => {
-        // setIsLoading(true)
+        
+        console.log(termId, Number(termId))
         window.innerWidth < 900 ? setMobile(true) : setMobile(false)
         setIsLoadingTerms(true)
         setIsLoadingMeaning(true)
@@ -77,7 +79,7 @@ export default function Dictionary(props) {
             // console.log("No access");
             window.location.href = '/'
         }
-        fetch(`https://sandbox.linarys.com/api/folios/${id}?populate=*`, { 
+        fetch(`https://sandbox.linarys.com/api/folios/${Number(termId)}?populate=*`, { 
             headers, method: 'GET' 
         })
             .then(checkStatus)
@@ -474,8 +476,9 @@ export default function Dictionary(props) {
                 visible={toastVisible}
             />
             <AppHeader 
+
                 currentPathName={props.location.pathname}
-                currentId={{...{...{...meaning.terms}.data}[0]}.id}
+                currentId={props.location.pathname.replace('/dictionary/','')}
                 onClick3={(letters) => getTermsWithLetter(letters) }
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
@@ -607,7 +610,7 @@ export default function Dictionary(props) {
                                 termNotFound={terms.length === 0}
                                 isLoading={isLoadingTerms}
                                 terms={terms}
-                                onClick2={(id) => getMeaning(id)} 
+                                onClick2={(id) => {getMeaning(id); window.localStorage.setItem("termId", id);}} 
                                 currentTerm = {meaning.title}
                                 clipboard = {clipboard}
                                 toastVisible = {toastVisible}
@@ -679,7 +682,7 @@ export default function Dictionary(props) {
                             // <></>
                             <Meaning 
                                 meaning={meaning}
-                                id = {id}
+                                id = {termId}
                                 listOfCurrentTraductions = {listOfCurrentTraductions}
                                 meaningTranslation = {meaningTranslation}
                                 onClick4 = {(meaningTraductionId) => getMeaningTraducion(meaningTraductionId)}

@@ -22,7 +22,7 @@ console.log(window.location.pathname)
 
 export default function AppHeader2({
     currentPathName,
-    currentId = 1,
+    currentId,
     onClick3 = f => f, 
     search, 
     onClick5 = f => f, 
@@ -307,7 +307,7 @@ export default function AppHeader2({
                             className={`${classes.navLink} ${currentPathName.startsWith("/dictionary/") ? classes.active : null}`}
                         >
                             <Link 
-                                to={`/dictionary/1`}
+                                to={`/dictionary/${window.localStorage.getItem("termId")}`}
                                 exact={false}    
                             >
                                 <i className='icon-nav icon-dictionary'></i>
@@ -353,7 +353,7 @@ export default function AppHeader2({
                         <div className={`${classes.navbarLinks} `}> 
                             <div className={`${classes.navLink} ${currentPathName.startsWith("/dictionary/") ? classes.active : null}`}>
                                 <Link 
-                                    to={`/dictionary/1 `}
+                                    to={`/dictionary/${window.localStorage.getItem("termId")} `}
                                     exact={false}
                                 >
                                     <i className='icon-dictionary'></i>
