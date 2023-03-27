@@ -226,6 +226,16 @@ export default function WebHeader2(props) {
                                         <i className='icon-nav icon-signin'></i>
                                         Login
                                     </NavLink>
+                                    <NavLink
+                                        to={`/registration`}
+                                        exact={true}
+                                        className={'nav-link'}
+                                        activeClassName="active"
+                                        style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
+                                    >
+                                        <i className='icon-nav icon-register'></i>
+                                        register
+                                    </NavLink>
                                 </div>
                                 :
                                 <>

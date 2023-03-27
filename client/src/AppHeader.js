@@ -56,7 +56,7 @@ export default function AppHeader2({
     let id = window.localStorage.getItem("id")
     return (
         <>
-        <header style={{height: '10vh'}}>
+        <header className={classes.header} style={{height: '10vh'}}>
             <nav className={classes.navbar}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     
