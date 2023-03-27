@@ -26,7 +26,8 @@
         height: calc(10vh + env(safe-area-inset-top));
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
         background-color: red;
-        /* position: fixed; */
+        position: fixed;
+        top: 0;
     }
 
     .navbar {
