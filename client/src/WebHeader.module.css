@@ -10,7 +10,7 @@
     height: inherit;
     width: 100vw;
     position: fixed;
-    top: 3vh;
+    top: 0;
     z-index: 100;
     box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
 }
@@ -35,7 +35,7 @@
         height: inherit;
         width: 100vw;
         position: fixed;
-        top: 0;
+        top: env(safe-area-inset-top);
         z-index: 100;
         box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
     }
