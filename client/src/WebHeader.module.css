@@ -82,7 +82,7 @@
         text-align: center;
         position: fixed;
         right: 5vw;
-        top: env(safe-area-inset-top);
+        top: calc(10vh + env(safe-area-inset-top));
         z-index: 11;
         color: white;
         cursor: pointer;
