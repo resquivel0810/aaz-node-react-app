@@ -76,7 +76,7 @@ export default function WebHeader2(props) {
     useOutsideAlerter(wrapperRef);
 
     return(
-        <header className={classes.webHeader} style={{height:'10vh'}}>
+        <header className={classes.webHeader}>
             {
                 navbarOpen
                 ?
