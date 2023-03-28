@@ -1,3 +1,12 @@
+.webHeader {
+    height: 10vh;
+    padding: 0;
+    background-color: #068b77;
+    position: fixed;
+    top: 0;
+    z-index: 200;
+}
+
 .navbar {
     display: flex;
     justify-content: space-evenly;
@@ -21,7 +30,11 @@
     padding-bottom: 0.5rem;
 }
 
+
+
 @media screen and (max-width: 991px) {
+
+
     .webHeader {
         height: calc(7vh + env(safe-area-inset-top));
         padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
@@ -29,6 +42,10 @@
         position: fixed;
         top: 0;
         z-index: 200;
+    }
+
+    .logo{
+        padding-top: env(safe-area-inset-top);
     }
 
     .navbar {
@@ -47,24 +64,16 @@
         position: absolute;
         display: block;
         background-color: #F5F5F6;
-        top: 10vh;
+        top: calc(7vh + env(safe-area-inset-top));
         color: #B66A00;
         height: 90vh;
-        /* left: 0; */
+      
         width: 240px;
         z-index: 50;
         box-shadow: 4px 0px 2px rgb(0 0 0 / 25%);
         padding: 50px 25px;
     }
-    /* ------------- sliding menu ------------------ */
-    .hiddenTransparency {
-
-    }
-
-    .visibleTransparency {
-        
-    }
-
+ 
     .hidden {
         transition: all .25s ease-out;
         left: -245px;
@@ -85,7 +94,7 @@
         text-align: center;
         position: fixed;
         right: 5vw;
-        top: calc(env(safe-area-inset-top));
+        top: calc(env(safe-area-inset-top) + 10px);
         z-index: 11;
         color: white;
         cursor: pointer;
@@ -96,7 +105,7 @@
         height: 3px;
         background-color: #fff;
         margin: 6px 0;
-        /* transition: 0.2s; */
+      
         position: relative;
         top: 3px;
         left: 7px;
@@ -106,3 +115,7 @@
     
     
 }
+
+
+
+    
