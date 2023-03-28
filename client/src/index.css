@@ -12,6 +12,10 @@ body {
   
 }
 
+body #root {
+  overflow-x: hidden;
+}
+
 /* header{
   margin-top: 56px;
 } */
