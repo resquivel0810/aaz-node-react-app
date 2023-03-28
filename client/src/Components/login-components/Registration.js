@@ -413,7 +413,7 @@ export default function Registration2(props) {
     return(
         <>
         <div className='bg_registration'>
-                <div className='container position-relative'>
+                <div style={{paddingTop:'5rem'}} className='container position-relative'>
                     <div className='registration_box'>
                         <img src={textureImage} alt="" className="" />
                         <div className='row align-items-center '>
