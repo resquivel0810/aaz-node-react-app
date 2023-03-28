@@ -85,7 +85,7 @@
         text-align: center;
         position: fixed;
         right: 5vw;
-        top: calc(env(safe-area-inset-top) + 3.5vh);
+        top: calc(env(safe-area-inset-top));
         z-index: 11;
         color: white;
         cursor: pointer;
