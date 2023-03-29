@@ -58,6 +58,7 @@ export default function Dictionary(props) {
     const [toastProperties, setToastProperties] = useState([])
     const [link, setLink] = useState([])
     const [mobile, setMobile] = useState(false)
+    const [searchBarDisplayed, setSearchBarDisplayed] = useState(false)
     const [mobileMeaningStyle, setMobileMeaningStyle] = useState(false)
 
     const [skeletonWidth, setSkeletonWidth] = useState()
@@ -475,8 +476,9 @@ export default function Dictionary(props) {
                 position="top-right" 
                 visible={toastVisible}
             />
-            <AppHeader 
-
+            <AppHeader  
+                searchBarDisplayed={searchBarDisplayed}
+                setSearchBarDisplayed={(val) => setSearchBarDisplayed(val)}
                 currentPathName={props.location.pathname}
                 currentId={props.location.pathname.replace('/dictionary/','')}
                 onClick3={(letters) => getTermsWithLetter(letters) }
