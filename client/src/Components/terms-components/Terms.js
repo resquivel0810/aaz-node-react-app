@@ -30,7 +30,7 @@ export default function Terms({
 
 
     useEffect(() => {
-        // navigator.clipboard.writeText(clipboard)
+        navigator.clipboard.writeText(clipboard)
         
         setToastVisible(toastVisible)
        
