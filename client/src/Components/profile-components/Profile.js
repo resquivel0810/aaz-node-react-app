@@ -71,8 +71,12 @@ export default function Profile2(props) {
     const [userNameError, setUserNameError] = useState(initError);
     const [emailError, setEmailError] = useState(initError);
 
+    const [searchBarDisplayed, setSearchBarDisplayed] = useState(false)
+    const [mobile, setMobile] = useState(false)
+
 
     useEffect(() => {
+        window.innerWidth < 900 ? setMobile(true) : setMobile(false)
         let t = window.localStorage.getItem("jwt");
         
         if(t === null){
@@ -787,6 +791,9 @@ export default function Profile2(props) {
         <>
             <AppHeader 
                 currentPathName={props.location.pathname}
+                searchBarDisplayed={searchBarDisplayed}
+                mobile = {mobile}
+
             />
             <Toast
                 toastList={toastProperties}

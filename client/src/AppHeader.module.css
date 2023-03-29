@@ -203,5 +203,20 @@
             top: calc(1.5vh + env(safe-area-inset-top));
             left: 10vw;
         }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items:flex-end;
+            background-color: #068b77;
+            height: inherit;
+            width: 100vw;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+        }
+        .toggleSearchBar{
+            margin-bottom: 1.5vh;
+        }
 
     } 

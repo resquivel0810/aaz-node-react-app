@@ -259,7 +259,7 @@ export default function AppHeader2({
                             }
                             
                             </div>
-                            <button onClick={() => setSearchBarDisplayed(false)} style={{ marginRight:'30px', width:'35px', height:'35px'}} className={'none'}>
+                            <button  onClick={() => setSearchBarDisplayed(false)} style={{ marginRight:'30px', width:'35px', height:'35px'}} className={`none ${classes.toggleSearchBar}`}>
                                 <i style={{color:'#FDFDFD'}}  className='icon-nav icon-close'></i>
                             </button>
                         </div>
@@ -294,9 +294,16 @@ export default function AppHeader2({
                                 </svg>
 
                             </Link>
-                            <button onClick={() => setSearchBarDisplayed(true)} style={{backgroundColor:'#FDFDFD', marginRight:'30px', width:'35px', height:'35px', borderRadius:'50%'}} className={'none'}>
-                                <i  className='icon-nav icon-search-1'></i>
-                            </button>
+                            {
+                                currentPathName.startsWith("/dictionary/")
+                                ?
+                                <button onClick={() => setSearchBarDisplayed(true)} style={{backgroundColor:'#FDFDFD', marginRight:'30px', width:'35px', height:'35px', borderRadius:'50%'}} className={`none ${classes.toggleSearchBar}`}>
+                                    <i  className='icon-nav icon-search-1'></i>
+                                </button>
+                                :
+                                null
+                            }
+                            
                             
                         </>
                     }</>

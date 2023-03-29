@@ -24,16 +24,18 @@
         display: block;
         height: 85vh;
         padding: 5vh 10vw 0 10vw;
+        position: relative;
+        top: 10vh;
     }
 
     .divisionLine {
         height: 2px;
         width: 80%;
         background-color: #E1E2E1;
-        margin: 3vh 0;
+        margin: 1.5vh 0;
     }
     .settingsContainer div{
-        margin: 5px 0;
+        margin: 1px 0;
     }
     .settingsContainer{
         padding-top: 0;

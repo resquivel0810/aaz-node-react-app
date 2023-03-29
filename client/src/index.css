@@ -1415,6 +1415,12 @@ div.registration_box img{
 
 
 @media screen and (max-width: 480px){
+  .profile_image{
+    height: 90px;
+    width: 90px;
+    border-radius: 100px;
+    object-fit: cover;
+  }
   .login_box,
   .registration_box,
   .forgotPassword_box{
