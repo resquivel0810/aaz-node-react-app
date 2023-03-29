@@ -307,8 +307,8 @@ export default function Dictionary(props) {
             <>
             <div style={{fontFamily: 'Work Sans'}}>
                 <div>
-                    <div style={{display:'flex', backgroundColor: '#F5F5F6', width: '250px', padding: '5px 10px', borderRadius: '10px', justifyContent: 'space-between',alignItems: 'center', boxShadow: '0px 0px 4px rgb(0 0 0 / 25%)' }}>
-                        <div style={{display: 'flex', alignItems: 'center', backgroundColor: '#FDFDFD', padding: '0 10px',borderRadius: '10px'}}>
+                    <div className={classes.filterByLetterMain}>
+                        <div className={classes.moreLetters}>
                             <span>{currentLetters}</span>
                             <button onClick={() => changeDisplayedLetters()} className='none'><i className='icon ms-1 icon-more'></i></button>
                         </div>

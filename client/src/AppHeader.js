@@ -56,7 +56,7 @@ export default function AppHeader2({
     let id = window.localStorage.getItem("id")
     return (
         <>
-        <header className={classes.header} style={{height: '10vh'}}>
+        <header className={classes.header}>
             <nav className={classes.navbar}>
                 <div style={{display: 'flex', alignItems: 'center'}}>
                     
@@ -116,7 +116,7 @@ export default function AppHeader2({
                             search === '/dictionary/:id'
                             ?
                             <>
-                            <div style={{width:'350px'}} className='d-flex align-items-center'>
+                            <div style={{width:'350px'}} className={classes.search}>
                             <input
                                 id='search'
                                 placeholder='Search'
@@ -134,7 +134,7 @@ export default function AppHeader2({
                                 ?  
                                 <>
                                 
-                                <div ref={ref2}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'370px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(10vh - .5rem)':'calc(5vh + 17.5px)', boxShadow: '0px 5px 3px rgb(0 0 0 / 25%)'}}>
+                                <div ref={ref2} className={classes.searchSelection}  style={{width: mobile ? '100vw' : '400px', height:displayedPredicted?'370px':'200px', backgroundColor: 'rgba(246, 249, 229, 0.95)', position: 'absolute', padding: '15px 30px', borderRadius:mobile?'unset': '10px', right: mobile ? '0' : 'unset', top: mobile ? 'calc(7vh + env(safe-area-inset-top))':'calc(5vh + 17.5px)', boxShadow: '0px 5px 3px rgb(0 0 0 / 25%)'}}>
 
                                     <Select  
                                         // selectedOption={language}

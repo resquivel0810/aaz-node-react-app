@@ -1132,6 +1132,11 @@ div.registration_box img{
 
 /* RESPONSIVE */
 @media screen and (max-width: 991px) {
+  .container_term{
+
+    height: 68vh;
+
+  }
   .bg_login{
     height: 100vh;
     padding: 2rem 0rem;
@@ -1177,7 +1182,7 @@ div.registration_box img{
   }
 
   h3{
-    font-size: 1.5rem;
+    font-size: 1.1rem;
   }
 
   .subtitle_bold{
