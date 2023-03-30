@@ -65,7 +65,7 @@
     .navbarLinks {
         position: absolute;
         display: block;
-        background-color: blue;
+        background-color: #F5F5F6;
         top: calc(10vh + env(safe-area-inset-top));
         color: #B66A00;
         height: 90vh;
