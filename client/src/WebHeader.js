@@ -14,7 +14,7 @@ export default function WebHeader2(props) {
         let t = window.localStorage.getItem("jwt");
         if(t){
             if(jwt === ""){
-                setJwt(JSON.parse(t))
+                setJwt(t)
             }
         }
     })

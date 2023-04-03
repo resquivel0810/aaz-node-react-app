@@ -48,7 +48,7 @@ export default class App extends Component{
     let t = window.localStorage.getItem("jwt");
     if(t){
       if(this.state.jwt === ""){
-        this.setState({jwt: JSON.parse(t)});
+        this.setState({jwt: t});
       }
     }
   }

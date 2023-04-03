@@ -103,7 +103,8 @@ export default function Profile2(props) {
                                 lastname: json.user.lastname,
                                 email: json.user.email,
                                 picture: json.user.picture,
-                                account: json.user.account
+                                account: json.user.account.toString(),
+                                token: window.localStorage.getItem("jwt")
                             })
                             setCredentials({
                                 pwd: '',
@@ -297,7 +298,7 @@ export default function Profile2(props) {
             setEditName(true)
             return
         } else if (lastEdited === 'name' && user.name !== '') {
-            fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+            fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
             .then(data => {
                 setToastVisible(true)
                 setInterval(() => {
@@ -321,7 +322,7 @@ export default function Profile2(props) {
             setEditLastName(true)
             return
         } else if (lastEdited === 'lastname' && user.lastname !== '') {
-            fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+            fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
             .then(data => {
                 console.log(typeof(requestOptions.body))
                 console.log(JSON.parse(requestOptions.body).lastname)
@@ -367,7 +368,7 @@ export default function Profile2(props) {
                     body: JSON.stringify(newMail),
                 }
                 fetch('https://accounting.linarys.com/v1/changeemail/', mailRequestOptions)
-                fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+                fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
                 .then(data => {
                     setToastVisible(true)
                     setInterval(() => {
@@ -400,7 +401,7 @@ export default function Profile2(props) {
                 .then(data => {
                     console.log(data.ID)
                     if (data.ID === 0) {
-                        fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+                        fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
                         .then(data => {
                             setToastVisible(true)
                             setInterval(() => {
@@ -430,7 +431,7 @@ export default function Profile2(props) {
                 })
 
         } else {
-            fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+            fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
             .then(data => {
                 setToastVisible(true)
                 setInterval(() => {
@@ -449,7 +450,7 @@ export default function Profile2(props) {
             })
         }
 
-        // fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions)
+        // fetch('https://accounting.linarys.com/v1/updateuserlog/', requestOptions)
         //     .then(data => {
         //         setToastVisible(true)
         //         console.log()

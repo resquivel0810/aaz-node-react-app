@@ -127,7 +127,7 @@ export default function Login(props) {
                             setEnteredPwdTouched(true);
                             return false;
                         } else if (data.user.confirmed === 1){
-                            window.localStorage.setItem("jwt", JSON.stringify(JWToken));
+                            window.localStorage.setItem("jwt", JWToken);
                             window.localStorage.setItem("id", JSON.stringify(data.user.id));
                             props.history.push({
                                 pathname: "/dictionary/1",
