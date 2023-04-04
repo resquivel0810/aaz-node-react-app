@@ -477,6 +477,7 @@ export default function Dictionary(props) {
                 visible={toastVisible}
             />
             <AppHeader  
+                onSelectPreviosSearch={(val) => setSearchBarDisplayed(val)}
                 searchBarDisplayed={searchBarDisplayed}
                 setSearchBarDisplayed={(val) => setSearchBarDisplayed(val)}
                 currentPathName={props.location.pathname}
