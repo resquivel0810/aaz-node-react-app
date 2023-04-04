@@ -462,7 +462,8 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {
                                                     getMeaning(lastVisited.flat()[2].slice(11));
-                                                    console.log(lastVisited.flat()[2].slice(11))
+                                                    console.log(lastVisited.flat()[2].slice(11));
+                                                    onSelectPreviosSearch(false)
                                                 }} 
                                                 className={'link'} 
                                                 to={`/dictionary/${lastVisited.flat()[2].slice(11)}`}
@@ -474,7 +475,8 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {
                                                     getMeaning(lastVisited.flat()[4].slice(11));
-                                                    console.log(lastVisited.flat()[4].slice(11))
+                                                    console.log(lastVisited.flat()[4].slice(11));
+                                                    onSelectPreviosSearch(false)
                                                 }} 
                                                 className={'link'} 
                                                 to={`/dictionary/${lastVisited.flat()[4].slice(11)}`}
@@ -486,7 +488,8 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {
                                                     getMeaning(lastVisited.flat()[6].slice(11));
-                                                    console.log(lastVisited.flat()[6].slice(11))
+                                                    console.log(lastVisited.flat()[6].slice(11));
+                                                    onSelectPreviosSearch(false)
                                                 }} 
                                                 className={'link'} 
                                                 to={`/dictionary/${lastVisited.flat()[6].slice(11)}`}
@@ -498,7 +501,8 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {
                                                     getMeaning(lastVisited.flat()[8].slice(11));
-                                                    console.log(lastVisited.flat()[8].slice(11))
+                                                    console.log(lastVisited.flat()[8].slice(11));
+                                                    onSelectPreviosSearch(false)
                                                 }} 
                                                 className={'link'} 
                                                 to={`/dictionary/${lastVisited.flat()[8].slice(11)}`}
@@ -510,7 +514,8 @@ export default function AppHeader2({
                                             <Link 
                                                 onClick={() => {
                                                     getMeaning(lastVisited.flat()[10].slice(11));
-                                                    console.log(lastVisited.flat()[10].slice(11))
+                                                    console.log(lastVisited.flat()[10].slice(11));
+                                                    onSelectPreviosSearch(false)
                                                 }} 
                                                 className={'link'} 
                                                 to={`/dictionary/${lastVisited.flat()[10].slice(11)}`}
