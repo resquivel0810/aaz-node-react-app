@@ -354,7 +354,7 @@ export default function Dictionary(props) {
                                         value={['A','B','C']}
                                         selected={selected}
                                         text="ABC"
-                                        onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])}}
+                                        onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); setDisplayedLetters(false)}}
                                     />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -363,7 +363,7 @@ export default function Dictionary(props) {
                                             value={['D','E','F']}
                                             selected={selected}
                                             text="DEF"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -372,7 +372,7 @@ export default function Dictionary(props) {
                                             value={['G','H','I']}
                                             selected={selected}
                                             text="GHI"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -381,7 +381,7 @@ export default function Dictionary(props) {
                                             value={['J','K','L']}
                                             selected={selected}
                                             text="JKL"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -390,7 +390,7 @@ export default function Dictionary(props) {
                                             value={['M','N','O']}
                                             selected={selected}
                                             text="MNO"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                 </div>
@@ -401,7 +401,7 @@ export default function Dictionary(props) {
                                             value={['P','Q','R']}
                                             selected={selected}
                                             text="PQR"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -410,7 +410,7 @@ export default function Dictionary(props) {
                                             value={['S','T','U']}
                                             selected={selected}
                                             text="STU"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -419,7 +419,7 @@ export default function Dictionary(props) {
                                             value={['V','W','X']}
                                             selected={selected}
                                             text="VWX"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -428,7 +428,7 @@ export default function Dictionary(props) {
                                             value={['Y','Z']}
                                             selected={selected}
                                             text="YZ"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0])} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
                                         />
                                     </div>
                                 </div>
