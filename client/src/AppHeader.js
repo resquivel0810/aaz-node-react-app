@@ -162,7 +162,8 @@ export default function AppHeader2({
                                                             }else if (currentLetter === 'Y' ||  currentLetter==='Z') {
                                                                 currentLetters = ["Y", "Z"]
                                                             }
-                                                            setCurrentLetters(currentLetters)
+                                                            setCurrentLetters(currentLetters);
+                                                            onSelectPreviosSearch(false)
 
 
                                                             
@@ -438,7 +439,8 @@ export default function AppHeader2({
                                                         }else if (currentLetter === 'Y' ||  currentLetter==='Z') {
                                                             currentLetters = ["Y", "Z"]
                                                         }
-                                                        setCurrentLetters(currentLetters)
+                                                        setCurrentLetters(currentLetters);
+                                                        // onSelectPreviosSearch(false)
 
 
                                                         
