@@ -56,14 +56,7 @@ const isLocalhost = Boolean(
     navigator.serviceWorker
       .register(swUrl)
       .then((registration) => {
-        registration.onupdatefound = () => {
-          const installingWorker = registration.installing;
-          if (installingWorker == null) {
-            return;
-          }
-          installingWorker.onstatechange = () => {
-            if (installingWorker.state === 'installed') {
-				if (navigator.vendor === 'Apple Computer, Inc.') {
+        if (navigator.vendor === 'Apple Computer, Inc.') {
 					console.log('Safari!!!!');
 					if (registration.waiting) {
 						if (config && config.onUpdate) {
@@ -71,6 +64,14 @@ const isLocalhost = Boolean(
 						}
 					}
 				}
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          if (installingWorker == null) {
+            return;
+          }
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+				
 				if (navigator.serviceWorker.controller) {
 					// At this point, the updated precached content has been fetched,
 					// but the previous service worker will still serve the older
