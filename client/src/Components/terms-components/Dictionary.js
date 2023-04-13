@@ -543,7 +543,7 @@ export default function Dictionary(props) {
                                 )
                                 }
                             })()} */}
-                            <h3 style={{margin: '0'}}>Terms &#9749;</h3>
+                            <h3 style={{margin: '0'}}>Terms</h3>
                             <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {
