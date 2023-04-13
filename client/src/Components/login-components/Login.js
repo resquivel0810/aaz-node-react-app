@@ -265,7 +265,7 @@ export default function Login(props) {
                                                                 .then(response => response.json())
                                                                 .then(data => {
                                                                     console.log(data);
-                                                                    window.localStorage.setItem("jwt", JSON.stringify({...data}.user.token));
+                                                                    window.localStorage.setItem("jwt", {...data}.user.token);
                                                                     window.localStorage.setItem("id", JSON.stringify(data.user.id));
                                                                     props.history.push({
                                                                         pathname: "/dictionary/1",

@@ -361,7 +361,8 @@ export default function Profile2(props) {
                 console.log('The eamil was edited')
                 let newMail = {
                     id: window.localStorage.getItem("id"),
-                    email: user.email
+                    email: user.email,
+                    token: window.localStorage.getItem("jwt")
                 }
                 const mailRequestOptions = {
                     method: 'POST', 
@@ -492,9 +493,14 @@ export default function Profile2(props) {
               {
                 label: 'I am sure',
                 onClick: () => {
-                    fetch("https://accounting.linarys.com/v1/deleteaccount/" + user.id, 
+                    let deleteData = {
+                        id: user.id,
+                        token: window.localStorage.getItem("jwt")
+                    }
+                    fetch("https://accounting.linarys.com/v1/deleteaccount/", 
                     {
                         method: "POST",
+                        body: JSON.stringify(deleteData)
                     })
                     .then(response => response.json)
                     .then(data => {

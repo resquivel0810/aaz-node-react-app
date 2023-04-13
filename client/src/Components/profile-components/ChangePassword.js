@@ -28,7 +28,8 @@ export default function ChangePassword2(props) {
 
     const [user, setUser] = useState({
         id: window.localStorage.getItem("id"),
-        newpwd:""
+        newpwd:"",
+        token: window.localStorage.getItem("jwt")
     })
 
     const [credentials, setCredentials] = useState({
