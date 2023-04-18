@@ -386,7 +386,7 @@ export default function Registration2(props) {
                     }
             
                     fetch('https://accounting.linarys.com/v1/updateuser/', requestOptions2)
-                    .then( window.location.href='/confirmationRegistermail')
+                    .then(data => window.location.href='/confirmationRegistermail')
                 }
                 else if(data[0].ID !== 0 && data[1].ID === 0) {
                     setUserNameError({

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import AppHeader from '../../AppHeader';
 import AppFooter from '../../AppFooter';
 import Input from '../form-components/Input';
+import RadioInput from '../terms-components/RadioInput';
 import profileImage from '../../Images/profile_image.jpg';
 import styles from "./Modal.module.css";
 
@@ -51,6 +52,7 @@ export default function Profile2(props) {
     const [isOpenModalChangePass, setIsOpenModalChangePass] = useState(false);
     const [isOpenModalChangeEmail, setIsOpenModalChangeEmail] = useState(false);
     const [toastProperties, setToastProperties] = useState([])
+    const [isOpenModalDeleteAccount, setIsOpenModalDeleteAccount] = useState(false);
 
     const [passwordShown, setPasswordShown] = useState(false);
     const [enteredPwdTouched, setEnteredPwdTouched] = useState(false);
@@ -70,8 +72,11 @@ export default function Profile2(props) {
     const [lastNameError, setLastNameError] = useState(initError);
     const [userNameError, setUserNameError] = useState(initError);
     const [emailError, setEmailError] = useState(initError);
+    const [deleteReasonError, setDeleteReasonError] = useState(initError)
 
     const [searchBarDisplayed, setSearchBarDisplayed] = useState(false)
+    const [selected, setSelected] = useState("");
+
     const [mobile, setMobile] = useState(false)
 
 
@@ -479,53 +484,52 @@ export default function Profile2(props) {
     }
 
     const logout = () => {
+        fetch('https://accounting.linarys.com/v1/removeactiveuser/',{
+            method: 'GET', 
+        })
         setJwt("");
         // REMOVE TOKEN 
         window.localStorage.removeItem("jwt");
     }
 
-    const confirmDelete = (e) => {
 
-        confirmAlert({
-            title: 'Are you sure you want to delete your account?',
-            message: 'All your information will be lost',
-            buttons: [
-              {
-                label: 'I am sure',
-                onClick: () => {
-                    let deleteData = {
-                        id: user.id,
-                        token: window.localStorage.getItem("jwt")
-                    }
-                    fetch("https://accounting.linarys.com/v1/deleteaccount/", 
-                    {
-                        method: "POST",
-                        body: JSON.stringify(deleteData)
-                    })
-                    .then(response => response.json)
-                    .then(data => {
-                        if(data.err) {
-                            setAlert({
-                                type: "alert-danger", 
-                                message: data.error.message
-                            })
-                        }else{
-                            props.history.push({
-                                pathname: "/",
-                            })
-                            console.log("User deleted")
-                            window.localStorage.removeItem("jwt");
-                        }
-                    })
-                }
-              },
-              {
-                label: 'Cancel',
-                onClick: () => {}
-              }
-            ]
-        });
+
+    const confirmDelete = () => {
+        if (selected === "") {
+            setDeleteReasonError({
+                exists: true,
+                helperText: "Must choose an option",
+            })
+            return 
+
+        }
+        let deleteData = {
+            id: user.id,
+            token: window.localStorage.getItem("jwt")
+        }
+        let saveReasonData = {
+            id: user.id,
+            reason: selected[0]
+        }
+        fetch("https://accounting.linarys.com/v1/savereason/",{
+            method: "POST",
+            body: JSON.stringify(saveReasonData)
+        })
+        fetch("https://accounting.linarys.com/v1/deleteaccount/", 
+        {
+            method: "POST",
+            body: JSON.stringify(deleteData)
+        })
+            .then(response => response.json)
+            .then(data => {
+                props.history.push({
+                    pathname: "/",
+                })
+                window.localStorage.removeItem("jwt");
+            })
     }
+
+    
 
     const handleImage = (event) => {
         event.preventDefault();
@@ -640,6 +644,91 @@ export default function Profile2(props) {
     //     );
     // };
 
+    const ModalDeleteAccount = ({ setIsOpen }) => {
+        return (
+            <>
+            <div className={styles.darkBG} onClick={() => {setIsOpen(false); setDeleteReasonError(initError)}} />
+                <div className={styles.centered}>
+                    <div style={{height: '400px', width:'290px', padding:'0 10%', fontFamily:'Roboto', backgroundColor:'#F5F5F6'}} className={styles.modal}>
+                        <button style={{display:'flex', width:'100%', justifyContent:'flex-end', padding:'5px'}} className='none' onClick={() => {setIsOpen(false); setDeleteReasonError(initError)}}>
+                            <i className='icon ms-1 icon-close'></i> 
+                        </button>
+
+                        <div>
+                            <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center'}} className={styles.modalHeader}>
+                                <i style={{color:'#4FB8A8', fontSize:'3rem'}} className='icon ms-1 icon-warning'></i> 
+                            </div>
+                            <div style={{display:'flex', justifyContent: 'center', marginTop: '10px'}}>
+                                <h5 style={{fontSize:'14px', padding:'0', marginBottom:'10px', fontWeight:'600'}} className={styles.heading}>
+                                    Are you sure you want to delete your account?
+                                </h5>
+                            </div>
+                        
+                        </div>
+                        <div>
+                            <h5 style={{fontSize:'14px', padding:'0', marginBottom:'10px', fontWeight:'600'}} className={styles.heading}>Why are you deleting your account?</h5>
+                            <div style={{fontSize:'14px'}}>
+                                <RadioInput 
+                                    value={["I don´t use the app"]}
+                                    selected={selected}
+                                    text="I don´t use the app"
+                                    onChange={(val) => {setSelected(val)}}
+                                />
+                                <RadioInput 
+                                    value={["You send to many e-mails"]}
+                                    selected={selected}
+                                    text="You send to many e-mails"
+                                    onChange={(val) => {setSelected(val)}}
+                                />
+                                <RadioInput 
+                                    value={["I receive too many notifications"]}
+                                    selected={selected}
+                                    text="I receive too many notifications"
+                                    onChange={(val) => {setSelected(val)}}
+                                />
+                                <RadioInput 
+                                    value={["The app is not usefull"]}
+                                    selected={selected}
+                                    text="The app is not usefull"
+                                    onChange={(val) => {setSelected(val)}}
+                                />
+                                <RadioInput 
+                                    value={["Something else"]}
+                                    selected={selected}
+                                    text="Something else"
+                                    onChange={(val) => {setSelected(val)}}
+                                />
+
+                                <div style={{height:'18px'}} className={deleteReasonError.exists ? "text-danger" : "no-danger"}>{deleteReasonError.helperText}</div>
+                            </div>
+                        </div>
+                        <div style={{display:'flex', justifyContent: 'space-around', marginTop:'25px'}} >
+                            <button  
+                                style={{width:'unset'}}
+                                onClick={() => confirmDelete()}
+                                className="snow"
+                            >
+                                
+                                    I´M SURE
+                                
+                            </button>
+                            <button
+                                style={{width:'unset'}}
+                                className='ochre'
+                                onClick={() => {setIsOpen(false); setDeleteReasonError(initError)}}
+                            >
+                                Cancel
+                            </button>
+                            
+                        </div>
+                        
+                        
+                    </div>
+                </div>
+            </>
+        );
+    };
+
     const ModalChangePass = ({ setIsOpen }) => {
         return (
             <>
@@ -655,14 +744,14 @@ export default function Profile2(props) {
                             <i style={{color:'#4FB8A8', fontSize:'3rem'}} className='icon ms-1 icon-alert'></i> 
                         </div>
                         <div style={{display:'flex', justifyContent: 'center', marginBottom: '25px', marginTop: '10px'}}>
-                            <h5 className={styles.heading}>
+                            <h5  className={styles.heading}>
                                 Are you sure you want to change your password?
                             </h5>
                         </div>
                             
                         
                         <div style={{display:'flex', justifyContent: 'space-around'}} >
-                        <button  
+                            <button  
                                 style={{width:'unset'}}
                                 
                                 className="snow"
@@ -703,7 +792,7 @@ export default function Profile2(props) {
             body: JSON.stringify(credentials),
         }
 
-        fetch("https://accounting.linarys.com/v1/login/", requestOptions)
+        fetch("https://accounting.linarys.com/v1/validatepwd/", requestOptions)
             .then((response) => response.json())
             .then(data => {
                 if (data.user.id === 0 && credentials.pwd !== ''){
@@ -813,6 +902,7 @@ export default function Profile2(props) {
             {/* {isOpenPhotoModal && <ModalPhoto setIsOpen={setIsOpenPhotoModal} />} */}
             {isOpenModalChangePass && <ModalChangePass setIsOpen={setIsOpenModalChangePass} />}
             {isOpenModalChangeEmail && <ModalChangeEmail setIsOpen={setIsOpenModalChangeEmail} />}
+            {isOpenModalDeleteAccount && <ModalDeleteAccount setIsOpen={setIsOpenModalDeleteAccount} />}
                 <div >
                     <div className={classes.profileContainer}>
                         
@@ -1043,26 +1133,26 @@ export default function Profile2(props) {
                             </div>
                             <div>
                                     
-                                    <a
-                                        href="#!" 
+                                    <button
+                          
                                         className="link"
                                         onClick={() => setIsOpenModalChangePass(true)}
                                     >
                                         Change password
-                                    </a>
+                                    </button>
                                 </div>
                             <div >
                                 <Link className={'link'} to="/" onClick={logout}><i className='icon-link icon-logout me-1'></i> Log out</Link>
                             </div>
                             <div>
-                                <a 
-                                    href="#!" 
-                                    onClick={() => confirmDelete()}
+                                <button 
+                       
+                                    onClick={() => setIsOpenModalDeleteAccount(true)}
                                     className="link"
                                 >
                                     <i className='icon-link icon-delete'></i>
                                     Delete account
-                                </a>
+                                </button>
                             </div>
                         </div>
                     </div>
