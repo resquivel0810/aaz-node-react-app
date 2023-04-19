@@ -4,12 +4,14 @@ import { Link } from 'react-router-dom';
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+// import { response } from 'express';
 
 
 
 
 export default function Terms({
     currentSearch,
+    expandCurrentSearch = f => f,
     termNotFound,
     terms, 
     onClick2 = f => f, 
@@ -68,11 +70,30 @@ export default function Terms({
                     :
                     null
                 }
-                    <div className='container_term'>
+                    <div 
+                        onScroll={() => {
+                            if(document.getElementById("container_term").scrollTop === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight) {
+                                console.log("CALL FUNCTION TO ADD MORE TERMS")
+                                // console.log(currentSearch)
+                                // console.log(typeof(terms), terms)
+                                fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${currentSearch}&sort[0]=title:asc&pagination[page]=2`, {method: 'GET'})
+                                    .then(response => {
+                                        return response.json()
+                                    })
+                                    .then(json => expandCurrentSearch(json))
+
+
+                            }
+                        }} 
+                        id='container_term' 
+                        className='container_term'
+                    >
                     
                         {terms.map((t) => (                             
                             <div className='box_term' id={t.id} key={t.id}>
-                                <div style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(243,191,76,0.25)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} className='row'>
+                                <div 
+                                    style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(243,191,76,0.25)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} 
+                                    className='row'>
                                     <div  style={{width:'95%'}}>
                                        
                                     

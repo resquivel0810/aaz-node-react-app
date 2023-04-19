@@ -105,6 +105,14 @@ export default function Dictionary(props) {
         })
     }, [clipboardTitle])
 
+    // useEffect(() => {
+    //     // if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight)
+    //     // {
+    //     // //your code here
+    //     // }
+    //     console.log(document.getElementById("container_term").scrollHeight)
+    // }, [])
+
     
     // console.log(props.match.path)
 
@@ -610,6 +618,16 @@ export default function Dictionary(props) {
                             {/* {console.log(terms.length)} */}
                             <Terms 
                                 currentSearch={currentSearch}
+                                expandCurrentSearch={(exp) => {
+                                    // setTerms((prevState) => ([
+                                    //     ...prevState,
+                                    //     {'vacio': 'vacio'}
+                                    //     ]))
+                                    setTerms(exp.data)
+                                        ; console.log(exp.data, terms)
+                                    }
+                                    
+                                }
                                 termNotFound={terms.length === 0}
                                 isLoading={isLoadingTerms}
                                 terms={terms}
