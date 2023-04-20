@@ -39,6 +39,8 @@ export default function Dictionary(props) {
     const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
 
     const [terms, setTerms] = useState([])
+    const [termsMeta, setTermsMeta] = useState()
+    const [scrolledCount, setScrolledCount] = useState(2)
     // const [error, setError] = useState(null);
     const [currentSearch, setCurrentSearch] = useState('')
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
@@ -87,13 +89,13 @@ export default function Dictionary(props) {
             .then(parseJSON)
             .then(data  => {
                 setMeaning({...data.data.attributes}); 
+                // console.log({...data});
                 setSearchLanguage({...data.data.attributes}.locale); 
                 fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${data.data.attributes.locale}`, { 
                     headers, method: 'GET' 
                 })
-                .then(checkStatus)
-                .then(parseJSON)
-                .then(({ data }) => {setTerms(data); setIsLoadingTerms(false); setIsLoadingMeaning(false)})
+                .then(data => data.json())
+                .then(data => {setTerms(data.data); setIsLoadingTerms(false); setIsLoadingMeaning(false); setTermsMeta(data.meta)})
             })
     }, [])
 
@@ -551,7 +553,7 @@ export default function Dictionary(props) {
                                 )
                                 }
                             })()} */}
-                            <h3 style={{margin: '0'}}>Terms &#9742;</h3>
+                            <h3 style={{margin: '0'}}>Terms </h3>
                             <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {
@@ -619,15 +621,21 @@ export default function Dictionary(props) {
                             <Terms 
                                 currentSearch={currentSearch}
                                 expandCurrentSearch={(exp) => {
-                                    // setTerms((prevState) => ([
-                                    //     ...prevState,
-                                    //     {'vacio': 'vacio'}
-                                    //     ]))
-                                    setTerms(exp.data)
-                                        ; console.log(exp.data, terms)
+                                    setTerms((prevState) => ([
+                                        ...prevState,
+                                        ...exp.data
+                                        ]))
+                                    // setTerms(exp.data)
+                                        // ; console.log(...exp.data, terms)
                                     }
                                     
                                 }
+                                scrolledCount={() => {
+                                    setScrolledCount((prevState) => prevState +1)
+                                    
+                                }}
+                                scroll={scrolledCount}
+                                termsMeta={termsMeta}
                                 termNotFound={terms.length === 0}
                                 isLoading={isLoadingTerms}
                                 terms={terms}

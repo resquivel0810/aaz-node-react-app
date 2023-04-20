@@ -10,8 +10,11 @@ import 'react-loading-skeleton/dist/skeleton.css'
 
 
 export default function Terms({
+    scrolledCount = f => f,
+    scroll,
     currentSearch,
     expandCurrentSearch = f => f,
+    termsMeta,
     termNotFound,
     terms, 
     onClick2 = f => f, 
@@ -39,7 +42,16 @@ export default function Terms({
         
     }, [clipboard, toastVisible, setToastVisible])
 
-    
+
+    var count = 1;
+    const ahhh = () => {
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${currentSearch}&sort[0]=title:asc&pagination[page]=${scroll}`, {method: 'GET'})
+            // .then(console.log("AHHHH"))
+            .then(response => 
+                response.json()
+            )
+            .then(json => expandCurrentSearch(json))
+    }
     return(
         <>
             {
@@ -73,17 +85,19 @@ export default function Terms({
                     <div 
                         onScroll={() => {
                             if(document.getElementById("container_term").scrollTop === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight) {
-                                console.log("CALL FUNCTION TO ADD MORE TERMS")
-                                // console.log(currentSearch)
-                                // console.log(typeof(terms), terms)
-                                fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${currentSearch}&sort[0]=title:asc&pagination[page]=2`, {method: 'GET'})
-                                    .then(response => {
-                                        return response.json()
-                                    })
-                                    .then(json => expandCurrentSearch(json))
-
-
-                            }
+                                
+                           
+                                scrolledCount(count)
+                                setTimeout(ahhh, 1000)
+                              
+                        
+                                
+                                
+                                 
+                            } 
+                            
+                            
+                            
                         }} 
                         id='container_term' 
                         className='container_term'
