@@ -37,6 +37,7 @@ export default function Dictionary(props) {
     const [isLoadingTerms, setIsLoadingTerms] = useState(false)
     const [isLoadingMeaning, setIsLoadingMeaning] = useState(false)
     const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
+    const [loader, setLoader] = useState(false)
 
     const [terms, setTerms] = useState([])
     const [termsMeta, setTermsMeta] = useState()
@@ -329,7 +330,7 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['A', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[0]} 
-                                onClick={() => getTermsWithLetter(Object.values(currentLetters)[0])}
+                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[0]); setCurrentSearch(Object.values(currentLetters)[0]);setScrolledCount(2)}}
                             >
                                 {Object.values(currentLetters)[0]}
                             </button>
@@ -337,7 +338,7 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['B', 'E', 'H', 'K', 'N', 'Q', 'T', 'W', 'Z'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[1]} 
-                                onClick={() => getTermsWithLetter(Object.values(currentLetters)[1])}
+                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[1]); setCurrentSearch(Object.values(currentLetters)[1]);setScrolledCount(2)}}
                             >
                                 {Object.values(currentLetters)[1]}
                             </button>
@@ -346,7 +347,7 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['C', 'F', 'I', 'L', 'O', 'R', 'U', 'X'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[2]} 
-                                onClick={() => getTermsWithLetter(Object.values(currentLetters)[2])}
+                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[2]); setCurrentSearch(Object.values(currentLetters)[2]);setScrolledCount(2)}}
                             >
                                 {Object.values(currentLetters)[2]}
                             </button>
@@ -364,7 +365,7 @@ export default function Dictionary(props) {
                                         value={['A','B','C']}
                                         selected={selected}
                                         text="ABC"
-                                        onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); setDisplayedLetters(false)}}
+                                        onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)}}
                                     />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -373,7 +374,7 @@ export default function Dictionary(props) {
                                             value={['D','E','F']}
                                             selected={selected}
                                             text="DEF"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -382,7 +383,7 @@ export default function Dictionary(props) {
                                             value={['G','H','I']}
                                             selected={selected}
                                             text="GHI"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -391,7 +392,7 @@ export default function Dictionary(props) {
                                             value={['J','K','L']}
                                             selected={selected}
                                             text="JKL"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -400,7 +401,7 @@ export default function Dictionary(props) {
                                             value={['M','N','O']}
                                             selected={selected}
                                             text="MNO"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                 </div>
@@ -411,7 +412,7 @@ export default function Dictionary(props) {
                                             value={['P','Q','R']}
                                             selected={selected}
                                             text="PQR"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -420,7 +421,7 @@ export default function Dictionary(props) {
                                             value={['S','T','U']}
                                             selected={selected}
                                             text="STU"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -429,7 +430,7 @@ export default function Dictionary(props) {
                                             value={['V','W','X']}
                                             selected={selected}
                                             text="VWX"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                     <div style={{display:'flex'}}>
@@ -438,7 +439,7 @@ export default function Dictionary(props) {
                                             value={['Y','Z']}
                                             selected={selected}
                                             text="YZ"
-                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]); ; setDisplayedLetters(false)} }
+                                            onChange={(val) => {setSelected(val); setCurrentLetters(val); setCurrentLetter(val[0]); getTermsWithLetter(val[0]);  setDisplayedLetters(false);setCurrentSearch(val[0]);setScrolledCount(2)} }
                                         />
                                     </div>
                                 </div>

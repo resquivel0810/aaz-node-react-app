@@ -88,7 +88,7 @@ export default function Terms({
                                 
                            
                                 scrolledCount(count)
-                                setTimeout(ahhh, 1000)
+                                setTimeout(ahhh, 1500)
                               
                         
                                 
@@ -728,9 +728,9 @@ export default function Terms({
                                         
                                         </div>
                                         
-
+                                        
                                     </div>
-                                  
+                                    
                                 </div>
                                 
                             </div>
