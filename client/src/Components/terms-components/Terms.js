@@ -746,7 +746,7 @@ export default function Terms({
                             loading 
                             ?
                             <>
-                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0 50px 0'}}>
+                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0 60px 0'}}>
                                 <div class="loader"></div>
                             </div>
                             </>
