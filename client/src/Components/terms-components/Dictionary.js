@@ -38,7 +38,7 @@ export default function Dictionary(props) {
     const [isLoadingMeaning, setIsLoadingMeaning] = useState(false)
     const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
     const [loader, setLoader] = useState(false)
-
+    
     const [terms, setTerms] = useState([])
     const [termsMeta, setTermsMeta] = useState()
     const [scrolledCount, setScrolledCount] = useState(2)
@@ -174,6 +174,7 @@ export default function Dictionary(props) {
             return response.json();
         })
         .then((json) => {
+            setTermsMeta(json.meta)
             setTerms(json.data)
             setIsLoadingTerms(false)
             // setMeaning([])
@@ -330,7 +331,11 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['A', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[0]} 
-                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[0]); setCurrentSearch(Object.values(currentLetters)[0]);setScrolledCount(2)}}
+                                onClick={() => {
+                                    getTermsWithLetter(Object.values(currentLetters)[0]); 
+                                    setCurrentSearch(Object.values(currentLetters)[0]);
+                                    setScrolledCount(2);
+                                }}
                             >
                                 {Object.values(currentLetters)[0]}
                             </button>
@@ -338,7 +343,12 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['B', 'E', 'H', 'K', 'N', 'Q', 'T', 'W', 'Z'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[1]} 
-                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[1]); setCurrentSearch(Object.values(currentLetters)[1]);setScrolledCount(2)}}
+                                onClick={() => {
+                                    getTermsWithLetter(Object.values(currentLetters)[1]); 
+                                    setCurrentSearch(Object.values(currentLetters)[1]);
+                                    setScrolledCount(2);
+
+                                }}
                             >
                                 {Object.values(currentLetters)[1]}
                             </button>
@@ -347,7 +357,11 @@ export default function Dictionary(props) {
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['C', 'F', 'I', 'L', 'O', 'R', 'U', 'X'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none'}}  
                                 className={classes.filterButton}
                                 id={Object.values(currentLetters)[2]} 
-                                onClick={() => {getTermsWithLetter(Object.values(currentLetters)[2]); setCurrentSearch(Object.values(currentLetters)[2]);setScrolledCount(2)}}
+                                onClick={() => {
+                                    getTermsWithLetter(Object.values(currentLetters)[2]); 
+                                    setCurrentSearch(Object.values(currentLetters)[2]);
+                                    setScrolledCount(2)
+                                }}
                             >
                                 {Object.values(currentLetters)[2]}
                             </button>
@@ -477,7 +491,6 @@ export default function Dictionary(props) {
           console.log("Sorry! Your browser does not support Web Share API");
         }
     };
-
 
     
     return(
@@ -621,21 +634,38 @@ export default function Dictionary(props) {
                             {/* {console.log(terms.length)} */}
                             <Terms 
                                 currentSearch={currentSearch}
-                                expandCurrentSearch={(exp) => {
-                                    setTerms((prevState) => ([
-                                        ...prevState,
-                                        ...exp.data
-                                        ]))
-                                    // setTerms(exp.data)
-                                        // ; console.log(...exp.data, terms)
-                                    }
-                                    
-                                }
-                                scrolledCount={() => {
-                                    setScrolledCount((prevState) => prevState +1)
+                                scroll={scrolledCount}
+                                scrolledCount={(n) => {
+                                    setScrolledCount((prevState) => { 
+                                        console.log(prevState)
+                                         if (prevState <= termsMeta.pagination.pageCount) {
+                                            return n + prevState
+                                        } else {
+                                            return prevState
+                                        }
+                                    })
                                     
                                 }}
-                                scroll={scrolledCount}
+                                expandCurrentSearch={(exp) => {
+                                    
+                                    setTerms((prevState) => {
+                                        if (scrolledCount <= termsMeta.pagination.pageCount) {
+                                            return ([
+                                                ...prevState,
+                                                ...exp.data
+                                                ])
+                                        } else {
+                                            return prevState
+                                        }
+                                        
+                                    })
+                                }
+                                    
+                                }
+                                
+                                loaderLimit={scrolledCount}
+                                loading={loader}
+                                setLoader={(v) => setLoader(v)}
                                 termsMeta={termsMeta}
                                 termNotFound={terms.length === 0}
                                 isLoading={isLoadingTerms}

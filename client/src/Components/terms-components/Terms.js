@@ -15,6 +15,9 @@ export default function Terms({
     currentSearch,
     expandCurrentSearch = f => f,
     termsMeta,
+    setLoader = f => f,
+    loaderLimit,
+    loading,
     termNotFound,
     terms, 
     onClick2 = f => f, 
@@ -44,13 +47,26 @@ export default function Terms({
 
 
     var count = 1;
+    
     const ahhh = () => {
-        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${currentSearch}&sort[0]=title:asc&pagination[page]=${scroll}`, {method: 'GET'})
-            // .then(console.log("AHHHH"))
+        
+        if (loaderLimit === termsMeta.pagination.pageCount + 1) {
+            setLoader(false);
+        } else {
+            setLoader(true);
+        }
+        setTimeout(() => {
+            fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${searchLanguage}&filters[title][$startsWith]=${currentSearch}&sort[0]=title:asc&pagination[page]=${scroll}`, {method: 'GET'})
             .then(response => 
                 response.json()
             )
-            .then(json => expandCurrentSearch(json))
+            .then(json => {
+                expandCurrentSearch(json);  
+            })
+            .then(() => setLoader(false))
+        }, 3000);
+        
+            
     }
     return(
         <>
@@ -84,19 +100,10 @@ export default function Terms({
                 }
                     <div 
                         onScroll={() => {
-                            if(document.getElementById("container_term").scrollTop === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight) {
-                                
-                           
-                                scrolledCount(count)
-                                setTimeout(ahhh, 1500)
-                              
-                        
-                                
-                                
-                                 
-                            } 
-                            
-                            
+                            if(document.getElementById("container_term").scrollTop === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight && loading === false) {
+                                scrolledCount(count);
+                                ahhh() 
+                            }  
                             
                         }} 
                         id='container_term' 
@@ -106,7 +113,7 @@ export default function Terms({
                         {terms.map((t) => (                             
                             <div className='box_term' id={t.id} key={t.id}>
                                 <div 
-                                    style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(243,191,76,0.25)': 'white', width: mobile ?'100%':'80%', padding: mobile ?'5px':'15px'}} 
+                                    style={{backgroundColor: t.attributes.title === currentTerm ? 'rgba(243,191,76,0.25)': 'white', width: mobile ?'100%':'100%', padding: mobile ?'5px':'15px'}} 
                                     className='row'>
                                     <div  style={{width:'95%'}}>
                                        
@@ -735,7 +742,19 @@ export default function Terms({
                                 
                             </div>
                         ))}
-            
+                        {
+                            loading 
+                            ?
+                            <>
+                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0'}}>
+                                <div class="loader"></div>
+                            </div>
+                            </>
+                            :
+                            <>
+                            <div style={{textAlign:'center', color:'#B66A00'}}>END</div>
+                            </>
+                        }
                     </div>
                     
                     
