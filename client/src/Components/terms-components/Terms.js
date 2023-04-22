@@ -754,7 +754,7 @@ export default function Terms({
                             <></>
                         }
                         {
-                            {...{...termsMeta}.pagination}.pageCount === loaderLimit
+                            {...{...termsMeta}.pagination}.pageCount === loaderLimit - 1 && loading === false
                             ?
                             <>
                             <div style={{textAlign:'center', color:'#B66A00'}}>END</div>
@@ -762,6 +762,7 @@ export default function Terms({
                             : 
                             <></>
                         }
+                      
                       
                     </div>
                     
