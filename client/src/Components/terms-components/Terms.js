@@ -746,15 +746,23 @@ export default function Terms({
                             loading 
                             ?
                             <>
-                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0'}}>
+                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0 50px 0'}}>
                                 <div class="loader"></div>
                             </div>
                             </>
                             :
+                            <></>
+                        }
+                        {
+                            {...{...termsMeta}.pagination}.pageCount === loaderLimit
+                            ?
                             <>
                             <div style={{textAlign:'center', color:'#B66A00'}}>END</div>
-                            </>
+                            </> 
+                            : 
+                            <></>
                         }
+                      
                     </div>
                     
                     
