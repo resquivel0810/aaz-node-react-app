@@ -45,7 +45,7 @@ export default function Dictionary(props) {
     // const [error, setError] = useState(null);
     const [currentSearch, setCurrentSearch] = useState('')
     const [currentLetters, setCurrentLetters] = useState(['A','B','C'])
-    const [currentLetter, setCurrentLetter] = useState('A')
+    const [currentLetter, setCurrentLetter] = useState('')
     const [displayedLetters, setDisplayedLetters] = useState(false)
     const [displayedSearchBarOptions, setDisplayedSearchBarOptions] = useState(false)
     const [meaning, setMeaning] = useState([])
@@ -185,6 +185,9 @@ export default function Dictionary(props) {
 
             } 
             else if(json.data.length > 0 && searched === '') {
+                // if(currentSearch === "*") {
+                //     return null
+                // }
                 setCurrentLetter(json.data[0].attributes.title.charAt(0).toUpperCase())
             }
             else if (json.data.length === 0) {
@@ -195,6 +198,16 @@ export default function Dictionary(props) {
             // console.log(json.data[0].attributes.title.charAt(0))
             // console.log(json.data.length > 0 )
         })
+    }
+
+    const getAllTerms = (lang) => {
+        setIsLoadingTerms(true)
+        setCurrentLetter("")
+        fetch(`https://sandbox.linarys.com/api/folios?populate=*&locale=${lang}`, { 
+                    headers, method: 'GET' 
+                })
+            .then(data => data.json())
+            .then(data => {setTerms(data.data); setIsLoadingTerms(false); setIsLoadingMeaning(false); setTermsMeta(data.meta)})
     }
 
     const getMeaningTraducion = (meaningTraductionId) => {
@@ -326,7 +339,7 @@ export default function Dictionary(props) {
                             <button onClick={() => changeDisplayedLetters()} className='none'><i className='icon ms-1 icon-more'></i></button>
                         </div>
                         
-                        <div style={{display: 'flex'}}>
+                        <div style={{display: 'flex', width:'120px'}}>
                             <button 
                                 style={{margin: '5px', borderRadius: '50%',backgroundColor: ['A', 'D', 'G', 'J', 'M', 'P', 'S', 'V', 'Y'].includes(currentLetter) && currentLetters.includes(currentLetter) ? 'rgba(243, 191, 76, .55)' : 'none' }} 
                                 className={classes.filterButton}
@@ -365,7 +378,32 @@ export default function Dictionary(props) {
                             >
                                 {Object.values(currentLetters)[2]}
                             </button>
+                            
                         </div>
+                        <div style={{display:'flex'}}>
+                            <button 
+                                style={{
+                                    margin: '5px', 
+                                    borderRadius: '50%',
+                                    textTransform:'uppercase',
+                                    whiteSpace:'nowrap',
+                                    width:'unset',
+                                    backgroundColor: currentSearch === "" ? 'rgba(243, 191, 76, .55)' : 'none',
+                                    borderRadius: 'none', 
+                                    padding: '5px'
+                                }}  
+                                className={classes.filterButton}
+                                id={"allTerms"} 
+                                onClick={() => {
+                                    getAllTerms(searchLanguage)
+                                    setCurrentSearch("");
+                                    setScrolledCount(2);
+                                }}
+                            >
+                                all terms
+                            </button>
+                        </div>
+                        
                     </div>
                     {displayedLetters
                         ?
@@ -552,22 +590,22 @@ export default function Dictionary(props) {
                   
                     <div  style={{display: mobileMeaningStyle ? 'none' : 'block', flex:'1', marginRight:'3vw'}}  >
                         <div className={classes.searchParams}>
-                            {/* {(() => {
-                                if (currentLetter !== undefined && searched === '') {
+                            {(() => {
+                                if (currentLetter !== "" && searched === '') {
                                 return (
-                                    <h3 style={{margin: '0'}}>All terms with {currentLetter}</h3>
+                                    <h3 style={{margin: '0'}}>Terms starting with {currentLetter}</h3>
+                                )
+                                } else if (currentLetter === "" && searched === '') {
+                                return (
+                                    <h3 style={{margin: '0'}}>All terms</h3>
                                 )
                                 } else if (searched !== '') {
                                 return (
-                                    <h3 style={{margin: '0'}}>Results</h3>
-                                )
-                                } else {
-                                return (
-                                    <h3 style={{margin: '0'}}>Terms</h3>
+                                    <h3 style={{margin: '0'}}>Terms starting with {searched}</h3>
                                 )
                                 }
-                            })()} */}
-                            <h3 style={{margin: '0'}}>Terms </h3>
+                            })()}
+                            {/* <h3 style={{margin: '0'}}>Terms </h3> */}
                             <div className={classes.searchLanguage} >
                                 Currently searching in 
                                 {
