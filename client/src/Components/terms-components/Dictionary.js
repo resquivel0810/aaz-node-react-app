@@ -181,7 +181,7 @@ export default function Dictionary(props) {
             // props.history.push('/dictionary/0')
             if(json.data.length > 0 && searched !== '') {
                 setCurrentLetter(json.data[0].attributes.title.charAt(0).toUpperCase())
-                setSearched('')
+                // setSearched('')
 
             } 
             else if(json.data.length > 0 && searched === '') {
@@ -348,6 +348,7 @@ export default function Dictionary(props) {
                                     getTermsWithLetter(Object.values(currentLetters)[0]); 
                                     setCurrentSearch(Object.values(currentLetters)[0]);
                                     setScrolledCount(2);
+                                    setSearched('')
                                 }}
                             >
                                 {Object.values(currentLetters)[0]}
@@ -360,6 +361,7 @@ export default function Dictionary(props) {
                                     getTermsWithLetter(Object.values(currentLetters)[1]); 
                                     setCurrentSearch(Object.values(currentLetters)[1]);
                                     setScrolledCount(2);
+                                    setSearched('')
 
                                 }}
                             >
@@ -374,6 +376,7 @@ export default function Dictionary(props) {
                                     getTermsWithLetter(Object.values(currentLetters)[2]); 
                                     setCurrentSearch(Object.values(currentLetters)[2]);
                                     setScrolledCount(2)
+                                    setSearched('')
                                 }}
                             >
                                 {Object.values(currentLetters)[2]}
@@ -398,6 +401,7 @@ export default function Dictionary(props) {
                                     getAllTerms(searchLanguage)
                                     setCurrentSearch("");
                                     setScrolledCount(2);
+                                    setSearched('')
                                 }}
                             >
                                 all terms
@@ -581,7 +585,10 @@ export default function Dictionary(props) {
                 mobile = {mobile}
                 setLink = {(val) => setLink([...[val], ...link])}
                 language={searchLanguage}
-                setTermVisible={(val) => {setSearched(val); getTermsWithLetter(val)}}
+                setTermVisible={(val) => {
+                    setSearched(val); 
+                    getTermsWithLetter(val)
+                }}
                 setCurrentLetters={(val) => setCurrentLetters(val)}
 
             />
@@ -601,7 +608,7 @@ export default function Dictionary(props) {
                                 )
                                 } else if (searched !== '') {
                                 return (
-                                    <h3 style={{margin: '0'}}>Terms starting with {searched}</h3>
+                                    <h3 style={{margin: '0'}}>Terms starting with <span style={{fontStyle:'italic'}}>{searched}</span></h3>
                                 )
                                 }
                             })()}
