@@ -37,6 +37,8 @@ export default function Dictionary(props) {
     const [isLoadingTerms, setIsLoadingTerms] = useState(false)
     const [isLoadingMeaning, setIsLoadingMeaning] = useState(false)
     const [isLoadingMeaningTranslation, setIsLoadingMeaningTranslation] = useState(false)
+    const [isLoadingPredictedTerms, setIsLoadingPredictedTerms] = useState(false)
+
     const [loader, setLoader] = useState(false)
     
     const [terms, setTerms] = useState([])
@@ -231,14 +233,19 @@ export default function Dictionary(props) {
     }
 
     const getTermsWithPredictive = (lan, search) => {
-        // setIsLoadingTerms(true)
+        setIsLoadingPredictedTerms(true)
         fetch(`https://sandbox.linarys.com/api/folios?populate=terms&locale=${lan}&filters[title][$startsWith]=${search}&pagination[limit]=5`, { 
             headers, method: 'GET' 
         })
-          .then(checkStatus)
-          .then(parseJSON)
-          .then(({ data }) => {setPredictedTerms(data);setDisplayedPredicted(true)})
-   
+            .then(data => data.json())
+            .then(( data ) => {
+                // if(currentSearch === "") {
+                //     console.log("EMPTY!!!")
+                // }
+                setPredictedTerms(data.data);
+                setDisplayedPredicted(true); 
+                setIsLoadingPredictedTerms(false)
+            })
         
     }
 
@@ -552,9 +559,27 @@ export default function Dictionary(props) {
                 onClick5={(search) => setSearched(search)}
                 onFocus1={() => setDisplayedSearchBarOptions(true)}
                 // onBlur1={() => setDisplayedSearchBarOptions(false)}
-                setCurrentSearch={(val) => setCurrentSearch(val)}
+                
                 currentSearch={currentSearch}
-                getTermsWithPredictive={(partial) => getTermsWithPredictive(searchLanguage ,partial)}
+                isLoadingPredictedTerms={isLoadingPredictedTerms}
+                getTermsWithPredictive={(partial) => {
+                    if(partial ===""){
+                        setDisplayedPredicted(false)
+                        setPredictedTerms([])
+                    } else {
+                        console.log(partial===currentSearch)
+                        getTermsWithPredictive(searchLanguage ,partial);
+                        console.log(partial)
+                    }
+                    
+                }}
+                setCurrentSearch={(val) => {
+                    setCurrentSearch(val); 
+                    if(val === "") {
+                        console.log("EMPTY!!!")
+                        setPredictedTerms([])
+                    }
+                }}
                 displayedPredicted={displayedPredicted}
                 predictedTerms = {predictedTerms}
                 displayedSearchBarOptions={displayedSearchBarOptions}
