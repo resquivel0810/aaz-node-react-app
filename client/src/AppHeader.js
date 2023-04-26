@@ -495,10 +495,10 @@ export default function AppHeader2({
                                             isLoadingPredictedTerms
                                             ?
                                             <>
-                                            {/* <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with <span style={{fontStyle:'italic'}}>{currentSearch}</span></div>
+                                            <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with <span style={{fontStyle:'italic'}}>{currentSearch}</span></div>
                                             <div style={{display:'flex', justifyContent:'center', padding: '10px 0'}}>
                                                 <div class="loader"></div>
-                                            </div> */}
+                                            </div>
                                             </>
                                             : 
                                             <></>

@@ -563,6 +563,7 @@ export default function Dictionary(props) {
                 currentSearch={currentSearch}
                 isLoadingPredictedTerms={isLoadingPredictedTerms}
                 getTermsWithPredictive={(partial) => {
+                    setDisplayedSearchBarOptions(true)
                     if(partial ===""){
                         setDisplayedPredicted(false)
                         setPredictedTerms([])
