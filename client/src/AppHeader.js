@@ -49,7 +49,8 @@ export default function AppHeader2({
     language,
     setLanguage = f => f,
     setTermVisible = f => f,
-    setCurrentLetters = f => f
+    setCurrentLetters = f => f,
+    sendConsultedTermMetric = f => f
 }) {
     
     
@@ -134,6 +135,27 @@ export default function AppHeader2({
                                             ?
                                             <>
                                             <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with <span style={{fontStyle:'italic'}}>{currentSearch}</span></div>
+                                            {
+                                                isLoadingPredictedTerms
+                                                ?
+                                                <>
+                                                <div style={{display:'flex', justifyContent:'center', padding: '10px 0'}}>
+                                                    <div class="loader"></div>
+                                                </div>
+                                                </>
+                                                :
+                                                <>
+                                                {
+                                                    Object.keys(predictedTerms).length===0
+                                                    ?
+                                                    <div style={{width: '250px', color: '#F33757'}}>
+                                                        Sorry we couldn’t find any matches. 
+                                                    </div>
+                                                    :
+                                                    <></>
+                                                }
+                                                </>
+                                            }
                                             {predictedTerms.map(t => (
                                                 
                                                 <div>
@@ -141,6 +163,8 @@ export default function AppHeader2({
                                                     <Link 
                                                         // id={t.id} 
                                                         onClick={() => {
+                                                            sendConsultedTermMetric(t.id)
+                                                            console.log(t.id)
                                                             getMeaning(t.id); 
                                                             setLink([`/dictionary/${t.id}`, t.attributes.title]);
                                                             // console.log(t.attributes.title.slice(0, 1)) ;
@@ -183,7 +207,19 @@ export default function AppHeader2({
                                             ))}
                                             </>
                                             :
-                                            <div class="loader"></div>
+                                            <>
+                                            {
+                                            isLoadingPredictedTerms
+                                            ?
+                                            <>
+                                            <div  style={{color: '#004F3D', fontFamily: 'Work Sans', padding: '5px 0'}}>Search for terms starting with <span style={{fontStyle:'italic'}}>{currentSearch}</span></div>
+                                            <div style={{display:'flex', justifyContent:'center', padding: '10px 0'}}>
+                                                <div class="loader"></div>
+                                            </div>
+                                            </>
+                                            : 
+                                            <></>
+                                        }</>
                                         }   
 
                                         <div>
@@ -368,10 +404,6 @@ export default function AppHeader2({
                                     setCurrentSearch(document.getElementById('search').value);
                                     
                                 }}
-                                // onKeyUpCapture={
-                                //     currentSearch !== "" ? null : 
-                                          
-                                // }
                                 autocomplete="off"
                                 style={{width: window.innerWidth < 600 ? '185px' : '275px', paddingRight: '75px'}}
 
@@ -436,7 +468,6 @@ export default function AppHeader2({
                                                 :
                                                 <></>
                                             }
-                                            {/* {console.log(Object.keys(predictedTerms).length)} */}
                                             {predictedTerms.map(t => (
                                             
                                             <div>
@@ -444,6 +475,8 @@ export default function AppHeader2({
                                                 <Link 
                                                     // id={t.id} 
                                                     onClick={() => {
+                                                        console.log(t.id)
+                                                        sendConsultedTermMetric(t.id)
                                                         getMeaning(t.id); 
                                                         setLink([`/dictionary/${t.id}`, t.attributes.title]);
                                                         // console.log(t.attributes.title.slice(0, 1)) ;

@@ -34,7 +34,9 @@ export default function Terms({
     setMobileMeaningStyle = f => f, 
     mobileMeaningStyle,
     setSkeletonWidth = f => f,
-    searchLanguage}) {
+    searchLanguage,
+    sendConsultedTermMetric = f => f
+}) {
 
 
     useEffect(() => {
@@ -129,6 +131,7 @@ export default function Terms({
                                                 <Link
                                                     key={t.id} 
                                                     onClick={() =>{
+                                                        sendConsultedTermMetric(t.id)
                                                         onClick2(t.id); 
                                                         setLink([document.getElementById(t.attributes.title).href.replace('https://aaz-node-react-app.herokuapp.com', ''), document.getElementById(t.attributes.title).innerText]); 
                                                         setMobileMeaningStyle(true);

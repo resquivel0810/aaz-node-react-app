@@ -212,6 +212,8 @@ export default function Dictionary(props) {
             .then(data => {setTerms(data.data); setIsLoadingTerms(false); setIsLoadingMeaning(false); setTermsMeta(data.meta)})
     }
 
+
+
     const getMeaningTraducion = (meaningTraductionId) => {
         const requestOptions = {
             method: 'GET', 
@@ -247,6 +249,14 @@ export default function Dictionary(props) {
                 setIsLoadingPredictedTerms(false)
             })
         
+    }
+
+    const sendConsultedTermMetric = (id) => {
+        // setIsLoadingTerms(true)
+        // setCurrentLetter("")
+        fetch(`https://accounting.linarys.com/v1/mterm/${id}`, {method: 'POST' })
+            // .then(data => data.json())
+            // .then(data => {setTerms(data.data); setIsLoadingTerms(false); setIsLoadingMeaning(false); setTermsMeta(data.meta)})
     }
 
     let traductions = {...meaning.localizations}.data
@@ -584,6 +594,7 @@ export default function Dictionary(props) {
                 displayedPredicted={displayedPredicted}
                 predictedTerms = {predictedTerms}
                 displayedSearchBarOptions={displayedSearchBarOptions}
+                sendConsultedTermMetric={(id) => sendConsultedTermMetric(id)}
                 ref2={wrapperRef2}
                 options={displayedSearchBarOptions}
                 search={props.match.path}
@@ -764,6 +775,7 @@ export default function Dictionary(props) {
                                 mobile = {mobile}
                                 setSkeletonWidth = {(val) => setSkeletonWidth(val)}
                                 searchLanguage = {searchLanguage}
+                                sendConsultedTermMetric={(id) => sendConsultedTermMetric(id)}
 
                             />
                             </>
