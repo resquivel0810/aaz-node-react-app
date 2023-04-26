@@ -894,13 +894,13 @@ export default function Meaning({
                                         
                                         </div>
                                         <div id='meaningText' style={{height: '50vh' }}>
-                                            {/* {
+                                            {
                                                 meaningTranslation === false
                                                 ?
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaning.terms}.data}[0]}.attributes}.definition)} />
                                                 :
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaningTranslation.terms}.data}[0]}.attributes}.definition)} />
-                                            } */}
+                                            }
                                         </div>
                                         
                                         </>
