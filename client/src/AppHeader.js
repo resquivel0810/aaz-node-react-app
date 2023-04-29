@@ -55,7 +55,17 @@ export default function AppHeader2({
     
     
    
-
+    const startTask = () => { 
+        Notification.requestPermission((permission) => {
+            navigator.serviceWorker.ready.then(() => {
+                const notifyMe = permission === 'granted' 
+                navigator.serviceWorker.controller.postMessage({
+                    type: 'DO_SLOW_THING',
+                    notifyMe, 
+                })
+            }) 
+        })
+    }
 
 
     let id = window.localStorage.getItem("id")
@@ -662,6 +672,7 @@ export default function AppHeader2({
                             <Link
                                 to={`/profile/${id}`}
                                 exact={false}
+                                onClick={startTask}
                             >
                                 <i className='icon-nav icon-profile'></i>
                                 <div>
