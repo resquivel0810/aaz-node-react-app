@@ -669,16 +669,19 @@ export default function AppHeader2({
                         <div
                             className={`${classes.navLink} ${currentPathName.startsWith("/profile/") || currentPathName.startsWith("/changePassword") || currentPathName.startsWith("/confirmChangePassword") ? classes.active : null}`} 
                         >
+                            {'serviceWorker' in navigator && (
                             <Link
                                 to={`/profile/${id}`}
                                 exact={false}
                                 onClick={startTask}
-                            >
+                                >
                                 <i className='icon-nav icon-profile'></i>
                                 <div>
                                     Profile
                                 </div> 
                             </Link>
+                            )}
+                            
                         </div>
                         <div
                         className={`${classes.navLink}`}
