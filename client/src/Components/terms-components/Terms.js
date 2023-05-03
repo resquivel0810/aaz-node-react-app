@@ -40,7 +40,7 @@ export default function Terms({
 
 
     useEffect(() => {
-        navigator.clipboard.writeText(clipboard)
+        // navigator.clipboard.writeText(clipboard)
         
         setToastVisible(toastVisible)
        
@@ -102,8 +102,9 @@ export default function Terms({
                 }
                     <div 
                         onScroll={() => {
-                            if(document.getElementById("container_term").scrollTop === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight && loading === false) {
+                            if(Math.floor(document.getElementById("container_term").scrollTop) === document.getElementById("container_term").scrollHeight - document.getElementById("container_term").clientHeight && loading === false) {
                                 scrolledCount(count);
+                                console.log("SCROLL TO BOTTOM")
                                 ahhh() 
                             }  
                             
