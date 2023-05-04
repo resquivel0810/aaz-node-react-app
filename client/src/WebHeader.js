@@ -75,6 +75,11 @@ export default function WebHeader2(props) {
     
     useOutsideAlerter(wrapperRef);
 
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+
     return(
         <header className={classes.webHeader}>
             {
@@ -88,7 +93,7 @@ export default function WebHeader2(props) {
             <nav ref={wrapperRef} className={classes.navbar}>
                 <Link
                     to={`/`}
-                    style={{display:'flex', width:'180px'}}
+                    style={{display:'flex'}}
                 >
                     {/* <svg style={{margin: window.innerWidth > 600 ? '0 50px': '0 10px'}}  width={window.innerWidth > 600 ? "200" : "120"} id="Capa_1" data-name="Capa 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 73 22">
                         <g>
@@ -167,7 +172,7 @@ export default function WebHeader2(props) {
                                     className={'nav-link'}
                                     activeClassName="active"
                                     style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                    onClick={() => setNavbarOpen(false)}
+                                    onClick={() => {setNavbarOpen(false); topFunction()}}
                                 >
                                     <i className='icon-nav icon-home'></i>
                                     Home
@@ -180,7 +185,7 @@ export default function WebHeader2(props) {
                                     className={'nav-link'}
                                     activeClassName="active"
                                     style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                    onClick={() => setNavbarOpen(false)}
+                                    onClick={() => {setNavbarOpen(false); topFunction()}}
                                 >
                                     <i className='icon-nav icon-app'></i>
                                     About the app
@@ -193,7 +198,7 @@ export default function WebHeader2(props) {
                                     className={'nav-link'}
                                     activeClassName="active"
                                     style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                    onClick={() => setNavbarOpen(false)}
+                                    onClick={() => {setNavbarOpen(false); topFunction()}}
                                 >
                                     <i className='icon-nav icon-book'></i>
                                     About the book
@@ -206,7 +211,7 @@ export default function WebHeader2(props) {
                                     className={'nav-link'}
                                     activeClassName="active"
                                     style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                    onClick={() => setNavbarOpen(false)}
+                                    onClick={() => {setNavbarOpen(false); topFunction()}}
                                 >
                                     <i className='icon-nav icon-author'></i>
                                     About the author
@@ -226,7 +231,7 @@ export default function WebHeader2(props) {
                                         className={'nav-link'}
                                         activeClassName="active"
                                         style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                        onClick={() => setNavbarOpen(false)}
+                                        onClick={() => {setNavbarOpen(false); topFunction()}}
                                     >
                                         <i className='icon-nav icon-signin'></i>
                                         Login
@@ -237,7 +242,7 @@ export default function WebHeader2(props) {
                                         className={'nav-link'}
                                         activeClassName="active"
                                         style={{color:window.innerWidth < 991 ? '#B66A00' :'#FDFDFD', textTransform:'uppercase'}}
-                                        onClick={() => setNavbarOpen(false)}
+                                        onClick={() => {setNavbarOpen(false); topFunction()}}
                                     >
                                         <i className='icon-nav icon-register'></i>
                                         register

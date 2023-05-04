@@ -22,6 +22,7 @@ const headers = { 'Content-Type': 'application/json' };
 // let listOfTradcutions = []
 // let listOfCurrentTraductions = []
 
+
 export default function Meaning({
     meaning, 
     id, 
@@ -44,6 +45,9 @@ export default function Meaning({
     function createMarkup(str) {
         return {__html: str};
     }
+
+    
+    
 
     return(
         <>
@@ -894,13 +898,41 @@ export default function Meaning({
                                         
                                         </div>
                                         <div id='meaningText' style={{height: '50vh' }}>
-                                            {
+                                            {/* {
                                                 meaningTranslation === false
                                                 ?
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaning.terms}.data}[0]}.attributes}.definition)} />
                                                 :
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaningTranslation.terms}.data}[0]}.attributes}.definition)} />
-                                            }
+                                            } */}
+                                            <div>
+                                                <div style={{width:'400px', height:'400px', backgroundImage: 'linear-gradient(rgba(224, 242, 240, .8), rgba(224, 242, 240, 1))', position: 'absolute'}}></div>
+                                                <p>Description is available just in the premium version.</p>
+                                                <p id="NoText" >
+                                                    Description is available just in the premium version. Description is available just in 
+                                                    the premium version. Description is available just in the premium version. Description 
+                                                    is available just in the premium version. Description is available just in the premium 
+                                                    version. Description is available just in the premium version. Description is available 
+                                                    just in the premium version. Description is available just in the premium version. 
+                                                    Description is available just in the premium version. Description is available just in 
+                                                    the premium version. Description is available just in the premium version. Description 
+                                                    is available just in the premium version. Description is available just in the premium 
+                                                    version. Description is available just in the premium version. Description is available 
+                                                    just in the premium version. Description is available just in the premium version. 
+                                                    Description is available just in the premium version. Description is available just 
+                                                    in the premium version. Description is available just in the premium version. 
+                                                    Description is available just in the premium version. Description is available 
+                                                    just in the premium version. Description is available just in the premium version. 
+                                                    Description is available just in the premium version. Description is available just 
+                                                    in the premium version. Description is available just in the premium version. 
+                                                    Description is available just in the premium version. Description is available 
+                                                    just in the premium version. Description is available just in the premium version.
+                                                </p>
+                                               
+                                                
+                                                
+                                                
+                                            </div>
                                         </div>
                                         
                                         </>
@@ -920,3 +952,4 @@ export default function Meaning({
         </>
     );
 }
+
