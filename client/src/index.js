@@ -31,6 +31,6 @@ ReactDOM.render(
 serviceWorkerRegistration.register({
   onUpdate: (registration) => {
       registration.waiting.postMessage({type: 'SKIP_WAITING'});
-      // window.location.reload();
+      window.location.reload();
   }
 });
