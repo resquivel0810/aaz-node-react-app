@@ -167,7 +167,7 @@ export default function Terms({
                                                     >
                                                         <i className='icon ms-1 icon-copy'></i>
                                                     </button>  
-                                                    <button  onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText)}} className='none'>
+                                                    <button  onClick={() => {setShareId(t.id, document.getElementById(t.attributes.terms.data[0].id).innerText.replace(/([.]\n)/gm,". "))}} className='none'>
                                                         <i className='icon ms-1 icon-share'></i>
                                                     </button>
                                                 </div>
