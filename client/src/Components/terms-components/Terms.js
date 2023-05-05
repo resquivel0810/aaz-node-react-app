@@ -40,7 +40,7 @@ export default function Terms({
 
 
     useEffect(() => {
-        // navigator.clipboard.writeText(clipboard)
+        navigator.clipboard.writeText(clipboard)
         
         setToastVisible(toastVisible)
        
@@ -152,8 +152,9 @@ export default function Terms({
 
                                                             {  
 
-                                                                setClipboard(document.getElementById(t.attributes.terms.data[0].id).innerText)
-                                                                setToastVisible(true)
+                                                                setClipboard(document.getElementById(t.attributes.terms.data[0].id).innerText.replace(/([.]\n)/gm,". "))
+                                                                setToastVisible(true);
+                                                                // console.log(document.getElementById(t.attributes.terms.data[0].id).innerText.replace(/([.]\n)/gm,". "))
                                                                 setTimeout(() => {
                                                                     setToastVisible(false)
                                                                 }, 5000)

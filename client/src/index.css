@@ -862,7 +862,7 @@ input:hover {
 /* TERMS */
 .box_meaningTerm{
   background: #E0F2F0;
-  height: 74vh;
+  height: 75vh;
   /* overflow-y: scroll; */
 }
 
@@ -1238,6 +1238,7 @@ div.registration_box img{
   /* NAVBAR */
   .nav-link.active{
     border-bottom: 0px #DDE295 solid;
+    color: red;
   }
   .nav-web .nav-link,
   .nav-web .nav-link .icon-nav{

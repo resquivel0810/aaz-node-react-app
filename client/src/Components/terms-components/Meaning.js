@@ -1,6 +1,7 @@
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useRef, useEffect, useState } from 'react';
+// import { useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import Skeleton, { SkeletonTheme } from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
@@ -46,6 +47,40 @@ export default function Meaning({
         return {__html: str};
     }
 
+    const [blurSize, setBlurSize] = useState({
+        blurWidth: '',
+        blurHeight: '',
+        blurTop: ''
+
+    })
+
+
+
+    useEffect(() => {
+        setBlurSize({
+            blurWidth: ref.current.getBoundingClientRect().width,
+            blurHeight: ref.current.getBoundingClientRect().height,
+            blurTop: ref.current.getBoundingClientRect().top
+        })
+  
+        console.log(ref.current.getBoundingClientRect())
+        
+    }, [ref])
+
+    // useEffect(() =>{
+    //     window.addEventListener("resize", () => {
+    //         // setBlurSize({
+    //         //     blurWidth: ref.current.getBoundingClientRect().width,
+    //         //     blurHeight: ref.current.getBoundingClientRect().height
+    //         // })
+    //        console.log(ref.current.getBoundingClientRect())
+    //     });
+    // })
+
+  
+
+    const ref = useRef(null)
+    
     
     
 
@@ -897,7 +932,7 @@ export default function Meaning({
                                             }
                                         
                                         </div>
-                                        <div id='meaningText' style={{height: '50vh' }}>
+                                        <div id='meaningText' style={{height: '50vh', overflowY:'scroll', overflowX:'hidden' }}>
                                             {/* {
                                                 meaningTranslation === false
                                                 ?
@@ -905,33 +940,49 @@ export default function Meaning({
                                                 :
                                                 <div dangerouslySetInnerHTML={createMarkup({...{...{...{...meaningTranslation.terms}.data}[0]}.attributes}.definition)} />
                                             } */}
-                                            <div>
-                                                <div style={{width:'400px', height:'400px', backgroundImage: 'linear-gradient(rgba(224, 242, 240, .8), rgba(224, 242, 240, 1))', position: 'absolute'}}></div>
-                                                <p>Description is available just in the premium version.</p>
-                                                <p id="NoText" >
-                                                    Description is available just in the premium version. Description is available just in 
-                                                    the premium version. Description is available just in the premium version. Description 
-                                                    is available just in the premium version. Description is available just in the premium 
-                                                    version. Description is available just in the premium version. Description is available 
-                                                    just in the premium version. Description is available just in the premium version. 
-                                                    Description is available just in the premium version. Description is available just in 
-                                                    the premium version. Description is available just in the premium version. Description 
-                                                    is available just in the premium version. Description is available just in the premium 
-                                                    version. Description is available just in the premium version. Description is available 
-                                                    just in the premium version. Description is available just in the premium version. 
-                                                    Description is available just in the premium version. Description is available just 
-                                                    in the premium version. Description is available just in the premium version. 
-                                                    Description is available just in the premium version. Description is available 
-                                                    just in the premium version. Description is available just in the premium version. 
-                                                    Description is available just in the premium version. Description is available just 
-                                                    in the premium version. Description is available just in the premium version. 
-                                                    Description is available just in the premium version. Description is available 
-                                                    just in the premium version. Description is available just in the premium version.
-                                                </p>
-                                               
-                                                
-                                                
-                                                
+                                            <div 
+                                                style={{position:'relative'}}
+                                            >
+                                                <div style={{width:`${blurSize.blurWidth}px`, height:`${blurSize.blurHeight}px`, backgroundImage: 'linear-gradient(rgba(224, 242, 240, .8), rgba(224, 242, 240, 1))', position: 'absolute', top: `0px`}}>
+                                                    <div style={{backgroundColor:'#F6F9E5', position:'sticky', top:'15%', width:'80%', margin:'auto', padding:'10%', textAlign:'center'}}>
+                                                        <i style={{color:'#4FB8A8', fontSize:'3.5em'}} className='icon-upgrade'></i>
+                                                        <div style={{marginBottom:'20px'}}>Have all access with Premium account</div>
+                                                        <Link
+                                                            to={`/abouttheapp`}
+                                                            className={'btn ochre size-auto'}
+                                                        >
+                                                            coming soon
+                                                        </Link>
+                                                    </div>
+                                                </div>
+                                                {/* <p>Description is available just in the premium version.</p> */}
+                                                <div
+                                                    // style={{overflowY:'scroll'}}
+                                                >
+                                                    <p 
+                                                        ref={ref}
+                                                        
+                                                    >
+                                                        Description is available just in the premium version. Description is available just in 
+                                                        the premium version. Description is available just in the premium version. Description 
+                                                        is available just in the premium version. Description is available just in the premium 
+                                                        version. Description is available just in the premium version. Description is available 
+                                                        just in the premium version. Description is available just in the premium version. 
+                                                        Description is available just in the premium version. Description is available just in 
+                                                        the premium version. Description is available just in the premium version. Description 
+                                                        is available just in the premium version. Description is available just in the premium 
+                                                        version. Description is available just in the premium version. Description is available 
+                                                        just in the premium version. Description is available just in the premium version. 
+                                                        Description is available just in the premium version. Description is available just 
+                                                        in the premium version. Description is available just in the premium version. 
+                                                        Description is available just in the premium version. Description is available 
+                                                        just in the premium version. Description is available just in the premium version. 
+                                                        Description is available just in the premium version. Description is available just 
+                                                        in the premium version. Description is available just in the premium version. 
+                                                        Description is available just in the premium version. Description is available 
+                                                        just in the premium version. 
+                                                    </p>
+                                                </div>
                                             </div>
                                         </div>
                                         
