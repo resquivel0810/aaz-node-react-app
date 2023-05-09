@@ -231,7 +231,7 @@ export default function ChangePassword2(props) {
             body: JSON.stringify(credentials),
         }
 
-        fetch("https://accounting.linarys.com/v1/login/", requestOptions2)
+        fetch("https://accounting.linarys.com/v1/validatepwd/", requestOptions2)
             .then((response) => response.json())
             .then(data => {
                 if (data.user.id === 0 && credentials.pwd !== ''){
