@@ -255,19 +255,12 @@ export default function ChangePassword2(props) {
                     };
             
                     fetch('https://accounting.linarys.com/v1/cpwdlog/', requestOptions)
-                        // .then(response => response.json())
+                        .then(response => response.json())
                         .then(data => {
-                            console.log("Test");
-                            if(data.error){
-                                console.log("Error");
-                            }else{
-                                console.log(data.error);
-                                // console.log(payload)
-                                
-                                fetch('https://accounting.linarys.com/v1/closecode/' + this.props.match.params.id, {method: "GET"})
-                                    window.location.href='/confirmationforgotpasswordmail'
-                                window.location.href='/confirmChangePassword'
-                            }
+                            console.log(data);
+                            
+                            window.location.href='/confirmChangePassword';
+                
                         })
                 }
             })
