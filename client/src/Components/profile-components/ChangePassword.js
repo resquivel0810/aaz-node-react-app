@@ -264,9 +264,9 @@ export default function ChangePassword2(props) {
                                 console.log(data.error);
                                 // console.log(payload)
                                 
-                                // fetch('https://accounting.linarys.com/v1/closecode/' + this.props.match.params.id, {method: "GET"})
-                                //     window.location.href='/confirmationforgotpasswordmail'
-                                // window.location.href='/confirmChangePassword'
+                                fetch('https://accounting.linarys.com/v1/closecode/' + this.props.match.params.id, {method: "GET"})
+                                    window.location.href='/confirmationforgotpasswordmail'
+                                window.location.href='/confirmChangePassword'
                             }
                         })
                 }
