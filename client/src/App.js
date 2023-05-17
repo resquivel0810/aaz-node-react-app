@@ -3,33 +3,33 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import "./fontello/css/fontello.css";
 // import Template from './Template';
 
-import Login from './Components/login-components/Login';
-import Registration from './Components/login-components/Registration';
-import ForgotPassword from './Components/login-components/ForgotPassword';
-import ResetPassword from './Components/login-components/ResetPassword';
+import Login from './Pages/Login';
+import Registration from './Pages/Registration';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
-import AppHeader from './AppHeader';
-import AppFooter from './AppFooter';
-import Dictionary from './Components/terms-components/Dictionary';
+import AppHeader from './Components/AppHeader';
+import AppFooter from './Components/AppFooter';
+import Dictionary from './Pages/Dictionary';
 
 
-import WebFooter from './WebFooter';
-import WebHeader from './WebHeader';
-import HomePage from './Website-Pages/HomePage';
-import AboutAppPage from './Website-Pages/AboutAppPage';
-import ConfirmationRegistration from './Components/login-components/ConfirmationRegistration';
-import AboutBookPage from './Website-Pages/AboutBookPage';
-import AboutAuthorPage from './Website-Pages/AboutAuthorPage';
-import NotFoundPage from './NotFoundPage';
-import ConfirmationRegistrationMail from './Components/login-components/ConfirmationRegistrationMail';
-import ConfirmationForgotPasswordMail from './Components/login-components/ConfirmationForgotPasswordMail';
-import ConfirmationForgotPassword from './Components/login-components/ConfirmationForgotPassword';
-import ImprintPage from './ImprintPage';
-import Profile from './Components/profile-components/Profile';
+import WebFooter from './Components/WebFooter';
+import WebHeader from './Components/WebHeader';
+import HomePage from './Pages/HomePage';
+import AboutAppPage from './Pages/AboutAppPage';
+import ConfirmationRegistration from './Pages/ConfirmationRegistration';
+import AboutBookPage from './Pages/AboutBookPage';
+import AboutAuthorPage from './Pages/AboutAuthorPage';
+import NotFoundPage from './Pages/NotFoundPage';
+import ConfirmationRegistrationMail from './Pages/ConfirmationRegistrationMail';
+import ConfirmationForgotPasswordMail from './Pages/ConfirmationForgotPassword';
+import ConfirmationForgotPassword from './Pages/ConfirmationForgotPassword';
+import ImprintPage from './Pages/ImprintPage';
+import Profile from './Pages/Profile';
 
 // import Term from './Components/terms-components/Term';
-import ChangePassword from './Components/profile-components/ChangePassword';
-import ConfirmChangePassword from './Components/profile-components/ConfirmChangePassword';
+import ChangePassword from './Pages/ChangePassword';
+import ConfirmChangePassword from './Pages/ConfirmChangePassword';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
