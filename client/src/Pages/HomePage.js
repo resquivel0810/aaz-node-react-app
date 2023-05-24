@@ -6,13 +6,24 @@ import Benefits from '../Components/Benefits';
 import AboutAuthor from "../Components/AboutAuthor";
 import Register from '../Components/Register';
 import UserFeedback from '../Components/UserFeedback';
+
 import MyInstaller from '../Components/MyInstaller';
 
 
 export default function HomePage() {
     const [jwt, setJwt] = useState("")
+    const [feedback, setFeedback] = useState([])
     useEffect(() => {
         setJwt(window.localStorage.getItem("jwt"))
+        fetch(`http://localhost:3000/api`, { 
+            method: 'GET' 
+        })
+            .then(data => data.json())
+            .then(data => {
+                setFeedback(data.publicFeedback); 
+                // setFeedbackNumber(Object.keys(data.publicFeedback).length)
+            })
+
     }, [])
     return (
         <>
@@ -33,8 +44,8 @@ export default function HomePage() {
             />
             <Benefits />
             <AboutAuthor />
-            {/* <UserFeedback /> */}
-            {/* <Comments /> */}
+            <UserFeedback />
+           
             <Register 
                 jwt={jwt} 
             />
