@@ -35,44 +35,101 @@ const UserFeedback = (props) => {
 
     useEffect(() => {
         if(currentFeedback === 3 && lastCurrentFeedback === 1) {
-            ref1.current.style.transform = 'translateX(0%)'
+            ref1.current.style.transform = 'translateX(-10%)'
             ref1.current.style.zIndex = '1'
+            ref1.current.style.opacity = '0.4'
             ref1.current.style.transition = 'all 1s'
 
             ref2.current.style.transform = 'translateX(100%) '
             ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '1'
             ref2.current.style.transition = 'all 1s'
 
-            ref3.current.style.transform = 'translateX(200%) '
+            ref3.current.style.transform = 'translateX(210%) '
             ref3.current.style.zIndex = '3'
+            ref3.current.style.opacity = '0.4'
             ref3.current.style.transition = 'all 1s'
         } else if(currentFeedback === 2 && lastCurrentFeedback === 3){
             ref1.current.style.transform = 'translateX(100%) '
             ref1.current.style.zIndex = '3'
+            ref1.current.style.opacity = '1'
             ref1.current.style.transition = 'all 1s'
             
-            ref2.current.style.transform = 'translateX(200%)'
+            ref2.current.style.transform = 'translateX(210%)'
             ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '0.4'
             ref2.current.style.transition = 'all 1s'
 
-            ref3.current.style.transform = 'translateX(0%)'
+            ref3.current.style.transform = 'translateX(-10%)'
             ref3.current.style.zIndex = '1'
+            ref3.current.style.opacity = '0.4'
             ref3.current.style.transition = 'all 1s'
 
         } else if(currentFeedback === 1 && lastCurrentFeedback === 2){
-            ref1.current.style.transform = 'translateX(200%) '
+            ref1.current.style.transform = 'translateX(210%) '
             ref1.current.style.zIndex = '3'
+            ref1.current.style.opacity = '0.4'
             ref1.current.style.transition = 'all 1s'
             
-            ref2.current.style.transform = 'translateX(0%)'
+            ref2.current.style.transform = 'translateX(-10%)'
             ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '0.4'
             ref2.current.style.transition = 'all 1s'
 
             ref3.current.style.transform = 'translateX(100%)'
             ref3.current.style.zIndex = '1'
+            ref3.current.style.opacity = '1'
             ref3.current.style.transition = 'all 1s'
 
         } 
+        else if (currentFeedback === 3 && lastCurrentFeedback === 2) {
+            ref1.current.style.transform = 'translateX(100%)'
+            ref1.current.style.zIndex = '1'
+            ref1.current.style.opacity = '1'
+            ref1.current.style.transition = 'all 1s'
+
+            ref2.current.style.transform = 'translateX(210%) '
+            ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '0.4'
+            ref2.current.style.transition = 'all 1s'
+
+            ref3.current.style.transform = 'translateX(-10%) '
+            ref3.current.style.zIndex = '3'
+            ref3.current.style.opacity = '0.4'
+            ref3.current.style.transition = 'all 1s'
+
+        } else if(currentFeedback === 2 && lastCurrentFeedback === 1) {
+            ref1.current.style.transform = 'translateX(210%) '
+            ref1.current.style.zIndex = '3'
+            ref1.current.style.opacity = '0.4'
+            ref1.current.style.transition = 'all 1s'
+            
+            ref2.current.style.transform = 'translateX(-10%)'
+            ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '0.4'
+            ref2.current.style.transition = 'all 1s'
+
+            ref3.current.style.transform = 'translateX(100%)'
+            ref3.current.style.zIndex = '1'
+            ref3.current.style.opacity = '1'
+            ref3.current.style.transition = 'all 1s'
+        }
+        else if(currentFeedback === 1 && lastCurrentFeedback === 3) {
+            ref1.current.style.transform = 'translateX(-10%) '
+            ref1.current.style.zIndex = '3'
+            ref1.current.style.opacity = '0.4'
+            ref1.current.style.transition = 'all 1s'
+            
+            ref2.current.style.transform = 'translateX(100%)'
+            ref2.current.style.zIndex = '1'
+            ref2.current.style.opacity = '1'
+            ref2.current.style.transition = 'all 1s'
+
+            ref3.current.style.transform = 'translateX(210%)'
+            ref3.current.style.zIndex = '1'
+            ref3.current.style.opacity = '0.4'
+            ref3.current.style.transition = 'all 1s'
+        }
     }, [currentFeedback])
 
    
@@ -101,7 +158,7 @@ const UserFeedback = (props) => {
                     })()}
                     id={`feedback${id}`}
                 
-                style={{opacity:'1'}} 
+                style={{}} 
                 // className={`carousel__slide m${currentFeedback}${lastCurrentFeedback}`}
                 className={`carousel__slide m${currentFeedback}`}
 
@@ -189,7 +246,7 @@ const UserFeedback = (props) => {
     };
 
     const handler3 = () => {
-
+        setLastCurrentFeedback(currentFeedback)
         if(currentFeedback === 2) {
            
             setCurrentFeedback(3)
@@ -242,7 +299,9 @@ const UserFeedback = (props) => {
             <div className={`${'carousel'} ${'myCarousel'}`}>
 
                 <button
-                    onClick={handler2}
+                    onClick={() => { 
+                        handler2()
+                    }}
                 >F</button>
              
                 
@@ -256,11 +315,11 @@ const UserFeedback = (props) => {
                 }
 
                 </div>
-                {/* <button 
+                <button 
                     onClick={handler3}
                 >
                     B
-                </button> */}
+                </button>
             </div>
             </div>
         </div>

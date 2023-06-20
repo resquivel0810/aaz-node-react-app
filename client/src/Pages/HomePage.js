@@ -6,6 +6,7 @@ import Benefits from '../Components/Benefits';
 import AboutAuthor from "../Components/AboutAuthor";
 import Register from '../Components/Register';
 import UserFeedback from '../Components/UserFeedback';
+import UserFeedback2 from '../Components/UserFeedback2'
 
 import MyInstaller from '../Components/MyInstaller';
 
@@ -44,7 +45,7 @@ export default function HomePage() {
             />
             <Benefits />
             <AboutAuthor />
-            <UserFeedback />
+            <UserFeedback2 />
            
             <Register 
                 jwt={jwt} 

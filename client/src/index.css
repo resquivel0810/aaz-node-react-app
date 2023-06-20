@@ -41,6 +41,80 @@ body #root {
   100% { transform: rotate(360deg); }
 }
 
+.userFeedback{
+  --a: 1;
+  position: relative;
+}
+
+.containerThirdCarousel {
+ 
+  display: flex;
+  align-items: center;
+  overflow-y: hidden;
+  width: 100%;
+  width: calc(var(--s)*100%);
+  height: 50vw;
+  max-height: 100vh;
+  transform: translate(calc(var(--o)/var(--s)*-100%));
+  transition: transform .5s ease-out;
+  /* margin: 5vh 0; */
+
+  
+}
+.thirdCarousel__item {
+  width: 100%;
+  width: calc(100%/var(--s));
+  user-select: none;
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.thirdCarousel__item-content {
+  width: 300px;
+  height: 375px;
+  background-color: #FDFDFD;
+  padding: 15px;
+  box-shadow: 0px 0px 4px rgb(0 0 0 / 25%);
+  border-radius: 15px;
+  
+}
+
+.carousel-indicators2 {
+  position: absolute;
+  padding-left: 0;
+  margin: 0;
+  list-style: none;
+  /* width: 30vw; */
+  display: flex;
+  justify-content: center;
+  top: 80%;
+  right: 50vw;
+  right: calc((100vw - var(--a)*50px)/2);
+  /* right: calc((100vw - 200px)/2); */
+}
+.carousel-indicators2 li {
+  display: inline-block;
+  width: 35px;
+  height: 5px;
+  cursor: pointer;
+  background-color: #A5A5A5;
+  border-radius: 10px;
+  margin: 0 7.5px;
+}
+.carousel-indicators2 li.active {
+  background-color: #DDE295;
+}
+
+.slideButtons {
+  position: absolute;
+  top: 50%;
+  left: calc((100vw - 360px)/2);
+  width: 360px;
+  display: flex;
+  justify-content: space-between;
+}
+
 
 /* CENTER */
 .center-grid{
@@ -202,7 +276,7 @@ footer .imprint{
 }
 .img_bg_registerHP{
   width: 100% !important;
-  height: 100vh;
+  /* height: 50vh; */
   object-fit: cover;
   z-index: 0;
   position: absolute;
@@ -1413,6 +1487,17 @@ div.registration_box img{
 
 
 @media screen and (max-width: 480px){
+  .containerThirdCarousel {
+    height: 100vh;
+  }
+  .img_bg_registerHP{
+    height: 100vh;
+  }
+
+  .carousel-indicators2 {
+    top: 85%;
+    
+  }
   .profile_image{
     height: 90px;
     width: 90px;
@@ -1609,7 +1694,7 @@ does this suck?     /  ~          \ |
   top: 100px;
   left: 100px;
   right: 0;
-  opacity: .4;
+  /* opacity: .4; */
   width: 300px;
 
   
@@ -1620,35 +1705,39 @@ does this suck?     /  ~          \ |
 
 
 .carousel__slide.m3:nth-of-type(1) {
-  transform: translateX(200%) ;
-  z-index: 3;
+  transform: translateX(210%)  ;
+  opacity: 0.4;
+  /* z-index: 3; */
   background-color: red;
 }
 .carousel__slide.m3:nth-of-type(2){
-  transform: translateX(0%) ;
-  z-index: 1;
+  transform: translateX(-10%) ;
+  opacity: 0.4;
+  /* z-index: 1; */
   background-color: green;
 }
 .carousel__slide.m3:nth-of-type(3){
   transform: translateX(100%) ;
-  z-index: 1;   
+  /* z-index: 1;    */
   background-color: blue;
 }
 
 
 .carousel__slide.m2:nth-of-type(1) {
-  transform: translateX(0%) ;
-  z-index: 3; 
+  transform: translateX(-10%) ;
+  opacity: 0.4;
+  /* z-index: 3;  */
   background-color: red;
 }
 .carousel__slide.m2:nth-of-type(2){
   transform: translateX(100%);
-  z-index: 1;
+  /* z-index: 1; */
   background-color: green;
 }
 .carousel__slide.m2:nth-of-type(3){
-  transform: translateX(200%) ;
-  z-index: 1;   
+  transform: translateX(210%) ;
+  opacity: 0.4;
+  /* z-index: 1;    */
   background-color: blue;
 }
 
@@ -1656,17 +1745,19 @@ does this suck?     /  ~          \ |
 
 .carousel__slide.m1:nth-of-type(1) {
   transform: translateX(100%);
-  z-index: 1; 
+  /* z-index: 1;  */
   background-color: red;
 }
 .carousel__slide.m1:nth-of-type(2){
-  transform: translateX(200%);
-  z-index: 1;
+  transform: translateX(210%);
+  opacity: 0.4;
+  /* z-index: 1; */
   background-color: green;
 }
 .carousel__slide.m1:nth-of-type(3){
-  transform: translateX(0%) ;
-  z-index: 3;   
+  transform: translateX(-10%) ;
+  opacity: 0.4;
+  /* z-index: 3;    */
   background-color: blue;
 }
 
@@ -1774,7 +1865,7 @@ does this suck?     /  ~          \ |
   /* height: 180px; */
   position: absolute;
   overflow-y: auto;
-  opacity: 0;
+  /* opacity: 0; */
 }
 
 * {

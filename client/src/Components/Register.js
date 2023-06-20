@@ -6,7 +6,7 @@ import cellphone from '../Images/Cellphone_front.png';
 export default function Register({jwt}) {
     return (
         <>
-        <img src={backgroundImage} alt="" className="img_bg_registerHP" />
+        <img style={{height:'100vh'}} src={backgroundImage} alt="" className="img_bg_registerHP" />
         <div className='bg_registerHP'>
             <div className='container position-relative'>
                 <div>

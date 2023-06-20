@@ -1,3 +1,24 @@
-
+.containerThirdCarousel {
+    --s: 1;
+    display: flex;
+    align-items: center;
+    overflow-y: hidden;
+    width: 100%;
+    width: calc(var(--s)*100%);
+    /* height: 50vw; */
+    max-height: 100vh;
+    transform: translate(calc(var(--o)/var(--s)*-100%));
+    transition: transform .5s ease-out;
+    margin: 5vh 0;
+    
+}
+.thirdCarousel__item {
+    width: 100%;
+    width: calc(100%/var(--s));
+    user-select: none;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
   
   
